@@ -6,7 +6,7 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:10:31 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/19 23:40:14 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/20 23:19:40 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h> //DELETE THIS
+#include <limits.h> //DELETE THIS
 
 #define NULL_STRING (char[7]) {'(', 'n', 'u', 'l', 'l', ')', '\0'}
 
@@ -48,7 +49,7 @@ typedef struct struct_percent
 	char type;
 } st_format_spec;
 
-void	ft_putnbr(int);
+void	ft_putnbr(long int);
 size_t	ft_strlen(const char *);
 size_t	ft_numlen(long long, int);
 //

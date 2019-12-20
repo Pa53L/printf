@@ -6,13 +6,13 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 20:13:02 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/19 21:04:59 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/20 23:32:44 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-void	ft_putnbr(int n)
+void	ft_putnbr(long n)
 {
 	long int i;
 

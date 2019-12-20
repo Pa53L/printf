@@ -6,7 +6,7 @@
 #    By: yshawn <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/10 19:41:13 by yshawn            #+#    #+#              #
-#    Updated: 2019/12/19 19:09:02 by yshawn           ###   ########.fr        #
+#    Updated: 2019/12/20 21:29:19 by yshawn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,9 @@ OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 $(ODIR)/%.o: $(SDIR)/%.c
 	@$(CC) -c -I $(HEADER) -o $@ $< $(CFLAGS)
 
-$(OUT) : $(OBJS)
+@$(OUT) : $(OBJS)
 	@ar rv $(OUT) $^
-	gcc main.c $(OUT)
+	@gcc main.c $(OUT)
 
 .PHONY: clean
 

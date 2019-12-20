@@ -6,7 +6,7 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 19:53:31 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/19 21:17:56 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/20 22:22:16 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,19 @@ size_t	ft_output(st_format_spec *spec, va_list ap)
 
 	temp_length = 0;
 	length = 0;
+	/*
+	printf("----------------------\n");
+	printf("minus: %d\n", spec[0].minus);
+	printf("plus: %d\n", spec[0].plus);
+	printf("space: %d\n", spec[0].space);
+	printf("sharp: %d\n", spec[0].sharp);
+	printf("zero: %d\n", spec[0].zero);
+	printf("width: %d\n", spec[0].width);
+	printf("accuracy: %d\n", spec[0].accuracy);
+	printf("size: %d\n", spec[0].size);
+	printf("type: %c\n", spec[0].type);
+	printf("----------------------\n");
+	*/
 	if (spec->type == 's')
 	{
 		str = va_arg(ap, char *);
