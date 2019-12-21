@@ -6,13 +6,13 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 19:53:31 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/20 22:22:16 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/21 21:38:14 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-size_t	ft_output(st_format_spec *spec, va_list ap)
+size_t	ft_output(st_format *spec, va_list ap)
 {
 	char *str; /* для STRING */
 	int ival; /* для CHAR и INT */
@@ -46,8 +46,7 @@ size_t	ft_output(st_format_spec *spec, va_list ap)
 	}
 	if (spec->type == 'd' || spec->type == 'i')
 	{
-		ival = va_arg(ap, int);
-		length = out_di(&spec[0], ival);
+		length = out_di(&spec[0], ap);
 	}
 	return (length + temp_length);
 }

@@ -6,7 +6,7 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:10:31 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/20 23:19:40 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/21 22:54:05 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef enum
 	FLOAT = 'f'
 } Format_Type;
 
-typedef struct struct_percent
+typedef struct struct_specifer
 {
 	int minus;
 	int plus;
@@ -44,29 +44,30 @@ typedef struct struct_percent
 	int sharp;
 	int zero;
 	int width;
-	int accuracy;
+	int accur;
 	int size;
 	char type;
-} st_format_spec;
+} st_format;
 
-void	ft_putnbr(long int);
+void	ft_putnbr(long long int);
+void	ft_uputnbr(unsigned long long);
 size_t	ft_strlen(const char *);
-size_t	ft_numlen(long long, int);
+long long	ft_numlen(long long int, int);
 //
-void	ft_clean_struct(st_format_spec *);
-char	*ft_record_struct(st_format_spec *, char *);
+void	ft_clean_struct(st_format *);
+char	*ft_record_struct(st_format *, char *);
 //
-char	*is_flag(st_format_spec *, char *);
-char	*is_width(st_format_spec *, char *);
-char	*is_accuracy(st_format_spec *, char *);
-char	*is_size(st_format_spec *, char *);
-char	*is_type(st_format_spec *, char *);
+char	*is_flag(st_format *, char *);
+char	*is_width(st_format *, char *);
+char	*is_accuracy(st_format *, char *);
+char	*is_size(st_format *, char *);
+char	*is_type(st_format *, char *);
 //
-size_t	out_str(st_format_spec *,  char *);
-size_t	out_chr(st_format_spec *, int);
-size_t	out_di(st_format_spec *, int);
+size_t	out_str(st_format *,  char *);
+size_t	out_chr(st_format *, int);
+size_t	out_di(st_format *, va_list);
 //
 int		ft_printf(const char *, ...);
-size_t	ft_output(st_format_spec *, va_list);
+size_t	ft_output(st_format *, va_list);
 
 #endif

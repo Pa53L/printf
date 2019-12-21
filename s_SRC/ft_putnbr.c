@@ -6,15 +6,15 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 20:13:02 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/20 23:32:44 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/21 22:49:47 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-void	ft_putnbr(long n)
+void	ft_putnbr(long long int n)
 {
-	long int i;
+	long long int i;
 
 	if (n >= 0 && n <= 9)
 	{
@@ -22,8 +22,13 @@ void	ft_putnbr(long n)
 		write(1, &i, 1);
 		return ;
 	}
-	else if (n == -2147483648)
-		write(1, "-2147483648", 11);
+	else if (n == -9223372036854775808)
+	{
+		write(1, "-", 1);
+		write(1, "9", 1);
+		ft_putnbr(223372036854775808);
+		return ;
+	}
 	else if (n < 0)
 	{
 		write(1, "-", 1);

@@ -1,7 +1,7 @@
 
 #include "../h_HEAD/header.h"
 
-size_t	ft_numlen(long long num, int base)
+long long int	ft_numlen(long long int num, int base)
 {
 	size_t i;
 	

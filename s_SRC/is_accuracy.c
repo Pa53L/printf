@@ -6,17 +6,18 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 18:54:19 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/20 20:52:42 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/21 15:34:05 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-char	*is_accuracy(st_format_spec *spec, char *p)
+char	*is_accuracy(st_format *spec, char *p)
 {
+	spec->accur = 0;
 	if (*(p + 1))
 		p++;
-	spec->accuracy += atoi(p);
+	spec->accur += atoi(p);
 	while (*p >= '0' && *p <= '9')
 		p++;
 	return (p);

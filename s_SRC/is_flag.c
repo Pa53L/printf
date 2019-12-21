@@ -1,7 +1,7 @@
 
 #include "../h_HEAD/header.h"
 
-char	*is_flag(st_format_spec *spec, char *p)
+char	*is_flag(st_format *spec, char *p)
 {
 	while (*p == '-' || *p == '+' || *p == ' ' || *p == '#' || *p == '0')
 	{

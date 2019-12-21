@@ -1,21 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_width.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/17 18:40:25 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/21 15:26:51 by yshawn           ###   ########.fr       */
+/*   Created: 2019/09/15 20:13:02 by yshawn            #+#    #+#             */
+/*   Updated: 2019/12/21 22:55:25 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-char	*is_width(st_format *spec, char *p)
+void	ft_uputnbr(unsigned long long n)
 {
-	spec->width = atoi(p);
-	while (*p >= '0' && *p <= '9')
-		p++;
-	return (p);
+	long long int i;
+
+	if (n >= 0 && n <= 9)
+	{
+		i = n + '0';
+		write(1, &i, 1);
+		return ;
+	}
+	else if (n == -9223372036854775808)
+	{
+		write(1, "-", 1);
+		write(1, "9", 1);
+		ft_putnbr(223372036854775808);
+		return ;
+	}
+	else if (n < 0)
+	{
+		write(1, "-", 1);
+		ft_putnbr(n * -1);
+	}
+	else
+	{
+		ft_putnbr(n / 10);
+		i = n % 10 + '0';
+		write(1, &i, 1);
+	}
 }

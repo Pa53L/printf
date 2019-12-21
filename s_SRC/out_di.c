@@ -6,119 +6,190 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 20:39:02 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/21 00:18:19 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/21 23:15:38 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-size_t	out_di(st_format_spec *spec, int ival)
+size_t	out_di(st_format *spec, va_list ap)
 {
+	long long int di;
+	unsigned long long di_2;
 	size_t len;
 	size_t tmp_len;
+	int is_accur;
+	int flag;
+	long long int ival;
 	
 	tmp_len = 0;
+	flag = 0;
+	di_2 = 0;
+	is_accur = spec->accur;
+	//printf("----------------------\n");
+	//printf("minus: %d\n", spec[0].minus);
+	//printf("plus: %d\n", spec[0].plus);
+	//printf("space: %d\n", spec[0].space);
+	//printf("sharp: %d\n", spec[0].sharp);
+	//printf("zero: %d\n", spec[0].zero);
+	//printf("width: %d\n", spec[0].width);
+	//printf("accuracy: %d\n", spec[0].accur);
+	//printf("size: %d\n", spec[0].size);
+	//printf("type: %c\n", spec[0].type);
+	//printf("----------------------\n");
+	if (spec->size == 3) //h
+		ival = (char)va_arg(ap, int);
+	else if (spec->size == 4) //hh
+		ival = (char)va_arg(ap, int);
+	else if (spec->size == 1) //l
+		ival = (long int)va_arg(ap, long int);
+	else if (spec->size == 2) //ll
+		ival = (long long int)va_arg(ap, long long int);
+	else if (spec->size == 5) //L
+		ival = (int)va_arg(ap, int);
+	else if (spec->size == 0) //int
+		ival = (int)va_arg(ap, int);
 	len = ft_numlen(ival, 10);
-	/* УСЛОВИЯ, ГДЕ Я ПОДСЧИТЫВАЮ ДЛИНУ И ОБРАБАТЫВАЮ НЕКОТОРЫЕ АСПЕКТЫ */
-	if(spec->plus)
+
+	/* ЛОГИКА И ПОДСЧЕТ ШИРИНЫ, А ТАКЖЕ НЕОБХОДИМОСТЬ ВЫВОДА В ЗАВИСИМОСТИ ОТ ФЛАГОВ */
+	/* проверяем на зависимости и несостыковки spec->zero */
+	if (spec->zero)
 	{
-		if (ival < 0)
-			spec->plus = 0;
-		spec->space = 0;
+		if (spec->accur >= 0)
+			spec->zero = 0;
+		if (spec->minus)
+			spec->zero = 0;
 	}
-	if (spec->space && ival < 0)
-		spec->space = 0;
-	if (spec->accuracy)
+	/* игнорируем заполнение нулями, если есть флаг минус (-) */
+	if (spec->space)
 	{
+		if (spec->plus)
+			spec->space = 0;
 		if (ival < 0)
-			spec->accuracy++;
-		spec->accuracy = spec->accuracy - len;
-		if (spec->accuracy < 0)
-			spec->accuracy = 0;
-		spec->zero = 1;
+			spec->space = 0;
 	}
+	/* игнорируем заполнение нулями, если есть флаг минус (-) */
+	if (spec->minus)
+		spec->zero = 0;
+	/* для вывода знака */
+	if (ival < 0)
+	{
+			di = ival;
+			di = di * (-1);
+	}
+	else
+		di = ival;
+	/* ебемся с точностью */
+	if (spec->accur)
+	{
+		if (spec->accur <= len)
+			spec->accur = 0;
+		else
+		{
+			if (ival < 0) /* это нужно для правильного возвращения выведенных символов */
+				spec->accur = spec->accur - len + 1; /* т.к. мы знак записываем в другом месте */
+			else
+				spec->accur = spec->accur - len;
+		}
+	}
+	/* считаем ширину */
 	if (spec->width)
 	{
-		spec-> width = spec->width - spec->space - spec->plus - spec->accuracy - len;
+		spec->width = spec->width - spec->space - spec->plus - len;
+		if (spec->accur > 0)
+			spec->width = spec->width - spec->accur;
+		if (ival < 0 && spec->plus)
+			spec->width = spec->width + 1;
+		if (ival == 0 && spec->accur == 0)
+			spec->width++;
 		if (spec->width < 0)
 			spec->width = 0;
 	}
-	tmp_len = spec->width + spec->space + spec->plus + spec->accuracy;
+	/* подсчет возвращаемого количества выведенных символов */
+	tmp_len = spec->width + spec->space + spec->plus;
+	if (spec->accur > 0)
+		tmp_len = tmp_len + spec->accur;
+	if (ival <  0 && spec->plus)
+		tmp_len = tmp_len - 1;
+	/* ------------------------------------------------------------------------------ */
 	/* ВЫВОД В ЗАВИСИМОСТИ ОТ ТОГО, ЕСТЬ МИНУС (-) ИЛИ НЕТУ */
-	/* ЕСЛИ МИНУСА (-) НЕТУ */
 	if (spec->minus == 0)
 	{
+		/* сначала печатаем ширину */
+		while (spec->width > 0 && spec->zero == 0)
+		{
+			write(1, " ", 1);
+			spec->width--;
+		}
+		/* печатаем знак в зависимости является ли число отр. или стоит флаг + */
+		if (spec->plus || ival < 0)
+		{
+			if (ival < 0 && di != -9223372036854775808)
+				write(1, "-", 1);
+			else if (di != -9223372036854775808)
+				write(1, "+", 1);
+		}
+		/* смотрим, есть ли spec->space */
 		if (spec->space)
 			write(1, " ", 1);
-		/* если нулями заполняем, то плюс должен быть перед ними */
-		if (spec->zero && (spec->plus || ival < 0))
+		while (spec->width > 0 && spec->zero == 1)
 		{
-			if(spec->plus && ival >= 0)
-				write(1, "+", 1);
-			else if (ival < 0)
-				write(1, "-", 1);
-			spec->plus = 0;
+			write(1, "0", 1);  /*если zero, то нули вместо проб. */
+			spec->width--;
 		}
-		if (spec->width)
-		{
-			while (spec->width > 0)
-			{
-				if (spec->zero)
-					write(1, "0", 1);
-				else
-					write (1, " ", 1);
-				spec->width--;
-			}
-		}
-		if (spec->plus)
-			write(1, "+", 1);
-		while (spec->accuracy > 0)
+		/* печатаем точность ебаную */
+		while (spec->accur > 0)
 		{
 			write(1, "0", 1);
-			spec->accuracy--;
+			spec->accur--;
 		}
-		/*
-		 * если нулями заполняем, то плюс должен быть перед ними
-		 * поэтому, если это отрицательное и нужно заполнять, в putnbr
-		 * нужно передавать неотрицательное число
-		*/
-		if (spec->zero && ival < 0)
-			ft_putnbr((long)ival * (-1));
+		/* непосредственно вывод числа */
+		if (ival == 0 && is_accur == 0)
+			;
 		else
-			ft_putnbr(ival);
+			ft_putnbr(di);
 	}
-	/* ЕСЛИ МИНУС (-) ЕСТЬ */
+	/* ------------------------------------------------------------------------------ */
+	/* ВЫВОД В ЗАВИСИМОСТИ ОТ ТОГО, ЕСТЬ МИНУС (-) ИЛИ НЕТУ */
 	else if (spec->minus == 1)
 	{
-		if (spec->space)
-			write(1, " ", 1);
-		if (spec->plus)
-			write(1, "+", 1);
-		if (spec->zero && (spec->plus || ival < 0))
+		/* печатаем знак в зависимости является ли число отр. или стоит флаг + */
+		if (spec->plus || ival < 0)
 		{
-			if(spec->plus && ival >= 0)
-				write(1, "+", 1);
-			else if (ival < 0)
+			if (ival < 0 && di != -9223372036854775808)
 				write(1, "-", 1);
-			spec->plus = 0;
+			else if (di != -9223372036854775808)
+				write(1, "+", 1);
 		}
-		while (spec->accuracy > 0)
+		/* печатаем точность ебаную */
+		if (spec->space && ival == 0 && is_accur > 0)
+		{
+			write(1, " ", 1);
+			flag++;
+		}
+		while (spec->accur > 0)
 		{
 			write(1, "0", 1);
-			spec->accuracy--;
+			spec->accur--;
 		}
-		if (spec->zero && ival < 0)
-			ft_putnbr((long)ival * (-1));
+		/* смотрим, есть ли spec->space */
+		if (spec->space && flag == 0)
+			write(1, " ", 1);
+		/* непосредственно вывод числа */
+		if (ival == 0 && is_accur == 0)
+			;
 		else
-			ft_putnbr(ival);
-		if (spec->width)
+			ft_putnbr(di);
+		/* сначала печатаем ширину */
+		while(spec->width > 0)
 		{
-			while (spec->width > 0)
-			{
-				write (1, " ", 1);
-				spec->width--;
-			}
+			write(1, " ", 1);
+			spec->width--;
 		}
 	}
-	return (len + tmp_len);
+	/* ------------------------------------------------------------------------------ */
+	if (ival == 0 && is_accur == 0)
+		return (len + tmp_len - 1);
+	else
+		return (len + tmp_len);
 }

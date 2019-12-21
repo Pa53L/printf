@@ -6,13 +6,13 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:31:23 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/19 21:00:23 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/21 18:38:24 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-size_t	out_str(st_format_spec *spec, char *str)
+size_t	out_str(st_format *spec, char *str)
 {
 	size_t len;
 	size_t tmp_len;
@@ -20,9 +20,9 @@ size_t	out_str(st_format_spec *spec, char *str)
 	if (!str)
 		str = NULL_STRING;
 	len = ft_strlen(str);
-	if (spec->accuracy)
-		if (spec->accuracy < len)
-			len = spec->accuracy;
+	if (spec->accur >= 0)
+		if (spec->accur < len)
+			len = spec->accur;
 	if (spec->width)
 	{
 		if (spec->width > len)

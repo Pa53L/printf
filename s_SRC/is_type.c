@@ -6,13 +6,13 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 21:01:18 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/18 20:13:23 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/21 15:28:18 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-char	*is_type(st_format_spec *spec, char *p)
+char	*is_type(st_format *spec, char *p)
 {
 	if (*p == CHAR)
 		spec->type = CHAR;

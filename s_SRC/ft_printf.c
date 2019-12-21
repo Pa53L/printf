@@ -6,7 +6,7 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:31:27 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/19 21:01:43 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/21 21:26:17 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ft_printf(const char *format, ...)
 	size_t count; /* для подсчета количества выведенных символов */
 	int ival; /* for INT and CHAR */
 	char *p; /* указатель на format */
-	st_format_spec spec[1]; /* новая структура */
+	st_format spec[1]; /* новая структура */
 	//Format_Type type;
 
 	count = 0;

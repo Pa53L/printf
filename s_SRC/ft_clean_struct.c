@@ -6,13 +6,13 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 19:49:14 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/20 20:52:13 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/21 15:25:58 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-void	ft_clean_struct(st_format_spec *spec)
+void	ft_clean_struct(st_format *spec)
 {
 	spec->minus = 0;
 	spec->plus = 0;
@@ -20,7 +20,7 @@ void	ft_clean_struct(st_format_spec *spec)
 	spec->sharp = 0;
 	spec->zero = 0;
 	spec->width = 0;
-	spec->accuracy = 0;
+	spec->accur = -1;
 	spec->size = 0;
 	spec->type = 0;
 	return ;

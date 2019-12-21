@@ -6,13 +6,13 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 19:14:37 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/18 20:11:21 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/21 21:57:29 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-char	*is_size(st_format_spec *spec, char *p)
+char	*is_size(st_format *spec, char *p)
 {
 	if(*p == 'l' || *p == 'L' || *p == 'h')
 	{

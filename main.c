@@ -6,7 +6,7 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:31:27 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/20 23:57:13 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/21 23:11:46 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		main()
 {
-	printf("M: %d\n", ft_printf("%.5d|%-.5d|%+.5d|% .5d|%0.5d", -10, -10, -10, -10, -10));
+	printf("M: %d\n", ft_printf("%023ld|", LLONG_MIN));
 	printf("\n");
-	printf("I: %d\n",    printf("%.5d|%-.5d|%+.5d|% .5d|%0.5d", -10, -10, -10, -10, -10));
+	printf("I: %d\n",    printf("%023ld|", LLONG_MIN));
 	printf("\n");
 
 	return (0);

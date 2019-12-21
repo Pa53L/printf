@@ -6,13 +6,13 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:23:20 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/20 21:08:08 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/21 15:33:46 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-char	*ft_record_struct(st_format_spec *spec, char *p)
+char	*ft_record_struct(st_format *spec, char *p)
 {
 	p = is_flag(&spec[0], p);
 	if(*p >= '0' && *p <= '9')

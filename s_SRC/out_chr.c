@@ -1,7 +1,7 @@
 
 #include "../h_HEAD/header.h"
 
-size_t	out_chr(st_format_spec *spec, int ival)
+size_t	out_chr(st_format *spec, int ival)
 {
 	size_t len;
 
