@@ -6,7 +6,7 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 17:57:22 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/22 18:39:32 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/22 20:49:09 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_cast_size(st_format *spec, va_list ap, long long *ival)
 {
 	if (spec->size == 3) /* h */
-		*ival = (char)va_arg(ap, int);
+		*ival = (short)va_arg(ap, int);
 	else if (spec->size == 4) /* hh */
 		*ival = (char)va_arg(ap, int);
 	else if(spec->size == 1) /* l */
