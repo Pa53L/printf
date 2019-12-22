@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_output.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: erodd <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 19:53:31 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/21 21:38:14 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/22 12:43:15 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ size_t	ft_output(st_format *spec, va_list ap)
 	if (spec->type == 'd' || spec->type == 'i')
 	{
 		length = out_di(&spec[0], ap);
+	}
+	if (spec->type == 'p' || spec->type == 'x' || spec->type == 'X' || spec->type == 'o')
+	{
+		length = ft_output2(spec, ap);
 	}
 	return (length + temp_length);
 }

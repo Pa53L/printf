@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: erodd <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:31:27 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/21 23:11:46 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/22 12:57:18 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,20 @@
 
 int		main()
 {
-	printf("M: %d\n", ft_printf("%023ld|", LLONG_MIN));
-	printf("\n");
-	printf("I: %d\n",    printf("%023ld|", LLONG_MIN));
-	printf("\n");
+	int n = 54763;
+	
+	
+	ft_printf("%30x\n", n);
+	ft_printf("%30X\n", n);
+	ft_printf("%30o\n", n);
+	printf("%30x\n", n);
+	printf("%30X\n", n);
+	printf("%30o\n", n);
+	
+	//printf("M: %x\n", ft_printf("%023ld|", LLONG_MIN));
+	//printf("\n");
+	//printf("I: %d\n",    printf("%023ld|", LLONG_MIN));
+	//printf("\n");
 
 	return (0);
 }

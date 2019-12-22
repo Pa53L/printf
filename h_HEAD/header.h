@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: erodd <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:10:31 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/21 22:54:05 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/22 12:43:51 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,14 @@ size_t	out_di(st_format *, va_list);
 //
 int		ft_printf(const char *, ...);
 size_t	ft_output(st_format *, va_list);
+
+
+// Ф-ции от П
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup(const char *s);
+size_t	ft_address(st_format *spec, uint64_t lval);
+char *ft_itoabase(uint64_t value, int base, char *str);
+int		ft_size(long long n, int base);
+size_t	ft_output2(st_format *spec, va_list ap);
 
 #endif
