@@ -6,13 +6,13 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 20:39:02 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/21 23:15:38 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/22 18:37:16 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-size_t	out_di(st_format *spec, va_list ap)
+size_t	out_di(st_format *spec, long long ival)
 {
 	long long int di;
 	unsigned long long di_2;
@@ -20,37 +20,13 @@ size_t	out_di(st_format *spec, va_list ap)
 	size_t tmp_len;
 	int is_accur;
 	int flag;
-	long long int ival;
 	
 	tmp_len = 0;
 	flag = 0;
 	di_2 = 0;
 	is_accur = spec->accur;
-	//printf("----------------------\n");
-	//printf("minus: %d\n", spec[0].minus);
-	//printf("plus: %d\n", spec[0].plus);
-	//printf("space: %d\n", spec[0].space);
-	//printf("sharp: %d\n", spec[0].sharp);
-	//printf("zero: %d\n", spec[0].zero);
-	//printf("width: %d\n", spec[0].width);
-	//printf("accuracy: %d\n", spec[0].accur);
-	//printf("size: %d\n", spec[0].size);
-	//printf("type: %c\n", spec[0].type);
-	//printf("----------------------\n");
-	if (spec->size == 3) //h
-		ival = (char)va_arg(ap, int);
-	else if (spec->size == 4) //hh
-		ival = (char)va_arg(ap, int);
-	else if (spec->size == 1) //l
-		ival = (long int)va_arg(ap, long int);
-	else if (spec->size == 2) //ll
-		ival = (long long int)va_arg(ap, long long int);
-	else if (spec->size == 5) //L
-		ival = (int)va_arg(ap, int);
-	else if (spec->size == 0) //int
-		ival = (int)va_arg(ap, int);
-	len = ft_numlen(ival, 10);
 
+	len = ft_numlen(ival, 10);
 	/* ЛОГИКА И ПОДСЧЕТ ШИРИНЫ, А ТАКЖЕ НЕОБХОДИМОСТЬ ВЫВОДА В ЗАВИСИМОСТИ ОТ ФЛАГОВ */
 	/* проверяем на зависимости и несостыковки spec->zero */
 	if (spec->zero)

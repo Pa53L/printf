@@ -6,7 +6,7 @@
 /*   By: erodd <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:10:31 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/22 12:43:51 by erodd            ###   ########.fr       */
+/*   Updated: 2019/12/22 18:34:24 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct struct_specifer
 } st_format;
 
 void	ft_putnbr(long long int);
-void	ft_uputnbr(unsigned long long);
+void	ft_cast_size(st_format *, va_list, long long *);
 size_t	ft_strlen(const char *);
 long long	ft_numlen(long long int, int);
 //
@@ -65,7 +65,7 @@ char	*is_type(st_format *, char *);
 //
 size_t	out_str(st_format *,  char *);
 size_t	out_chr(st_format *, int);
-size_t	out_di(st_format *, va_list);
+size_t	out_di(st_format *, long long);
 //
 int		ft_printf(const char *, ...);
 size_t	ft_output(st_format *, va_list);
@@ -77,6 +77,5 @@ char	*ft_strdup(const char *s);
 size_t	ft_address(st_format *spec, uint64_t lval);
 char *ft_itoabase(uint64_t value, int base, char *str);
 int		ft_size(long long n, int base);
-size_t	ft_output2(st_format *spec, va_list ap);
 
 #endif

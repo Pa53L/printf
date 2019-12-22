@@ -6,7 +6,7 @@
 #    By: erodd <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/10 19:41:13 by yshawn            #+#    #+#              #
-#    Updated: 2019/12/22 12:50:02 by erodd            ###   ########.fr        #
+#    Updated: 2019/12/22 18:33:18 by yshawn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,13 @@ CC = gcc
 ODIR = o_OBJ
 SDIR = s_SRC
 HEADER = h_HEAD/header.h
-_OBJS = ft_putnbr.o ft_strlen.o ft_numlen.o ft_uputnbr.o\
+_OBJS = ft_putnbr.o ft_strlen.o ft_numlen.o \
 		ft_clean_struct.o ft_record_struct.o \
 		ft_printf.o ft_output.o \
 		is_flag.o is_width.o is_accuracy.o is_size.o is_type.o \
 		out_chr.o out_str.o out_di.o \
-		ft_address.o ft_itoabase.o ft_output2.o ft_size.o \
+		ft_cast_size.o \
+		ft_address.o ft_itoabase.o ft_size.o \
 		ft_strdup.o ft_strjoin.o
 
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))

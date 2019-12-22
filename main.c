@@ -6,7 +6,7 @@
 /*   By: erodd <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:31:27 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/22 12:57:18 by erodd            ###   ########.fr       */
+/*   Updated: 2019/12/22 18:43:57 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 int		main()
 {
-	int n = 54763;
-	
-	
+	/*	
 	ft_printf("%30x\n", n);
 	ft_printf("%30X\n", n);
 	ft_printf("%30o\n", n);
 	printf("%30x\n", n);
 	printf("%30X\n", n);
 	printf("%30o\n", n);
-	
-	//printf("M: %x\n", ft_printf("%023ld|", LLONG_MIN));
-	//printf("\n");
-	//printf("I: %d\n",    printf("%023ld|", LLONG_MIN));
-	//printf("\n");
+	*/
+
+	printf("M: %d\n", ft_printf("%30p", "Random string"));
+	printf("\n");
+	printf("I: %d\n",    printf("%30p", "Random string"));
+	printf("\n");
 
 	return (0);
 }
