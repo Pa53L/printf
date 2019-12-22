@@ -16,11 +16,11 @@ size_t	ft_address(st_format *spec, uint64_t lval)
 		base = 16;
 	if (spec->type == 'p')
 		pref = "0x";
-	if (spec->type == 'p' && lval == 0)
+	/*if (spec->type == 'p' && lval == 0)
 	{
 		write(1, "0x0", 3);
 		return (3);
-	}
+	}*/
 
 	tmp = ft_itoabase(lval, base, tmp);
 	if (spec->type == 'p')
@@ -37,12 +37,26 @@ size_t	ft_address(st_format *spec, uint64_t lval)
 			i++;
 		}
 	}
-	//write(1, "0x", 2);
-	//write(1, tmp, ft_strlen(tmp));
-	// Дописать ширину и будет окайно
-	//tmp = ft_width(newstr, spec->width, '+');
-	//tmp = ft_strdup(newstr);
+	if (spec->width > ft_strlen(newstr) && spec->minus == 0)
+	{
+		while ((spec->width - ft_strlen(newstr)) > 0)
+		{
+			newstr = ft_strjoin(" ", newstr);
+			free (newstr);
+		}
+
+	}
+	else if (spec->width > ft_strlen(newstr) && spec->minus == 1)
+	{
+		while ((spec->width - ft_strlen(newstr)) > 0)
+		{
+			newstr = ft_strjoin(newstr, " ");
+			free (newstr);
+		}
+
+	}
 	write(1, newstr, ft_strlen(newstr));
+	free (newstr);
 	//printf("%d\n", spec->width);
 	return (ft_strlen(newstr));
 }
