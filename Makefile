@@ -6,24 +6,24 @@
 #    By: erodd <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/10 19:41:13 by yshawn            #+#    #+#              #
-#    Updated: 2019/12/22 19:49:37 by yshawn           ###   ########.fr        #
+#    Updated: 2019/12/24 00:20:25 by yshawn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-OUT = libftprintf.a
+NAME = libftprintf.a
 
 CC = gcc
 
 ODIR = o_OBJ
 SDIR = s_SRC
 HEADER = h_HEAD/header.h
-_OBJS = ft_putnbr.o ft_strlen.o ft_numlen.o \
+_OBJS = ft_strlen.o ft_numlen.o ft_itoabase.o \
 		ft_clean_struct.o ft_record_struct.o \
 		ft_printf.o ft_output.o \
 		is_flag.o is_width.o is_accuracy.o is_size.o is_type.o \
-		out_chr.o out_str.o out_di.o \
-		ft_cast_size.o \
-		ft_address.o ft_itoabase.o ft_size.o \
+		out_chr.o out_str.o out_dipoxu.o\
+		parse_format.o parse_dipoxu.o \
+		ft_cast_size_di.o ft_cast_size_poxu.o ft_strnew_width.o ft_strnew_accuracy.o \
 		ft_strdup.o ft_strjoin.o
 
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
@@ -31,14 +31,13 @@ OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 $(ODIR)/%.o: $(SDIR)/%.c
 	@$(CC) -c -I $(HEADER) -o $@ $< $(CFLAGS)
 
-all: $(OUT)
+all: $(NAME)
 
-$(OUT) : $(OBJS)
-	@ar rv $(OUT) $^
-	@gcc main.c $(OUT)
-
-.PHONY: clean
-
+$(NAME) : $(OBJS)
+	@ar rv $(NAME) $^
+	@gcc main.c $(NAME)
 clean:
-	@rm -f $(ODIR)/*.o $(OUT)
-re: clean all
+	@rm -f $(ODIR)/*.o
+fclean: clean
+	@rm -f $(NAME)
+re: fclean all

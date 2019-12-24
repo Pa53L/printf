@@ -7,21 +7,18 @@ char *ft_itoabase(uint64_t value, int base, char *str)
 	int i;
 	size_t len;
 	
-	len = ft_size(value, base);
+	len = ft_numlen(value, base);
 	i = len - 1;
-	if (!(str = (char *)malloc(sizeof(*str) * (len + 1))))
+	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	str[len] = '\0';
-	if (value < 0)
+	if (value == 0)
 	{
-		if (value == -2147483648)
-			return (ft_strdup("-2147483648"));
-		str[0] = '-';
-		value *= -1;
+		str[0] = '0';
+		return (str);
 	}
 	while (value > 0)
 	{
-		
 		if (value < base)
 		{
 			str[i] = numbers[value];

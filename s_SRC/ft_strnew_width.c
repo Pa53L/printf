@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strnew_zerospace.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/15 20:13:02 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/22 21:09:51 by yshawn           ###   ########.fr       */
+/*   Created: 2019/12/23 18:23:46 by yshawn            #+#    #+#             */
+/*   Updated: 2019/12/23 23:59:42 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-void	ft_putnbr(long long int n)
+char	*ft_strnew_width(st_format *spec)
 {
-	long long int i;
+	char *str;
+	int i;
 
-	if (n >= 0 && n <= 9)
+	i = 0;
+	str = (char *)malloc(sizeof(char) * (spec->width + 1));
+	if (!str)
+		return (NULL);
+	if (spec->zero && !spec->minus)
 	{
-		i = n + '0';
-		write(1, &i, 1);
-		return ;
-	}
-	else if (n == -9223372036854775808)
-	{
-		write(1, "9223372036854775808", 19);
-		return ;
-	}
-	else if (n < 0)
-	{
-		//write(1, "-", 1);
-		ft_putnbr(n * -1);
+		while (i < spec->width + 1)
+		{
+			str[i] = '0';
+			i++;
+		}
+		str[i] = '\0';
 	}
 	else
 	{
-		ft_putnbr(n / 10);
-		i = n % 10 + '0';
-		write(1, &i, 1);
+		while (i < spec->width + 1)
+		{
+			str[i] = ' ';
+			i++;
+		}
+		str[i] = '\0';
 	}
+	return (str);
 }

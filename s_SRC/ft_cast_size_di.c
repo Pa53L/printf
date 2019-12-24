@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-void	ft_cast_size(st_format *spec, va_list ap, long long *ival)
+void	ft_cast_size_di(st_format *spec, va_list ap, long long *ival)
 {
 	if (spec->size == 3) /* h */
 		*ival = (short)va_arg(ap, int);

@@ -6,7 +6,7 @@
 /*   By: erodd <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:31:27 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/22 22:57:09 by yshawn           ###   ########.fr       */
+/*   Updated: 2019/12/24 07:09:24 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,25 @@
 
 int		main()
 {
-	printf("M: %d\n", ft_printf("%23ld|%-23ld|%+23ld|% 23ld|%023ld", LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX));
+   ft_printf("hahahha ya korol etih gor\n");
+   /*
+	printf(" M: %d\n", ft_printf("%#.o|%-0.o|%#0.o|%-#0.o", 0U, 0U, 0U, 0U));
 	printf("\n");
-	printf("I: %d\n",    printf("%23ld|%-23ld|%+23ld|% 23ld|%023ld", LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX));
+   printf(" I: %d\n",    printf("%#.o|%-0.o|%#0.o|%-#0.o", 0U, 0U, 0U, 0U));
 	printf("\n");
+	printf(" M: %d\n", ft_printf("%-#23o|%-023o|%#023o|%-#23o", 0U, 0U, 0U, 0));
+	printf("\n");
+   printf(" I: %d\n",    printf("%-#23o|%-023o|%#023o|%-#23o", 0U, 0U, 0U, 0));
+	printf("\n");
+	printf(" M: %d\n", ft_printf("%.x|%-.x|%#.x|%0.x", 0U, 0U, 0U, 0U));
+	printf("\n");
+   printf(" I: %d\n",    printf("%.x|%-.x|%#.x|%0.x", 0U, 0U, 0U, 0U));
+	printf("\n");
+	printf(" M: %d\n", ft_printf("%-#23.x|%-023.x|%#023.x|%-#023.x", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX));
+	printf("\n");
+   printf(" I: %d\n",    printf("%-#23.x|%-023.x|%#023.x|%-#023.x", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX));
+	printf("\n");
+   */
 
 	return (0);
 }

@@ -15,22 +15,20 @@
 char	*is_type(st_format *spec, char *p)
 {
 	if (*p == CHAR)
-		spec->type = CHAR;
+		spec->type = 1;
 	else if (*p == STRING)
-		spec->type = STRING;
-	else if (*p == POINTER)
-		spec->type = POINTER;
-	else if (*p == DECIMAL)
-		spec->type = DECIMAL;
-	else if (*p == DECIMAL_2)
-		spec->type = DECIMAL;
+		spec->type = 2;
 	else if (*p == OCTAL)
-		spec->type = OCTAL;
+		spec->type = 8;
+	else if (*p == DECIMAL || *p == DECIMAL_2 || *p == UNSIGN)
+		spec->type = 10;
+	else if (*p == POINTER)
+		spec->type = 16;
 	else if (*p == HEX)
-		spec->type = HEX;
+		spec->type = 16;
 	else if (*p == BIG_HEX)
-		spec->type = BIG_HEX;
+		spec->type = 16;
 	else if (*p == FLOAT)
-		spec->type = FLOAT;
+		spec->type = 32;
 	return (p);
 }
