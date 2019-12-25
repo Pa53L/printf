@@ -15,6 +15,7 @@
 void	ft_clean_struct(st_format *spec)
 {
 	spec->sign = 0;
+	spec->numsys = 0;
 	spec->minus = 0;
 	spec->plus = 0;
 	spec->space = 0;
@@ -23,6 +24,6 @@ void	ft_clean_struct(st_format *spec)
 	spec->width = 0;
 	spec->accur = -1;
 	spec->size = 0;
-	spec->type = 0;
+	spec->type = '\0';
 	return ;
 }

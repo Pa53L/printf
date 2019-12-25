@@ -22,7 +22,9 @@ void	ft_cast_size_poxu(st_format *spec, va_list ap, unsigned long long *ival)
 		*ival = va_arg(ap, unsigned long);
 	else if(spec->size == 2) /* ll */
 		*ival = va_arg(ap, unsigned long long);
-	else if(spec->size == 0) /* без размера, простой INT */
+	else if(spec->type == 'p')
+		*ival = va_arg(ap, unsigned long long);
+	else
 		*ival = va_arg(ap, unsigned int);
 	return ;
 }

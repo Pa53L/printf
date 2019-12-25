@@ -23,7 +23,7 @@ char	*ft_strnew_width(st_format *spec)
 		return (NULL);
 	if (spec->zero && !spec->minus)
 	{
-		while (i < spec->width + 1)
+		while (i < spec->width)
 		{
 			str[i] = '0';
 			i++;
@@ -32,7 +32,7 @@ char	*ft_strnew_width(st_format *spec)
 	}
 	else
 	{
-		while (i < spec->width + 1)
+		while (i < spec->width)
 		{
 			str[i] = ' ';
 			i++;

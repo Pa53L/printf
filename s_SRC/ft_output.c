@@ -14,45 +14,52 @@
 
 size_t	ft_output(st_format *spec, va_list ap)
 {
-	size_t		len;
-	char		*str; /* для STRING */
-	long long	ival; /* для CHAR и ЧИСЕЛ */
+	size_t					len;
+	char					*str;
+	long long				ival;
 	unsigned long long		unval;
 
 	len = 0;
 	ival = 0;
 	unval = 0;
 	str = NULL;
-	if (spec->type == 1)
+	if (spec->type == 'c')
 	{
 		ival = (int)va_arg(ap, int);
 		len = out_chr(&spec[0], ival);
 	}
-	else if (spec->type == 2)
+	else if (spec->type == 's')
 	{
 		str = va_arg(ap, char *);
 		len = out_str(&spec[0], str);
 	}
-	else if (spec->type == 8 || spec->type == 10 || spec->type == 16)
+	else if (spec->type == 'd' || spec->type == 'i')
 	{
-		if (spec->type == 10)
+		spec->numsys = 10;
+		ft_cast_size_di(&spec[0], ap, &ival);
+		if (ival < 0)
 		{
-			ft_cast_size_di(&spec[0], ap, &ival);
-			if (ival < 0)
-			{
-				unval = ival * (-1);
-				spec->sign = 1;
-			}
-			else
-				unval = ival;
-			len = parse_dipoxu(&spec[0], unval);
+			unval = ival * (-1);
+			spec->sign = 1;
 		}
 		else
-		{
-			ft_cast_size_poxu(&spec[0], ap, &unval);
-			len = parse_dipoxu(&spec[0], unval);
-		}
-		
+			unval = ival;
+		len = parse_dipoxu(&spec[0], unval);
 	}
+	else if (spec->type == 'o' || spec->type == 'x' || spec->type == 'X' ||
+			 spec->type == 'u' || spec->type == 'p')
+	{
+		if (spec->type == 'o')
+			spec->numsys = 8;
+		else if (spec->type == 'u')
+			spec->numsys = 10;
+		else
+			spec->numsys = 16;
+
+		ft_cast_size_poxu(&spec[0], ap, &unval);
+		len = parse_dipoxu(&spec[0], unval);
+	}
+	else if (spec->type == '%')
+		len = out_per(&spec[0]);
 	return (len);
 }

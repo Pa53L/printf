@@ -12,7 +12,7 @@
 
 NAME = libftprintf.a
 
-CC = gcc
+CC = gcc -g
 
 ODIR = o_OBJ
 SDIR = s_SRC
@@ -20,8 +20,7 @@ HEADER = h_HEAD/header.h
 _OBJS = ft_strlen.o ft_numlen.o ft_itoabase.o \
 		ft_clean_struct.o ft_record_struct.o \
 		ft_printf.o ft_output.o \
-		is_flag.o is_width.o is_accuracy.o is_size.o is_type.o \
-		out_chr.o out_str.o out_dipoxu.o\
+		out_chr.o out_str.o out_per.o out_dipoxu.o \
 		parse_format.o parse_dipoxu.o \
 		ft_cast_size_di.o ft_cast_size_poxu.o ft_strnew_width.o ft_strnew_accuracy.o \
 		ft_strdup.o ft_strjoin.o

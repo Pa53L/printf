@@ -1,4 +1,3 @@
-
 #include "../h_HEAD/header.h"
 
 char	*is_flag(st_format *spec, char *p)

@@ -20,36 +20,23 @@
 #include <limits.h> //DELETE THIS
 
 #define NULL_STRING (char[7]) {'(', 'n', 'u', 'l', 'l', ')', '\0'}
-#define BUF (char[30]) {'a'}
+#define TYPES (char[11]) {'c', 's', 'd', 'i', 'u', 'o', 'p', 'x', 'X', 'f'}
 
-//# define EXAMPLE (char[5][3]) {"l\0\0", "hh\0", "h\0\0", "ll\0", "L\0\0"}
-
-typedef enum
-{
-	CHAR = 'c',
-	STRING = 's',
-	DECIMAL = 'd',
-	DECIMAL_2 = 'i',
-	UNSIGN = 'u',
-	OCTAL = 'o',
-	HEX = 'x',
-	BIG_HEX = 'X',
-	POINTER = 'p',
-	FLOAT = 'f'
-} Format_Type;
+//#define SIZE (char[5][3]) {"h\0\0", "hh\0", "l\0\0", "ll\0", "L\0\0"}
 
 typedef struct struct_specifer
 {
-	int sign;
-	int minus;
-	int plus;
-	int space;
-	int sharp;
-	int zero;
+	short sign;
+	short numsys;
+	short minus;
+	short plus;
+	short space;
+	short sharp;
+	short zero;
+	short size;
 	int width;
 	int accur;
-	int size;
-	int type;
+	char type;
 } st_format;
 
 size_t		ft_strlen(const char *);
@@ -62,12 +49,7 @@ void		ft_cast_size_poxu(st_format *, va_list, unsigned long long *);
 void		ft_clean_struct(st_format *);
 char		*ft_record_struct(st_format *, char *);
 //
-char		*is_flag(st_format *, char *);
-char		*is_width(st_format *, char *);
-char		*is_accuracy(st_format *, char *);
-char		*is_size(st_format *, char *);
-char		*is_type(st_format *, char *);
-//
+size_t		out_per(st_format *);
 size_t		out_str(st_format *,  char *);
 size_t		out_chr(st_format *, int);
 size_t		parse_dipoxu(st_format *, unsigned long long);
@@ -81,6 +63,6 @@ size_t		ft_output(st_format *, va_list);
 // Ф-ции от П
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strdup(const char *s);
-char		*ft_itoabase(uint64_t value, int base, char *str);
+char		*ft_itoabase(uint64_t value, char *str, int len, int base, int);
 
 #endif

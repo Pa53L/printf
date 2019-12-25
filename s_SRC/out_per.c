@@ -12,42 +12,26 @@
 
 #include "../h_HEAD/header.h"
 
-size_t	out_str(st_format *spec, char *str)
+size_t	out_per(st_format *spec)
 {
-	size_t len;
-	size_t tmp_len;
 	char *str_width;
 
 	str_width = NULL;
-	if (!str)
-		str = NULL_STRING;
-	len = ft_strlen(str);
-	if (spec->accur >= 0)
-		if (spec->accur < len)
-			len = spec->accur;
 	if (spec->width)
 	{
-		if (spec->width > len)
-			spec->width = spec->width - len;
+		if (spec->width > 1)
+			spec->width--;
 		else
 			spec->width = 0;
 	}
-	if (spec->width > 0)
+	if (spec->width > 1)
 		str_width = ft_strnew_width(&spec[0]);
-	tmp_len = spec->width;
-	if (spec->minus == 0)
-	{
-		if (spec->width)
-			write(1, str_width, spec->width);
-		write(1, str, len);
-	}
-	else if (spec->minus == 1)
-	{
-		write(1, str, len);
-		if (spec->width)
-			write(1, str_width, spec->width);
-	}
+	if (spec->width && spec->minus == 0)
+		write(1, str_width, spec->width);
+	write(1, "%", 1);
+	if (spec->width && spec->minus == 1)
+		write(1, str_width, spec->width);
 	if (str_width)
 		free(str_width);
-	return (len + tmp_len);
+	return (spec->width + 1);
 }

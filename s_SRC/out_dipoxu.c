@@ -32,10 +32,10 @@ void	out_dipoxu(st_format *spec, char *str_width, char *str_accur, char *str_num
 		}
 		if (spec->sharp)
 		{
-			if (spec->type == 8)
+			if (spec->numsys == 8)
 				write(1, "0", 1);
-			else if (spec->type == 16)
-				write(1, "0x", 2);
+			else if (spec->numsys == 16)
+				spec->type == 'X' ? write (1, "0X", 2) : write(1, "0x", 2);
 		}
 		if (spec->width && spec->zero)
 			write(1, str_width, spec->width);
@@ -61,15 +61,13 @@ void	out_dipoxu(st_format *spec, char *str_width, char *str_accur, char *str_num
 			flag++;
 		}
 		if (spec->space && flag == 0)
-		{
 			write(1, " ", 1);
-		}
 		if (spec->sharp)
 		{
-			if (spec->type == 8)
+			if (spec->numsys == 8)
 				write(1, "0", 1);
-			else if (spec->type == 16)
-				write(1, "0x", 2);
+			else if (spec->numsys == 16)
+				spec->type == 'X' ? write (1, "0X", 2) : write(1, "0x", 2);
 		}
 		if (spec->accur > 0)
 			write(1, str_accur, spec->accur);
