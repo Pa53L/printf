@@ -1,6 +1,6 @@
 #include "../h_HEAD/header.h"
 
-char	*ft_itoabase(uint64_t value, char *str, int base)
+char	*ft_itoabasex(uint64_t value, char *str, int base)
 {
 	int i;
 	int len;
@@ -19,11 +19,11 @@ char	*ft_itoabase(uint64_t value, char *str, int base)
 	{
 		if (value < base)
 		{
-			str[i] = ITOA[value];
+			str[i] = ITOAX[value];
 			value -= value;
 		}
 		else
-			str[i] = ITOA[value % base];
+			str[i] = ITOAX[value % base];
 		value /= base;
 		i--;
 	}

@@ -35,10 +35,10 @@ size_t	parse_dipoxu(st_format *spec, unsigned long long ival)
 		str_width = ft_strnew_width(&spec[0]);
 	if (is_accur >= (len + spec->sign))
 		str_accur = ft_strnew_accuracy(&spec[0]);
-	if (spec->type == 'X')
-		str_num = ft_itoabase(ival, str_num, len, spec->numsys, 1);
+	if (spec->type != 'X')
+		str_num = ft_itoabase(ival, str_num, spec->numsys);
 	else
-		str_num = ft_itoabase(ival, str_num, len, spec->numsys, 0);
+		str_num = ft_itoabasex(ival, str_num, spec->numsys);
 	out_dipoxu(&spec[0], str_width, str_accur, str_num, ival, len); //ВЫВОД В КОНСОЛЬ
 
 	/* фришим всякую хуйню */

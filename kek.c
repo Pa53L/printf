@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/12 18:29:53 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/21 15:19:33 by yshawn           ###   ########.fr       */
+/*   Created: 2019/12/06 19:31:27 by yshawn            #+#    #+#             */
+/*   Updated: 2019/12/23 19:21:43 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdlib.h>
 
-// проверено на %d
-// '+' > ' ' > '-' > '0'
-// когда есть '-' (минус), '0' (ноль) игнорируется
-// когда есть +, пробел игнорируется
-
-int main()
+typedef struct struct_specifer
 {
-	printf("% 3d", 0);
+	short size;
+	short type;
+} st_format;
+
+int		ft_kek(st_format *p)
+{	
+	p->size = 12;
+	return (0);
+}
+
+int		main()
+{
+	st_format spec;
+	st_format *p;
+
+	p = &spec;
+	p->size = 32;
+	printf("%d\n", p->size);
+	ft_kek(p);
+	printf("%d\n", p->size);
 	return (0);
 }

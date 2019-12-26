@@ -13,7 +13,7 @@
 #include "../h_HEAD/header.h"
 
 int		ft_printf(const char *format, ...)
-{
+{	
 	char *p;
 	va_list ap;
 	size_t count;
@@ -24,12 +24,12 @@ int		ft_printf(const char *format, ...)
 	p = (char *)format;
 	while (*p)
 	{
-		if (*p != '\0' && *p != '%')
+		if (*p != '%')
 		{
 			write(1, p, 1);
 			count++;
 		}
-		if (*p == '%' )
+		else if (*p == '%' )
 		{
 			ft_clean_struct(&spec[0]);
 			if (*(p + 1) != '\0')
@@ -40,16 +40,16 @@ int		ft_printf(const char *format, ...)
 				return (count);
 			}
 			p = ft_record_struct(&spec[0], p);
-		}
-		if(spec->type)
-			count += ft_output(&spec[0], ap);
+			if (spec->type)
+				count = count + ft_output(&spec[0], ap);
 			ft_clean_struct(&spec[0]);
+		}
 		p++;
 	}
 	va_end(ap);
 	return (count);
 }
-		/*
+/*
 		printf("----------------------\n");
 		printf("minus: %d\n", spec[0].minus);
 		printf("plus: %d\n", spec[0].plus);
