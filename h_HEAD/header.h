@@ -30,8 +30,8 @@
 
 typedef struct struct_specifer
 {
-	short width;
-	short accur;
+	int width;
+	int accur;
 	short sign;
 	short numsys;
 	short minus;
@@ -54,10 +54,10 @@ void		ft_clean_struct(st_format *);
 char		*ft_record_struct(st_format *, char *);
 //
 char		*is_flag(st_format *, char *);
-char		*is_width(st_format *, char *);
-char		*is_accuracy(st_format *, char *);
-char		*is_size(st_format *, char *);
-char		*is_type(st_format *, char *);
+char		*is_width(int *, char *);
+char		*is_accuracy(int *, char *);
+char		*is_size(int *, char *);
+char		*is_type(char *, char *);
 //
 size_t		out_per(st_format *);
 size_t		out_str(st_format *,  char *);

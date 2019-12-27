@@ -14,32 +14,16 @@
 
 char	*ft_record_struct(st_format *spec, char *p)
 {
-	char *tmp_p;
-
-	tmp_p = NULL;
 	if (*p == '-' || *p == '+' || *p == ' ' || *p == '#' || *p == '0')
 		p = is_flag(&spec[0], p);
-	if (*p >= '0' && *p <= '9')
-		p = is_width(&spec[0], p);
+	if (*p >= '1' && *p <= '9')
+		p = is_width(&spec->width, p);
 	if (*p == '.' && *(p + 1))
-		p = is_accuracy(&spec[0], p);
-	if(*p == 'l' || *p == 'L' || *p == 'h')
-		p = is_size(&spec[0], p);
-	p = is_type(&spec[0], p);
-	if(!spec->type)
-	{
-		tmp_p = p;
-		while (*tmp_p)
-		{
-			if (*tmp_p == '%')
-			{
-				spec->type = '%';
-				p = tmp_p;
-				break;
-			}
-			tmp_p++;
-		}
-	}
+		p = is_accuracy(&spec->accur, p);
+	if (*p == 'l' || *p == 'L' || *p == 'h')
+		p = is_size(&spec->size, p);
+	if (*p > 'W')
+		p = is_type(&spec->type, p);
 	return (p);
 }
 // printf("----------------------\n");

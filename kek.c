@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 
 typedef struct struct_specifer
 {
@@ -18,10 +19,9 @@ typedef struct struct_specifer
 	short type;
 } st_format;
 
-int		ft_kek(st_format *p)
+void		ft_kek(short *spec)
 {	
-	p->size = 12;
-	return (0);
+	*spec = 4;
 }
 
 int		main()
@@ -29,10 +29,8 @@ int		main()
 	st_format spec;
 	st_format *p;
 
-	p = &spec;
-	p->size = 32;
-	printf("%d\n", p->size);
-	ft_kek(p);
-	printf("%d\n", p->size);
+	ft_kek(&spec.size);
+	printf("%d\n", spec.size);
+	printf("%d\n", spec.type);
 	return (0);
 }
