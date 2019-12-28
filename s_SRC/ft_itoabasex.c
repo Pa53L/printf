@@ -1,6 +1,6 @@
 #include "../h_HEAD/header.h"
 
-char	*ft_itoabasex(uint64_t value, char *str, int base)
+char	*ft_itoabasex(unsigned long long value, char *str, int base)
 {
 	int i;
 	int len;

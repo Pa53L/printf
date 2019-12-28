@@ -64,7 +64,7 @@ size_t		out_per(st_format *);
 size_t		out_str(st_format *,  char *);
 size_t		out_chr(st_format *, int);
 size_t		parse_dipoxu(st_format *, unsigned long long);
-void		out_dipoxu(st_format *, char *, char *, char *, uint64_t, int numlen);
+void		out_dipoxu(st_format *, char *, char *, char *, unsigned long long, int numlen);
 //
 char 		*parse_format(st_format *, unsigned long long *);
 //
@@ -74,7 +74,7 @@ size_t		ft_output(st_format *, va_list);
 // Ф-ции от П
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strdup(const char *s);
-char		*ft_itoabase(uint64_t value, char *str, int base);
-char		*ft_itoabasex(uint64_t value, char *str, int base);
+char		*ft_itoabase(unsigned long long value, char *str, int base);
+char		*ft_itoabasex(unsigned long long value, char *str, int base);
 
 #endif

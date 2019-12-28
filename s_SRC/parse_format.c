@@ -18,7 +18,7 @@ char 	*parse_format(st_format *spec, unsigned long long *ival)
 	char *str;
 
 	len = ft_numlen(*ival, spec->numsys);
-	if (spec->accur)
+	if (spec->accur >= 0)
 	{
 		if (spec->accur > len)
 			spec->accur = spec->accur - len;

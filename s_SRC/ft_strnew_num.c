@@ -18,6 +18,7 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 	int i;
 
 	i = 0;
+	printf("for malloc : %d\n", spec->width + spec->accur + len + 1);
 	str = (char *)malloc(sizeof(char) * (spec->width + spec->accur + len + 1));
 	if (!str)
 		return (NULL);
@@ -34,7 +35,13 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 		i++;
 	}
 	i = i + len - 1;
+	printf("str %d\n", i);
 	str[i + 1] = '\0';
+	if (ival == 0)// && len > 0)
+	{
+		str[i] == 'k';
+		return (str);
+	}
 	while (ival > 0)
 	{
 		if (ival < 10)

@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-void	out_dipoxu(st_format *spec, char *str_width, char *str_accur, char *str_num, uint64_t ival, int numlen)
+void	out_dipoxu(st_format *spec, char *str_width, char *str_accur, char *str_num, unsigned long long ival, int numlen)
 {
 	int flag;
 
