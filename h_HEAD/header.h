@@ -47,6 +47,7 @@ size_t		ft_strlen(const char *);
 int			ft_numlen(unsigned long long, int);
 char		*ft_strnew_width(st_format *);
 char		*ft_strnew_accuracy(st_format *);
+char		*ft_strnew_num(st_format *spec, unsigned long long, int);
 void		ft_cast_size_di(st_format *, va_list, long long *);
 void		ft_cast_size_poxu(st_format *, va_list, unsigned long long *);
 //
@@ -56,7 +57,7 @@ char		*ft_record_struct(st_format *, char *);
 char		*is_flag(st_format *, char *);
 char		*is_width(int *, char *);
 char		*is_accuracy(int *, char *);
-char		*is_size(int *, char *);
+char		*is_size(short *, char *);
 char		*is_type(char *, char *);
 //
 size_t		out_per(st_format *);
@@ -65,7 +66,7 @@ size_t		out_chr(st_format *, int);
 size_t		parse_dipoxu(st_format *, unsigned long long);
 void		out_dipoxu(st_format *, char *, char *, char *, uint64_t, int numlen);
 //
-void		parse_format(st_format *, size_t, unsigned long long *);
+char 		*parse_format(st_format *, unsigned long long *);
 //
 int			ft_printf(const char *, ...);
 size_t		ft_output(st_format *, va_list);

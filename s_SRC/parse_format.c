@@ -12,8 +12,30 @@
 
 #include "../h_HEAD/header.h"
 
-void	parse_format(st_format *spec, size_t len, unsigned long long *ival)
+char 	*parse_format(st_format *spec, unsigned long long *ival)
 {
+	int len;
+	char *str;
+
+	len = ft_numlen(*ival, spec->numsys);
+	if (spec->accur)
+	{
+		if (spec->accur > len)
+			spec->accur = spec->accur - len;
+		else
+			spec->accur = 0;
+	}
+	if (spec->width)
+	{
+		spec->width = spec->width - spec->accur - len;
+	}
+	str = ft_strnew_num(&spec[0], *ival, len);
+
+
+
+
+
+	/*
 	if (spec->type == 'u')
 	{
 		spec->space = 0;
@@ -70,4 +92,6 @@ void	parse_format(st_format *spec, size_t len, unsigned long long *ival)
 		if (spec->width < 0)
 			spec->width = 0;
 	}
+	*/
+	return (str);
 }

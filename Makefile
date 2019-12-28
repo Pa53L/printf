@@ -23,7 +23,8 @@ _OBJS = ft_strlen.o ft_numlen.o ft_itoabase.o ft_itoabasex.o \
 		out_chr.o out_str.o out_per.o out_dipoxu.o \
 		is_flag.o is_width.o is_accuracy.o is_size.o is_type.o \
 		parse_format.o parse_dipoxu.o \
-		ft_cast_size_di.o ft_cast_size_poxu.o ft_strnew_width.o ft_strnew_accuracy.o \
+		ft_cast_size_di.o ft_cast_size_poxu.o \
+		ft_strnew_width.o ft_strnew_accuracy.o ft_strnew_num.o\
 		ft_strdup.o ft_strjoin.o
 
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))

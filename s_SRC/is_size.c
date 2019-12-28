@@ -1,6 +1,6 @@
 #include "../h_HEAD/header.h"
 
-char	*is_size(int *size, char *p)
+char	*is_size(short *size, char *p)
 {
 	if (*p == 'l')
 	{
