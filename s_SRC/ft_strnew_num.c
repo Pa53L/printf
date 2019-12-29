@@ -19,8 +19,10 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 	int i;
 
 	i = 0;
-	strlen = spec->width + spec->accur + spec->space + spec->plus + spec->sign + len;
-	// printf("for malloc : %d\n", strlen + 1);
+	strlen = spec->width + spec->space + spec->plus + spec->sign + len;
+	if (spec->accur > 0)
+		strlen = strlen + spec->accur;
+	printf("for malloc : %d\n", strlen + 1);
 	str = (char *)malloc(sizeof(char) * (strlen + 1));
 	if (!str)
 		return (NULL);
@@ -48,7 +50,10 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 		i++;
 	}
 	i = i + len - 1;
-	str[i + 1] = '\0';
+	printf("i is: [%d]\n", i);
+	printf("end of str is : [%d]\n", strlen);
+	printf("spec->width : %d\n", spec->width);
+	str[strlen] = '\0';
 	/* ОПОРА ВСЕЯ РУСИ ЗДЕСЬ *////////////
 	if (ival == 0 && len > 0)			//
 	{									//
@@ -70,7 +75,7 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 	/* ОПОРА ЗАКОНЧИЛАСЬ *////////////////
 	if (spec->minus == 1)
 	{
-		i = len + 1;
+		i = len;
 		while (spec->width > 0)
 		{
 			str[i] = ' ';
