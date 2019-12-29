@@ -21,7 +21,9 @@ size_t	parse_dipoxu(st_format *spec, unsigned long long ival)
 	str = NULL;
 
 	str = parse_format(&spec[0], &ival);
-	printf("%s", str);
+	tmp_len = ft_strlen(str);
+	if (str)
+		write(1, str, tmp_len);
 	/*
 	if (is_width >= (len + spec->sign))
 		str_width = ft_strnew_width(&spec[0]);

@@ -14,18 +14,31 @@
 
 char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 {
+	unsigned long strlen;
 	char *str;
 	int i;
 
 	i = 0;
-	printf("for malloc : %d\n", spec->width + spec->accur + len + 1);
-	str = (char *)malloc(sizeof(char) * (spec->width + spec->accur + len + 1));
+	strlen = spec->width + spec->accur + spec->space + spec->plus + spec->sign + len;
+	// printf("for malloc : %d\n", strlen + 1);
+	str = (char *)malloc(sizeof(char) * (strlen + 1));
 	if (!str)
 		return (NULL);
-	while (spec->width > 0)
+	if (spec->minus == 0)
 	{
-		str[i] = ' ';
-		spec->width--;
+		while (spec->width > 0)
+		{
+			str[i] = ' ';
+			spec->width--;
+			i++;
+		}
+	}
+	if (spec->plus || spec->sign)
+	{
+		if(spec->sign)
+			str[i] = '-';
+		else
+			str[i] = '+';
 		i++;
 	}
 	while (spec->accur > 0)
@@ -35,24 +48,35 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 		i++;
 	}
 	i = i + len - 1;
-	printf("str %d\n", i);
 	str[i + 1] = '\0';
-	if (ival == 0)// && len > 0)
+	/* ОПОРА ВСЕЯ РУСИ ЗДЕСЬ *////////////
+	if (ival == 0 && len > 0)			//
+	{									//
+		str[i] = '0';					//
+		return (str);					//
+	}									//
+	while (ival > 0)					//
+	{									//
+		if (ival < 10)					//
+		{								//
+			str[i] = ITOA[ival];		//
+			ival -= ival;				//
+		}								//
+		else							//
+			str[i] = ITOA[ival % 10];	//
+		ival /= 10;						//
+		i--;							//
+	}									//
+	/* ОПОРА ЗАКОНЧИЛАСЬ *////////////////
+	if (spec->minus == 1)
 	{
-		str[i] == 'k';
-		return (str);
-	}
-	while (ival > 0)
-	{
-		if (ival < 10)
+		i = len + 1;
+		while (spec->width > 0)
 		{
-			str[i] = ITOA[ival];
-			ival -= ival;
+			str[i] = ' ';
+			spec->width--;
+			i++;
 		}
-		else
-			str[i] = ITOA[ival % 10];
-		ival /= 10;
-		i--;
 	}
 	return (str);
 }

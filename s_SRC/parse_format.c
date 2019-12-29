@@ -18,23 +18,45 @@ char 	*parse_format(st_format *spec, unsigned long long *ival)
 	char *str;
 
 	len = ft_numlen(*ival, spec->numsys);
+	/* accur */
 	if (spec->accur >= 0)
 	{
+		if (spec->accur == 0 && *ival == 0)
+			len = 0;
 		if (spec->accur > len)
 			spec->accur = spec->accur - len;
 		else
 			spec->accur = 0;
 	}
+	if (spec->plus)
+	{
+		;
+	}
+	/* width */
 	if (spec->width)
 	{
-		spec->width = spec->width - spec->accur - len;
+		spec->width = spec->width - spec->sign - len;
+		if (spec->accur > 0)
+			spec->width = spec->width - spec->accur;
 	}
+	if (spec->space)
+	{
+		if (spec->plus || spec->sign || spec->width)
+			spec->space = 0;
+	}
+	// printf("----------------------\n");
+	// printf("width: %d\n", spec[0].width);
+	// printf("accuracy: %d\n", spec[0].accur);
+	// printf("minus: %d\n", spec[0].minus);
+	// printf("plus: %d\n", spec[0].plus);
+	// printf("sign: %d\n", spec[0].sign);
+	// printf("space: %d\n", spec[0].space);
+	// printf("sharp: %d\n", spec[0].sharp);
+	// printf("zero: %d\n", spec[0].zero);
+	// printf("size: %d\n", spec[0].size);
+	// printf("type: %c\n", spec[0].type);
+	// printf("----------------------\n");
 	str = ft_strnew_num(&spec[0], *ival, len);
-
-
-
-
-
 	/*
 	if (spec->type == 'u')
 	{

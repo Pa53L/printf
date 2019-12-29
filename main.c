@@ -14,12 +14,15 @@
 
 int		main()
 {
-	printf("|MMM: %d\n", ft_printf("% 10.d", 0));
-	printf("|III: %d\n", printf("% 10.d", 0));
+	printf("|MMM: %d\n", ft_printf("this %-7d number", 33));
+	printf("|III: %d\n", printf("this %-7d number", 33));
 	printf("\n");
-    printf("|MMM: %d\n", ft_printf("% 10.0x", 0));
-    printf("|III: %d\n", printf("% 10.0x", 0));
-    printf("\n");
+   printf("|MMM: %d\n", ft_printf("% 6.x", 0));
+   printf("|III: %d\n", printf("% 6.x", 0));
+   printf("\n");
+   printf("|MMM: %d\n", ft_printf("% 6.d", 0));
+   printf("|III: %d\n", printf("% 6.d", 0));
+   printf("\n");
 	// printf("|M: %d\n", ft_printf("%-10.5d", 4242));
    // printf("|I: %d\n",    printf("%-10.5d", 4242));
    // printf("\n");
