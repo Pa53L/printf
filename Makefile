@@ -17,7 +17,7 @@ CC = gcc -g
 ODIR = o_OBJ
 SDIR = s_SRC
 HEADER = h_HEAD/header.h
-_OBJS = ft_strlen.o ft_numlen.o ft_itoabase.o ft_itoabasex.o \
+_OBJS = ft_strlen.o ft_numlen.o ft_itoabase.o ft_itoabasex.o ft_myitoa.o \
 		ft_clean_struct.o ft_record_struct.o \
 		ft_printf.o ft_output.o \
 		out_chr.o out_str.o out_per.o \

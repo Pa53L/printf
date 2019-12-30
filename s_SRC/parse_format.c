@@ -18,7 +18,13 @@ char 	*parse_format(st_format *spec, unsigned long long *ival)
 	char *str;
 
 	len = ft_numlen(*ival, spec->numsys);
-	/* accur */
+	/* ZERO */
+	if (spec->zero)
+	{
+		if (spec->accur >= 0)
+			spec->zero = 0;
+	}
+	/* ACCUR */
 	if (spec->accur >= 0)
 	{
 		if (spec->accur == 0 && *ival == 0)
@@ -28,28 +34,36 @@ char 	*parse_format(st_format *spec, unsigned long long *ival)
 		else
 			spec->accur = 0;
 	}
+	/* PLUS */
 	if (spec->plus)
 	{
-		;
+		if (spec->sign == 1)
+			spec->plus = 0;
 	}
-	/* width */
+	/* SPACE */
+	if (spec->space)
+	{	
+		if (spec->plus || spec->sign)
+			spec->space = 0;
+		if (spec->width > len && spec->minus != 1 && spec->zero != 1)
+			spec->space = 0;
+	}
+	/* WIDTH */
 	if (spec->width)
 	{
-		spec->width = spec->width - spec->sign - len;
+		spec->width = spec->width - spec->sign - spec->space - spec->plus - len;
 		if (spec->accur > 0)
 			spec->width = spec->width - spec->accur;
-	}
-	if (spec->space)
-	{
-		if (spec->plus || spec->sign || spec->width)
-			spec->space = 0;
+		if (spec->width <= 0)
+			spec->width = 0;
 	}
 	// printf("----------------------\n");
 	// printf("width: %d\n", spec[0].width);
-	// printf("accuracy: %d\n", spec[0].accur);
-	// printf("minus: %d\n", spec[0].minus);
-	// printf("plus: %d\n", spec[0].plus);
+	// printf("len is: %d\n", len);
 	// printf("sign: %d\n", spec[0].sign);
+	// printf("minus: %d\n", spec[0].minus);
+	// printf("accuracy: %d\n", spec[0].accur);
+	// printf("plus: %d\n", spec[0].plus);
 	// printf("space: %d\n", spec[0].space);
 	// printf("sharp: %d\n", spec[0].sharp);
 	// printf("zero: %d\n", spec[0].zero);

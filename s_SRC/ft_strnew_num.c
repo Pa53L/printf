@@ -16,71 +16,134 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 {
 	unsigned long strlen;
 	char *str;
-	int i;
+	unsigned long i;
 
-	i = 0;
 	strlen = spec->width + spec->space + spec->plus + spec->sign + len;
 	if (spec->accur > 0)
 		strlen = strlen + spec->accur;
-	printf("for malloc : %d\n", strlen + 1);
+	// printf("for malloc : %d\n", strlen + 1);
 	str = (char *)malloc(sizeof(char) * (strlen + 1));
 	if (!str)
 		return (NULL);
+	i = strlen - 1;
+	str[strlen] = '\0';
+	/* MINUS == 0 */
 	if (spec->minus == 0)
-	{
+	{	
+		
+		if (ival == 0 && len > 0)
+		{
+			str[i] = '0';
+			i--;
+		}
+		else if (ival > 0)
+		{
+			ft_myitoa(ival, &(*str), spec->numsys, i);
+			i = i - len;
+		}
+
+		while (spec->accur > 0)
+		{
+			str[i] = '0';
+			spec->accur--;
+			i--;
+		}
+
+		if (spec->zero == 0 && (spec->plus || spec->sign))
+		{
+			if (spec->sign)
+				str[i] = '-';
+			else
+				str[i] = '+';
+			i--;
+		}
+
 		while (spec->width > 0)
 		{
-			str[i] = ' ';
+			if (spec->zero == 0)
+				str[i] = ' ';
+			else
+				str[i] = '0';
 			spec->width--;
-			i++;
+			i--;
+		}
+
+		if (spec->space)
+		{
+			str[i] = ' ';
+			i--;
+		}
+
+		if (spec->zero == 1 && (spec->plus || spec->sign))
+		{
+			if (spec->sign)
+				str[i] = '-';
+			else
+				str[i] = '+';
+			i--;
 		}
 	}
-	if (spec->plus || spec->sign)
-	{
-		if(spec->sign)
-			str[i] = '-';
-		else
-			str[i] = '+';
-		i++;
-	}
-	while (spec->accur > 0)
-	{
-		str[i] = '0';
-		spec->accur--;
-		i++;
-	}
-	i = i + len - 1;
-	printf("i is: [%d]\n", i);
-	printf("end of str is : [%d]\n", strlen);
-	printf("spec->width : %d\n", spec->width);
-	str[strlen] = '\0';
-	/* ОПОРА ВСЕЯ РУСИ ЗДЕСЬ *////////////
-	if (ival == 0 && len > 0)			//
-	{									//
-		str[i] = '0';					//
-		return (str);					//
-	}									//
-	while (ival > 0)					//
-	{									//
-		if (ival < 10)					//
-		{								//
-			str[i] = ITOA[ival];		//
-			ival -= ival;				//
-		}								//
-		else							//
-			str[i] = ITOA[ival % 10];	//
-		ival /= 10;						//
-		i--;							//
-	}									//
-	/* ОПОРА ЗАКОНЧИЛАСЬ *////////////////
+	/* MINUS == 1 */
 	if (spec->minus == 1)
 	{
-		i = len;
 		while (spec->width > 0)
 		{
 			str[i] = ' ';
 			spec->width--;
-			i++;
+			i--;
+		}
+
+		if (ival == 0 && len > 0)
+		{
+			str[i] = '0';
+			i--;
+		}
+		else if (ival > 0)
+		{
+			ft_myitoa(ival, &(*str), spec->numsys, i);
+			i = i - len;
+		}
+
+		/*
+		if (ival == 0 && len > 0)
+		{
+			str[i] = '0';				  
+			i--;
+		}
+		while (ival > 0)				  
+		{								  
+			if (ival < 10)				  
+			{							  
+				str[i] = ITOA[ival];	  
+				ival -= ival;
+			}
+			else
+				str[i] = ITOA[ival % 10];
+			ival /= 10;	
+			i--;
+		}
+		*/
+
+		while (spec->accur > 0)
+		{
+			str[i] = '0';
+			spec->accur--;
+			i--;
+		}
+
+		if (spec->plus || spec->sign)
+		{
+			if (spec->sign)
+				str[i] = '-';
+			else
+				str[i] = '+';
+			i--;
+		}
+
+		if (spec->space)
+		{
+			str[i] = ' ';
+			i--;
 		}
 	}
 	return (str);

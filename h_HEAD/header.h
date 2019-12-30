@@ -76,5 +76,6 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strdup(const char *s);
 char		*ft_itoabase(unsigned long long value, char *str, int base);
 char		*ft_itoabasex(unsigned long long value, char *str, int base);
+void		ft_myitoa(unsigned long long value, char *str, int base, int len);
 
 #endif
