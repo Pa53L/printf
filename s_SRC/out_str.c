@@ -1,53 +1,51 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   out_str.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/19 19:31:23 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/21 18:38:24 by yshawn           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
 size_t	out_str(st_format *spec, char *str)
 {
-	size_t len;
-	size_t tmp_len;
-	char *str_width;
+	int tmp_len;
+	int width;
+	int strlen;
+	int i;
+	char *strnew;
 
-	str_width = NULL;
 	if (!str)
 		str = NULL_STRING;
-	len = ft_strlen(str);
-	if (spec->accur >= 0)
-		if (spec->accur < len)
-			len = spec->accur;
-	if (spec->width)
+	strlen = ft_strlen(str);
+	if (spec->accur >= 0 && spec->accur < strlen)
+		strlen = spec->accur;
+	if (spec->width > strlen)
+		spec->width = spec->width - strlen;
+	else
+		spec->width = 0;
+	tmp_len = spec->width + strlen;
+	strnew = (char *)malloc(sizeof(char) * (tmp_len));
+	if (!strnew)
+		return (0);
+	i = tmp_len;
+	strlen--;
+	strnew[i] = '\0';
+	i--;
+	width = spec->width;
+	while (strlen >= 0 && spec->minus == 0)
 	{
-		if (spec->width > len)
-			spec->width = spec->width - len;
-		else
-			spec->width = 0;
+		strnew[i] = str[strlen];
+		i--;
+		strlen--;
 	}
-	if (spec->width > 0)
-		str_width = ft_strnew_width(&spec[0]);
-	tmp_len = spec->width;
-	if (spec->minus == 0)
+	while (width > 0)
 	{
-		if (spec->width)
-			write(1, str_width, spec->width);
-		write(1, str, len);
+		strnew[i] = ' ';
+		i--;
+		width--;
 	}
-	else if (spec->minus == 1)
+	while (strlen >= 0 && spec->minus == 1)
 	{
-		write(1, str, len);
-		if (spec->width)
-			write(1, str_width, spec->width);
+		strnew[i] = str[strlen];
+		i--;
+		strlen--;
 	}
-	if (str_width)
-		free(str_width);
-	return (len + tmp_len);
+	write(1, strnew, tmp_len);
+	free(strnew);
+	return (tmp_len);
 }
