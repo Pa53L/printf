@@ -15,8 +15,8 @@
 char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 {
 	unsigned long strlen;
-	char *str;
 	unsigned long i;
+	char *str;
 
 	strlen = spec->width + spec->space + spec->plus + spec->sign + len;
 	if (spec->accur > 0)
@@ -103,26 +103,6 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 			ft_myitoa(ival, &(*str), spec->numsys, i);
 			i = i - len;
 		}
-
-		/*
-		if (ival == 0 && len > 0)
-		{
-			str[i] = '0';				  
-			i--;
-		}
-		while (ival > 0)				  
-		{								  
-			if (ival < 10)				  
-			{							  
-				str[i] = ITOA[ival];	  
-				ival -= ival;
-			}
-			else
-				str[i] = ITOA[ival % 10];
-			ival /= 10;	
-			i--;
-		}
-		*/
 
 		while (spec->accur > 0)
 		{

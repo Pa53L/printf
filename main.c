@@ -14,8 +14,8 @@
 
 int		main()
 {
-	printf("|MMM: %d\n", ft_printf("%d", 42));
-	printf("|III: %d\n", printf("%d", 42));
+	printf("|MMM: %d\n", ft_printf("%-4c", 'a'));
+	printf("|III: %d\n", printf("%-4c", 'a'));
 	printf("\n");
    // printf("|MMM: %d\n", ft_printf("% d", 8375));
    // printf("|III: %d\n", printf("% d", 8375));
