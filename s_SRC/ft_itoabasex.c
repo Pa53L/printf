@@ -1,31 +1,26 @@
 #include "../h_HEAD/header.h"
 
-char	*ft_itoabasex(unsigned long long value, char *str, int base)
+void	ft_itoabasex(unsigned long long ival, char *str, int base, char type, int len)
 {
-	int i;
-	int len;
-	
-	len = ft_numlen(value, base);
-	i = len - 1;
-	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	str[len] = '\0';
-	if (value == 0)
+	while (ival > 0)
 	{
-		str[0] = '0';
-		return (str);
-	}
-	while (value > 0)
-	{
-		if (value < base)
+		if (ival < base)
 		{
-			str[i] = ITOAX[value];
-			value -= value;
+			if (type != 'X')
+				str[len] = ITOA[ival];
+			else
+				str[len] = ITOAX[ival];
+			return ;
 		}
 		else
-			str[i] = ITOAX[value % base];
-		value /= base;
-		i--;
+		{
+			if (type != 'X')
+				str[len] = ITOA[ival % base];
+			else
+				str[len] = ITOAX[ival % base];
+		}
+		ival = ival / base;
+		len--;
 	}
-	return (str);
+	return ;
 }

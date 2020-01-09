@@ -59,7 +59,10 @@ size_t	ft_output(st_format *spec, va_list ap)
 		ft_cast_size_poxu(&spec[0], ap, &unval);
 		len = parse_dipoxu(&spec[0], unval);
 	}
+	// НЕ ЗАБЫТЬ ПРО ЭТУ ХУЙНЮ
+	/*
 	else if (spec->type == '%')
 		len = out_per(&spec[0]);
+	*/
 	return (len);
 }

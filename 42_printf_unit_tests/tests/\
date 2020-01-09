@@ -1,0 +1,724 @@
+============= TRACE ==============
+
+
+conv_cap_x
+----------------------------------
+test: "%X|%-X|%#X|%0X", 0U, 0U, 0U, 0U
+  > expected: |0|0|0|0|, ret = 7
+  >   actual: |0|0|0|0|, ret = 7
+⟹  [OK]
+----------------------------------
+test: "%1X|%-1X|%#X|%01X", 0U, 0U, 0U, 0U
+  > expected: |0|0|0|0|, ret = 7
+  >   actual: |0|0|0|0|, ret = 7
+⟹  [OK]
+----------------------------------
+test: "%23X|%-23X|%#X|%023X", 0U, 0U, 0U, 0U
+  > expected: |                      0|0                      |0|00000000000000000000000|, ret = 73
+  >   actual: |                      0|0                      |0|00000000000000000000000|, ret = 73
+⟹  [OK]
+----------------------------------
+test: "%.X|%-.X|%#.X|%0.X", 0U, 0U, 0U, 0U
+  > expected: |||||, ret = 3
+  >   actual: |||||, ret = 3
+⟹  [OK]
+----------------------------------
+test: "%.5X|%-.5X|%#.5X|%0.5X", 0U, 0U, 0U, 0U
+  > expected: |00000|00000|00000|00000|, ret = 23
+  >   actual: |00000|00000|00000|00000|, ret = 23
+⟹  [OK]
+----------------------------------
+test: "%1.X|%-1.X|%#1.X|%01.X", 0U, 0U, 0U, 0U
+  > expected: | | | | |, ret = 7
+  >   actual: | | | | |, ret = 7
+⟹  [OK]
+----------------------------------
+test: "%23.X|%-23.X|%#23.X|%023.X", 0U, 0U, 0U, 0U
+  > expected: |                       |                       |                       |                       |, ret = 95
+  >   actual: |                       |                       |                       |                       |, ret = 95
+⟹  [OK]
+----------------------------------
+test: "%1.5X|%-1.5X|%#1.5X|%01.5X", 0U, 0U, 0U, 0U
+  > expected: |00000|00000|00000|00000|, ret = 23
+  >   actual: |00000|00000|00000|00000|, ret = 23
+⟹  [OK]
+----------------------------------
+test: "%23.5X|%-23.5X|%#23.5X|%023.5X", 0U, 0U, 0U, 0U
+  > expected: |                  00000|00000                  |                  00000|                  00000|, ret = 95
+  >   actual: |                  00000|00000                  |                  00000|                  00000|, ret = 95
+⟹  [OK]
+----------------------------------
+test: "%-#X|%-0X|%#0X|%-#0X", 0U, 0U, 0U, 0U
+  > expected: |0|0|0|0|, ret = 7
+  >   actual: |0|0|0|0|, ret = 7
+⟹  [OK]
+----------------------------------
+test: "%-#1X|%-01X|%#01X|%-#01X", 0U, 0U, 0U, 0U
+  > expected: |0|0|0|0|, ret = 7
+  >   actual: |0|0|0|0|, ret = 7
+⟹  [OK]
+----------------------------------
+test: "%-#23X|%-023X|%#023X|%-#023X", 0U, 0U, 0U, 0U
+  > expected: |0                      |0                      |00000000000000000000000|0                      |, ret = 95
+  >   actual: |0                      |0                      |00000000000000000000000|0                      |, ret = 95
+⟹  [OK]
+----------------------------------
+test: "%-#.X|%-0.X|%#0.X|%-#0.X", 0U, 0U, 0U, 0U
+  > expected: |||||, ret = 3
+  >   actual: |||||, ret = 3
+⟹  [OK]
+----------------------------------
+test: "%-#.5X|%-0.5X|%#0.5X|%-#0.5X", 0U, 0U, 0U, 0U
+  > expected: |00000|00000|00000|00000|, ret = 23
+  >   actual: |00000|00000|00000|00000|, ret = 23
+⟹  [OK]
+----------------------------------
+test: "%-#1.X|%-01.X|%#01.X|%-#01.X", 0U, 0U, 0U, 0U
+  > expected: | | | | |, ret = 7
+  >   actual: | | | | |, ret = 7
+⟹  [OK]
+----------------------------------
+test: "%-#1.5X|%-01.5X|%#01.5X|%-#01.5X", 0U, 0U, 0U, 0U
+  > expected: |00000|00000|00000|00000|, ret = 23
+  >   actual: |00000|00000|00000|00000|, ret = 23
+⟹  [OK]
+----------------------------------
+test: "%-#23.X|%-023.X|%#023.X|%-#023.X", 0U, 0U, 0U, 0U
+  > expected: |                       |                       |                       |                       |, ret = 95
+  >   actual: |                       |                       |                       |                       |, ret = 95
+⟹  [OK]
+----------------------------------
+test: "%-#23.5X|%-023.5X|%#023.5X|%-#023.5X", 0U, 0U, 0U, 0U
+  > expected: |00000                  |00000                  |                  00000|00000                  |, ret = 95
+  >   actual: |00000                  |00000                  |                  00000|00000                  |, ret = 95
+⟹  [OK]
+----------------------------------
+test: "%X|%-X|%#X|%0X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%1X|%-1X|%#X|%01X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%23X|%-23X|%#X|%023X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |               FFFFFFFF|FFFFFFFF               |0XFFFFFFFF|000000000000000FFFFFFFF|, ret = 82
+  >   actual: |               ffffffff|ffffffff               |0Xffffffff|000000000000000ffffffff|, ret = 82
+⟹  [KO]
+----------------------------------
+test: "%.X|%-.X|%#.X|%0.X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%.5X|%-.5X|%#.5X|%0.5X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%1.X|%-1.X|%#1.X|%01.X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%23.X|%-23.X|%#23.X|%023.X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |               FFFFFFFF|FFFFFFFF               |             0XFFFFFFFF|               FFFFFFFF|, ret = 95
+  >   actual: |               ffffffff|ffffffff               |             0Xffffffff|               ffffffff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%1.5X|%-1.5X|%#1.5X|%01.5X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%23.5X|%-23.5X|%#23.5X|%023.5X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |               FFFFFFFF|FFFFFFFF               |             0XFFFFFFFF|               FFFFFFFF|, ret = 95
+  >   actual: |               ffffffff|ffffffff               |             0Xffffffff|               ffffffff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#X|%-0X|%#0X|%-#0X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#1X|%-01X|%#01X|%-#01X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#23X|%-023X|%#023X|%-#023X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |0XFFFFFFFF             |FFFFFFFF               |0X0000000000000FFFFFFFF|0XFFFFFFFF             |, ret = 95
+  >   actual: |0Xffffffff             |ffffffff               |0X0000000000000ffffffff|0Xffffffff             |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#.X|%-0.X|%#0.X|%-#0.X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#.5X|%-0.5X|%#0.5X|%-#0.5X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#1.X|%-01.X|%#01.X|%-#01.X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#1.5X|%-01.5X|%#01.5X|%-#01.5X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#23.X|%-023.X|%#023.X|%-#023.X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |0XFFFFFFFF             |FFFFFFFF               |             0XFFFFFFFF|0XFFFFFFFF             |, ret = 95
+  >   actual: |0Xffffffff             |ffffffff               |             0Xffffffff|0Xffffffff             |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#23.5X|%-023.5X|%#023.5X|%-#023.5X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX
+  > expected: |0XFFFFFFFF             |FFFFFFFF               |             0XFFFFFFFF|0XFFFFFFFF             |, ret = 95
+  >   actual: |0Xffffffff             |ffffffff               |             0Xffffffff|0Xffffffff             |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%X|%-X|%#X|%0X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%1X|%-1X|%#X|%01X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%23X|%-23X|%#X|%023X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |               FFFFFFFF|FFFFFFFF               |0XFFFFFFFF|000000000000000FFFFFFFF|, ret = 82
+  >   actual: |               ffffffff|ffffffff               |0Xffffffff|000000000000000ffffffff|, ret = 82
+⟹  [KO]
+----------------------------------
+test: "%.X|%-.X|%#.X|%0.X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%.5X|%-.5X|%#.5X|%0.5X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%1.X|%-1.X|%#1.X|%01.X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%23.X|%-23.X|%#23.X|%023.X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |               FFFFFFFF|FFFFFFFF               |             0XFFFFFFFF|               FFFFFFFF|, ret = 95
+  >   actual: |               ffffffff|ffffffff               |             0Xffffffff|               ffffffff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%1.5X|%-1.5X|%#1.5X|%01.5X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%23.5X|%-23.5X|%#23.5X|%023.5X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |               FFFFFFFF|FFFFFFFF               |             0XFFFFFFFF|               FFFFFFFF|, ret = 95
+  >   actual: |               ffffffff|ffffffff               |             0Xffffffff|               ffffffff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#X|%-0X|%#0X|%-#0X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#1X|%-01X|%#01X|%-#01X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#23X|%-023X|%#023X|%-#023X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |0XFFFFFFFF             |FFFFFFFF               |0X0000000000000FFFFFFFF|0XFFFFFFFF             |, ret = 95
+  >   actual: |0Xffffffff             |ffffffff               |0X0000000000000ffffffff|0Xffffffff             |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#.X|%-0.X|%#0.X|%-#0.X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#.5X|%-0.5X|%#0.5X|%-#0.5X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#1.X|%-01.X|%#01.X|%-#01.X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#1.5X|%-01.5X|%#01.5X|%-#01.5X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#23.X|%-023.X|%#023.X|%-#023.X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |0XFFFFFFFF             |FFFFFFFF               |             0XFFFFFFFF|0XFFFFFFFF             |, ret = 95
+  >   actual: |0Xffffffff             |ffffffff               |             0Xffffffff|0Xffffffff             |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#23.5X|%-023.5X|%#023.5X|%-#023.5X", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX
+  > expected: |0XFFFFFFFF             |FFFFFFFF               |             0XFFFFFFFF|0XFFFFFFFF             |, ret = 95
+  >   actual: |0Xffffffff             |ffffffff               |             0Xffffffff|0Xffffffff             |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%X|%-X|%#X|%0X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%1X|%-1X|%#X|%01X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%23X|%-23X|%#X|%023X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |               FFFFFFFF|FFFFFFFF               |0XFFFFFFFF|000000000000000FFFFFFFF|, ret = 82
+  >   actual: |               ffffffff|ffffffff               |0Xffffffff|000000000000000ffffffff|, ret = 82
+⟹  [KO]
+----------------------------------
+test: "%.X|%-.X|%#.X|%0.X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%.5X|%-.5X|%#.5X|%0.5X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%1.X|%-1.X|%#1.X|%01.X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%23.X|%-23.X|%#23.X|%023.X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |               FFFFFFFF|FFFFFFFF               |             0XFFFFFFFF|               FFFFFFFF|, ret = 95
+  >   actual: |               ffffffff|ffffffff               |             0Xffffffff|               ffffffff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%1.5X|%-1.5X|%#1.5X|%01.5X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFF|FFFFFFFF|0XFFFFFFFF|FFFFFFFF|, ret = 37
+  >   actual: |ffffffff|ffffffff|0Xffffffff|ffffffff|, ret = 37
+⟹  [KO]
+----------------------------------
+test: "%23.5X|%-23.5X|%#23.5X|%023.5X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |               FFFFFFFF|FFFFFFFF               |             0XFFFFFFFF|               FFFFFFFF|, ret = 95
+  >   actual: |               ffffffff|ffffffff               |             0Xffffffff|               ffffffff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#X|%-0X|%#0X|%-#0X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#1X|%-01X|%#01X|%-#01X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#23X|%-023X|%#023X|%-#023X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFF             |FFFFFFFF               |0X0000000000000FFFFFFFF|0XFFFFFFFF             |, ret = 95
+  >   actual: |0Xffffffff             |ffffffff               |0X0000000000000ffffffff|0Xffffffff             |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#.X|%-0.X|%#0.X|%-#0.X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#.5X|%-0.5X|%#0.5X|%-#0.5X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#1.X|%-01.X|%#01.X|%-#01.X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#1.5X|%-01.5X|%#01.5X|%-#01.5X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFF|FFFFFFFF|0XFFFFFFFF|0XFFFFFFFF|, ret = 41
+  >   actual: |0Xffffffff|ffffffff|0Xffffffff|0Xffffffff|, ret = 41
+⟹  [KO]
+----------------------------------
+test: "%-#23.X|%-023.X|%#023.X|%-#023.X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFF             |FFFFFFFF               |             0XFFFFFFFF|0XFFFFFFFF             |, ret = 95
+  >   actual: |0Xffffffff             |ffffffff               |             0Xffffffff|0Xffffffff             |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#23.5X|%-023.5X|%#023.5X|%-#023.5X", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFF             |FFFFFFFF               |             0XFFFFFFFF|0XFFFFFFFF             |, ret = 95
+  >   actual: |0Xffffffff             |ffffffff               |             0Xffffffff|0Xffffffff             |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%hhX|%-hhX|%#hhX|%0hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FF|FF|0XFF|FF|, ret = 13
+  >   actual: |ff|ff|0Xff|ff|, ret = 13
+⟹  [KO]
+----------------------------------
+test: "%1hhX|%-1hhX|%#hhX|%01hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FF|FF|0XFF|FF|, ret = 13
+  >   actual: |ff|ff|0Xff|ff|, ret = 13
+⟹  [KO]
+----------------------------------
+test: "%23hhX|%-23hhX|%#hhX|%023hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |                     FF|FF                     |0XFF|000000000000000000000FF|, ret = 76
+  >   actual: |                     ff|ff                     |0Xff|000000000000000000000ff|, ret = 76
+⟹  [KO]
+----------------------------------
+test: "%.hhX|%-.hhX|%#.hhX|%0.hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FF|FF|0XFF|FF|, ret = 13
+  >   actual: |ff|ff|0Xff|ff|, ret = 13
+⟹  [KO]
+----------------------------------
+test: "%.5hhX|%-.5hhX|%#.5hhX|%0.5hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |000FF|000FF|0X000FF|000FF|, ret = 25
+  >   actual: |000ff|000ff|0X000ff|000ff|, ret = 25
+⟹  [KO]
+----------------------------------
+test: "%1.hhX|%-1.hhX|%#1.hhX|%01.hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FF|FF|0XFF|FF|, ret = 13
+  >   actual: |ff|ff|0Xff|ff|, ret = 13
+⟹  [KO]
+----------------------------------
+test: "%23.hhX|%-23.hhX|%#23.hhX|%023.hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |                     FF|FF                     |                   0XFF|                     FF|, ret = 95
+  >   actual: |                     ff|ff                     |                   0Xff|                     ff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%1.5hhX|%-1.5hhX|%#1.5hhX|%01.5hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |000FF|000FF|0X000FF|000FF|, ret = 25
+  >   actual: |000ff|000ff|0X000ff|000ff|, ret = 25
+⟹  [KO]
+----------------------------------
+test: "%23.5hhX|%-23.5hhX|%#23.5hhX|%023.5hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |                  000FF|000FF                  |                0X000FF|                  000FF|, ret = 95
+  >   actual: |                  000ff|000ff                  |                0X000ff|                  000ff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#hhX|%-0hhX|%#0hhX|%-#0hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFF|FF|0XFF|0XFF|, ret = 17
+  >   actual: |0Xff|ff|0Xff|0Xff|, ret = 17
+⟹  [KO]
+----------------------------------
+test: "%-#1hhX|%-01hhX|%#01hhX|%-#01hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFF|FF|0XFF|0XFF|, ret = 17
+  >   actual: |0Xff|ff|0Xff|0Xff|, ret = 17
+⟹  [KO]
+----------------------------------
+test: "%-#23hhX|%-023hhX|%#023hhX|%-#023hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFF                   |FF                     |0X0000000000000000000FF|0XFF                   |, ret = 95
+  >   actual: |0Xff                   |ff                     |0X0000000000000000000ff|0Xff                   |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#.hhX|%-0.hhX|%#0.hhX|%-#0.hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFF|FF|0XFF|0XFF|, ret = 17
+  >   actual: |0Xff|ff|0Xff|0Xff|, ret = 17
+⟹  [KO]
+----------------------------------
+test: "%-#.5hhX|%-0.5hhX|%#0.5hhX|%-#0.5hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0X000FF|000FF|0X000FF|0X000FF|, ret = 29
+  >   actual: |0X000ff|000ff|0X000ff|0X000ff|, ret = 29
+⟹  [KO]
+----------------------------------
+test: "%-#1.hhX|%-01.hhX|%#01.hhX|%-#01.hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFF|FF|0XFF|0XFF|, ret = 17
+  >   actual: |0Xff|ff|0Xff|0Xff|, ret = 17
+⟹  [KO]
+----------------------------------
+test: "%-#1.5hhX|%-01.5hhX|%#01.5hhX|%-#01.5hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0X000FF|000FF|0X000FF|0X000FF|, ret = 29
+  >   actual: |0X000ff|000ff|0X000ff|0X000ff|, ret = 29
+⟹  [KO]
+----------------------------------
+test: "%-#23.hhX|%-023.hhX|%#023.hhX|%-#023.hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFF                   |FF                     |                   0XFF|0XFF                   |, ret = 95
+  >   actual: |0Xff                   |ff                     |                   0Xff|0Xff                   |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#23.5hhX|%-023.5hhX|%#023.5hhX|%-#023.5hhX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0X000FF                |000FF                  |                0X000FF|0X000FF                |, ret = 95
+  >   actual: |0X000ff                |000ff                  |                0X000ff|0X000ff                |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%hX|%-hX|%#hX|%0hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFF|FFFF|0XFFFF|FFFF|, ret = 21
+  >   actual: |ffff|ffff|0Xffff|ffff|, ret = 21
+⟹  [KO]
+----------------------------------
+test: "%1hX|%-1hX|%#hX|%01hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFF|FFFF|0XFFFF|FFFF|, ret = 21
+  >   actual: |ffff|ffff|0Xffff|ffff|, ret = 21
+⟹  [KO]
+----------------------------------
+test: "%23hX|%-23hX|%#hX|%023hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |                   FFFF|FFFF                   |0XFFFF|0000000000000000000FFFF|, ret = 78
+  >   actual: |                   ffff|ffff                   |0Xffff|0000000000000000000ffff|, ret = 78
+⟹  [KO]
+----------------------------------
+test: "%.hX|%-.hX|%#.hX|%0.hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFF|FFFF|0XFFFF|FFFF|, ret = 21
+  >   actual: |ffff|ffff|0Xffff|ffff|, ret = 21
+⟹  [KO]
+----------------------------------
+test: "%.5hX|%-.5hX|%#.5hX|%0.5hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0FFFF|0FFFF|0X0FFFF|0FFFF|, ret = 25
+  >   actual: |0ffff|0ffff|0X0ffff|0ffff|, ret = 25
+⟹  [KO]
+----------------------------------
+test: "%1.hX|%-1.hX|%#1.hX|%01.hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFF|FFFF|0XFFFF|FFFF|, ret = 21
+  >   actual: |ffff|ffff|0Xffff|ffff|, ret = 21
+⟹  [KO]
+----------------------------------
+test: "%23.hX|%-23.hX|%#23.hX|%023.hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |                   FFFF|FFFF                   |                 0XFFFF|                   FFFF|, ret = 95
+  >   actual: |                   ffff|ffff                   |                 0Xffff|                   ffff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%1.5hX|%-1.5hX|%#1.5hX|%01.5hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0FFFF|0FFFF|0X0FFFF|0FFFF|, ret = 25
+  >   actual: |0ffff|0ffff|0X0ffff|0ffff|, ret = 25
+⟹  [KO]
+----------------------------------
+test: "%23.5hX|%-23.5hX|%#23.5hX|%023.5hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |                  0FFFF|0FFFF                  |                0X0FFFF|                  0FFFF|, ret = 95
+  >   actual: |                  0ffff|0ffff                  |                0X0ffff|                  0ffff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#hX|%-0hX|%#0hX|%-#0hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFF|FFFF|0XFFFF|0XFFFF|, ret = 25
+  >   actual: |0Xffff|ffff|0Xffff|0Xffff|, ret = 25
+⟹  [KO]
+----------------------------------
+test: "%-#1hX|%-01hX|%#01hX|%-#01hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFF|FFFF|0XFFFF|0XFFFF|, ret = 25
+  >   actual: |0Xffff|ffff|0Xffff|0Xffff|, ret = 25
+⟹  [KO]
+----------------------------------
+test: "%-#23hX|%-023hX|%#023hX|%-#023hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFF                 |FFFF                   |0X00000000000000000FFFF|0XFFFF                 |, ret = 95
+  >   actual: |0Xffff                 |ffff                   |0X00000000000000000ffff|0Xffff                 |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#.hX|%-0.hX|%#0.hX|%-#0.hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFF|FFFF|0XFFFF|0XFFFF|, ret = 25
+  >   actual: |0Xffff|ffff|0Xffff|0Xffff|, ret = 25
+⟹  [KO]
+----------------------------------
+test: "%-#.5hX|%-0.5hX|%#0.5hX|%-#0.5hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0X0FFFF|0FFFF|0X0FFFF|0X0FFFF|, ret = 29
+  >   actual: |0X0ffff|0ffff|0X0ffff|0X0ffff|, ret = 29
+⟹  [KO]
+----------------------------------
+test: "%-#1.hX|%-01.hX|%#01.hX|%-#01.hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFF|FFFF|0XFFFF|0XFFFF|, ret = 25
+  >   actual: |0Xffff|ffff|0Xffff|0Xffff|, ret = 25
+⟹  [KO]
+----------------------------------
+test: "%-#1.5hX|%-01.5hX|%#01.5hX|%-#01.5hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0X0FFFF|0FFFF|0X0FFFF|0X0FFFF|, ret = 29
+  >   actual: |0X0ffff|0ffff|0X0ffff|0X0ffff|, ret = 29
+⟹  [KO]
+----------------------------------
+test: "%-#23.hX|%-023.hX|%#023.hX|%-#023.hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFF                 |FFFF                   |                 0XFFFF|0XFFFF                 |, ret = 95
+  >   actual: |0Xffff                 |ffff                   |                 0Xffff|0Xffff                 |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#23.5hX|%-023.5hX|%#023.5hX|%-#023.5hX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0X0FFFF                |0FFFF                  |                0X0FFFF|0X0FFFF                |, ret = 95
+  >   actual: |0X0ffff                |0ffff                  |                0X0ffff|0X0ffff                |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%lX|%-lX|%#lX|%0lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|, ret = 69
+  >   actual: |ffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|ffffffffffffffff|, ret = 69
+⟹  [KO]
+----------------------------------
+test: "%1lX|%-1lX|%#lX|%01lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|, ret = 69
+  >   actual: |ffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|ffffffffffffffff|, ret = 69
+⟹  [KO]
+----------------------------------
+test: "%23lX|%-23lX|%#lX|%023lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |       FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF       |0XFFFFFFFFFFFFFFFF|0000000FFFFFFFFFFFFFFFF|, ret = 90
+  >   actual: |       ffffffffffffffff|ffffffffffffffff       |0Xffffffffffffffff|0000000ffffffffffffffff|, ret = 90
+⟹  [KO]
+----------------------------------
+test: "%.lX|%-.lX|%#.lX|%0.lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|, ret = 69
+  >   actual: |ffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|ffffffffffffffff|, ret = 69
+⟹  [KO]
+----------------------------------
+test: "%.5lX|%-.5lX|%#.5lX|%0.5lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|, ret = 69
+  >   actual: |ffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|ffffffffffffffff|, ret = 69
+⟹  [KO]
+----------------------------------
+test: "%1.lX|%-1.lX|%#1.lX|%01.lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|, ret = 69
+  >   actual: |ffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|ffffffffffffffff|, ret = 69
+⟹  [KO]
+----------------------------------
+test: "%23.lX|%-23.lX|%#23.lX|%023.lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |       FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF       |     0XFFFFFFFFFFFFFFFF|       FFFFFFFFFFFFFFFF|, ret = 95
+  >   actual: |       ffffffffffffffff|ffffffffffffffff       |     0Xffffffffffffffff|       ffffffffffffffff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%1.5lX|%-1.5lX|%#1.5lX|%01.5lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|, ret = 69
+  >   actual: |ffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|ffffffffffffffff|, ret = 69
+⟹  [KO]
+----------------------------------
+test: "%23.5lX|%-23.5lX|%#23.5lX|%023.5lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |       FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF       |     0XFFFFFFFFFFFFFFFF|       FFFFFFFFFFFFFFFF|, ret = 95
+  >   actual: |       ffffffffffffffff|ffffffffffffffff       |     0Xffffffffffffffff|       ffffffffffffffff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#lX|%-0lX|%#0lX|%-#0lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|, ret = 73
+  >   actual: |0Xffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|0Xffffffffffffffff|, ret = 73
+⟹  [KO]
+----------------------------------
+test: "%-#1lX|%-01lX|%#01lX|%-#01lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|, ret = 73
+  >   actual: |0Xffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|0Xffffffffffffffff|, ret = 73
+⟹  [KO]
+----------------------------------
+test: "%-#23lX|%-023lX|%#023lX|%-#023lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF     |FFFFFFFFFFFFFFFF       |0X00000FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF     |, ret = 95
+  >   actual: |0Xffffffffffffffff     |ffffffffffffffff       |0X00000ffffffffffffffff|0Xffffffffffffffff     |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#.lX|%-0.lX|%#0.lX|%-#0.lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|, ret = 73
+  >   actual: |0Xffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|0Xffffffffffffffff|, ret = 73
+⟹  [KO]
+----------------------------------
+test: "%-#.5lX|%-0.5lX|%#0.5lX|%-#0.5lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|, ret = 73
+  >   actual: |0Xffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|0Xffffffffffffffff|, ret = 73
+⟹  [KO]
+----------------------------------
+test: "%-#1.lX|%-01.lX|%#01.lX|%-#01.lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|, ret = 73
+  >   actual: |0Xffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|0Xffffffffffffffff|, ret = 73
+⟹  [KO]
+----------------------------------
+test: "%-#1.5lX|%-01.5lX|%#01.5lX|%-#01.5lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|, ret = 73
+  >   actual: |0Xffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|0Xffffffffffffffff|, ret = 73
+⟹  [KO]
+----------------------------------
+test: "%-#23.lX|%-023.lX|%#023.lX|%-#023.lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF     |FFFFFFFFFFFFFFFF       |     0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF     |, ret = 95
+  >   actual: |0Xffffffffffffffff     |ffffffffffffffff       |     0Xffffffffffffffff|0Xffffffffffffffff     |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#23.5lX|%-023.5lX|%#023.5lX|%-#023.5lX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF     |FFFFFFFFFFFFFFFF       |     0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF     |, ret = 95
+  >   actual: |0Xffffffffffffffff     |ffffffffffffffff       |     0Xffffffffffffffff|0Xffffffffffffffff     |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%llX|%-llX|%#llX|%0llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|, ret = 69
+  >   actual: |ffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|ffffffffffffffff|, ret = 69
+⟹  [KO]
+----------------------------------
+test: "%1llX|%-1llX|%#llX|%01llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|, ret = 69
+  >   actual: |ffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|ffffffffffffffff|, ret = 69
+⟹  [KO]
+----------------------------------
+test: "%23llX|%-23llX|%#llX|%023llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |       FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF       |0XFFFFFFFFFFFFFFFF|0000000FFFFFFFFFFFFFFFF|, ret = 90
+  >   actual: |       ffffffffffffffff|ffffffffffffffff       |0Xffffffffffffffff|0000000ffffffffffffffff|, ret = 90
+⟹  [KO]
+----------------------------------
+test: "%.llX|%-.llX|%#.llX|%0.llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|, ret = 69
+  >   actual: |ffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|ffffffffffffffff|, ret = 69
+⟹  [KO]
+----------------------------------
+test: "%.5llX|%-.5llX|%#.5llX|%0.5llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|, ret = 69
+  >   actual: |ffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|ffffffffffffffff|, ret = 69
+⟹  [KO]
+----------------------------------
+test: "%1.llX|%-1.llX|%#1.llX|%01.llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|, ret = 69
+  >   actual: |ffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|ffffffffffffffff|, ret = 69
+⟹  [KO]
+----------------------------------
+test: "%23.llX|%-23.llX|%#23.llX|%023.llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |       FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF       |     0XFFFFFFFFFFFFFFFF|       FFFFFFFFFFFFFFFF|, ret = 95
+  >   actual: |       ffffffffffffffff|ffffffffffffffff       |     0Xffffffffffffffff|       ffffffffffffffff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%1.5llX|%-1.5llX|%#1.5llX|%01.5llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|, ret = 69
+  >   actual: |ffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|ffffffffffffffff|, ret = 69
+⟹  [KO]
+----------------------------------
+test: "%23.5llX|%-23.5llX|%#23.5llX|%023.5llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |       FFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF       |     0XFFFFFFFFFFFFFFFF|       FFFFFFFFFFFFFFFF|, ret = 95
+  >   actual: |       ffffffffffffffff|ffffffffffffffff       |     0Xffffffffffffffff|       ffffffffffffffff|, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#llX|%-0llX|%#0llX|%-#0llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|, ret = 73
+  >   actual: |0Xffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|0Xffffffffffffffff|, ret = 73
+⟹  [KO]
+----------------------------------
+test: "%-#1llX|%-01llX|%#01llX|%-#01llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|, ret = 73
+  >   actual: |0Xffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|0Xffffffffffffffff|, ret = 73
+⟹  [KO]
+----------------------------------
+test: "%-#23llX|%-023llX|%#023llX|%-#023llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF     |FFFFFFFFFFFFFFFF       |0X00000FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF     |, ret = 95
+  >   actual: |0Xffffffffffffffff     |ffffffffffffffff       |0X00000ffffffffffffffff|0Xffffffffffffffff     |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#.llX|%-0.llX|%#0.llX|%-#0.llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|, ret = 73
+  >   actual: |0Xffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|0Xffffffffffffffff|, ret = 73
+⟹  [KO]
+----------------------------------
+test: "%-#.5llX|%-0.5llX|%#0.5llX|%-#0.5llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|, ret = 73
+  >   actual: |0Xffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|0Xffffffffffffffff|, ret = 73
+⟹  [KO]
+----------------------------------
+test: "%-#1.llX|%-01.llX|%#01.llX|%-#01.llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|, ret = 73
+  >   actual: |0Xffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|0Xffffffffffffffff|, ret = 73
+⟹  [KO]
+----------------------------------
+test: "%-#1.5llX|%-01.5llX|%#01.5llX|%-#01.5llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF|FFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF|, ret = 73
+  >   actual: |0Xffffffffffffffff|ffffffffffffffff|0Xffffffffffffffff|0Xffffffffffffffff|, ret = 73
+⟹  [KO]
+----------------------------------
+test: "%-#23.llX|%-023.llX|%#023.llX|%-#023.llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF     |FFFFFFFFFFFFFFFF       |     0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF     |, ret = 95
+  >   actual: |0Xffffffffffffffff     |ffffffffffffffff       |     0Xffffffffffffffff|0Xffffffffffffffff     |, ret = 95
+⟹  [KO]
+----------------------------------
+test: "%-#23.5llX|%-023.5llX|%#023.5llX|%-#023.5llX", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX
+  > expected: |0XFFFFFFFFFFFFFFFF     |FFFFFFFFFFFFFFFF       |     0XFFFFFFFFFFFFFFFF|0XFFFFFFFFFFFFFFFF     |, ret = 95
+  >   actual: |0Xffffffffffffffff     |ffffffffffffffff       |     0Xffffffffffffffff|0Xffffffffffffffff     |, ret = 95
+⟹  [KO]

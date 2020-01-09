@@ -14,8 +14,8 @@
 
 int		main()
 {
-	printf("|MMM: %d\n", ft_printf("%10.s", "kavkaz"));
-	printf("|III: %d\n", printf("%10.s", "kavkaz"));
+	printf("MMM: %d\n", ft_printf("%-#.5hho|%-0.5hho|%#0.5hho|%-#0.5hho", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX));
+	printf("III: %d\n",    printf("%-#.5hho|%-0.5hho|%#0.5hho|%-#0.5hho", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX));
 	printf("\n");
    // printf("|MMM: %d\n", ft_printf("% d", 8375));
    // printf("|III: %d\n", printf("% d", 8375));

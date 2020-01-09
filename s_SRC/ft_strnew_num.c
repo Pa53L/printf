@@ -18,7 +18,7 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 	unsigned long i;
 	char *str;
 
-	strlen = spec->width + spec->space + spec->plus + spec->sign + len;
+	strlen = spec->width + spec->space + spec->plus + spec->sign + spec->sharp + len;
 	if (spec->accur > 0)
 		strlen = strlen + spec->accur;
 	// printf("for malloc : %d\n", strlen + 1);
@@ -38,7 +38,7 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 		}
 		else if (ival > 0)
 		{
-			ft_myitoa(ival, &(*str), spec->numsys, i);
+			ft_itoabasex(ival, &(*str), spec->numsys, spec->type, i);
 			i = i - len;
 		}
 
@@ -58,6 +58,21 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 			i--;
 		}
 
+		/* SHARP */
+		if (spec->sharp && spec->zero == 0)
+		{
+			if (spec->sharp == 2)
+			{
+				if (spec->type != 'X')
+					str[i--] = 'x';
+				else
+					str[i--] = 'X';
+				str[i--] = '0';
+			}
+			else
+				str[i--] = '0';
+		}
+
 		while (spec->width > 0)
 		{
 			if (spec->zero == 0)
@@ -66,6 +81,21 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 				str[i] = '0';
 			spec->width--;
 			i--;
+		}
+
+		/* SHARP */
+		if (spec->sharp && spec->zero == 1)
+		{
+			if (spec->sharp == 2)
+			{
+				if (spec->type != 'X')
+					str[i--] = 'x';
+				else
+					str[i--] = 'X';
+				str[i--] = '0';
+			}
+			else
+				str[i--] = '0';
 		}
 
 		if (spec->space)
@@ -100,7 +130,7 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 		}
 		else if (ival > 0)
 		{
-			ft_myitoa(ival, &(*str), spec->numsys, i);
+			ft_itoabasex(ival, &(*str), spec->numsys, spec->type, i);
 			i = i - len;
 		}
 
@@ -109,6 +139,21 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 			str[i] = '0';
 			spec->accur--;
 			i--;
+		}
+
+		/* SHARP */
+		if (spec->sharp)
+		{
+			if (spec->sharp == 2)
+			{
+				if (spec->type != 'X')
+					str[i--] = 'x';
+				else
+					str[i--] = 'X';
+				str[i--] = '0';
+			}
+			else
+				str[i--] = '0';
 		}
 
 		if (spec->plus || spec->sign)

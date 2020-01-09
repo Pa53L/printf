@@ -9,7 +9,7 @@ char	*is_flag(st_format *spec, char *p)
 		else if (spec->plus == 0 && *p == '+')
 			spec->plus = 1;
 		else if (spec->sharp == 0 && *p == '#')
-			spec->sharp = 1;
+			spec->sharp = 2;
 		else if (spec->zero == 0 && *p == '0')
 			spec->zero = 1;
 		else if (spec->space == 0 && *p == ' ')

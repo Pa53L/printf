@@ -45,8 +45,6 @@ typedef struct struct_specifer
 
 size_t		ft_strlen(const char *);
 int			ft_numlen(unsigned long long, int);
-char		*ft_strnew_width(st_format *);
-char		*ft_strnew_accuracy(st_format *);
 char		*ft_strnew_num(st_format *spec, unsigned long long, int);
 void		ft_cast_size_di(st_format *, va_list, long long *);
 void		ft_cast_size_poxu(st_format *, va_list, unsigned long long *);
@@ -74,8 +72,6 @@ size_t		ft_output(st_format *, va_list);
 // Ф-ции от П
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strdup(const char *s);
-char		*ft_itoabase(unsigned long long value, char *str, int base);
-char		*ft_itoabasex(unsigned long long value, char *str, int base);
-void		ft_myitoa(unsigned long long value, char *str, int base, int len);
+void		ft_itoabasex(unsigned long long value, char *str, int base, char type, int len);
 
 #endif

@@ -34,6 +34,21 @@ char 	*parse_format(st_format *spec, unsigned long long *ival)
 		else
 			spec->accur = 0;
 	}
+	/* SHARP EBANYI */
+	if (spec->sharp || spec->type == 'p')
+	{	
+		if (spec->type == 'o')
+		{
+			if (*ival == 0 && spec->accur != 0)
+				spec->sharp = 0;
+			else
+				spec->sharp = 1;
+		}
+		if ((spec->accur == 0 && *ival == 0 && spec->type != 'o') || *ival == 0 && spec->type != 'o' || (spec->accur > 0 && spec->type == 'o'))// || spec->accur == -1)
+			spec->sharp = 0;
+		if (spec->type == 'p')
+			spec->sharp = 2;
+	}
 	/* PLUS */
 	if (spec->plus)
 	{
@@ -51,7 +66,7 @@ char 	*parse_format(st_format *spec, unsigned long long *ival)
 	/* WIDTH */
 	if (spec->width)
 	{
-		spec->width = spec->width - spec->sign - spec->space - spec->plus - len;
+		spec->width = spec->width - spec->sign - spec->space - spec->plus - spec->sharp - len;
 		if (spec->accur > 0)
 			spec->width = spec->width - spec->accur;
 		if (spec->width <= 0)
@@ -62,7 +77,7 @@ char 	*parse_format(st_format *spec, unsigned long long *ival)
 	// printf("len is: %d\n", len);
 	// printf("sign: %d\n", spec[0].sign);
 	// printf("minus: %d\n", spec[0].minus);
-	// printf("accuracy: %d\n", spec[0].accur);
+	//printf("accuracy: %d\n", spec[0].accur);
 	// printf("plus: %d\n", spec[0].plus);
 	// printf("space: %d\n", spec[0].space);
 	// printf("sharp: %d\n", spec[0].sharp);
@@ -71,63 +86,5 @@ char 	*parse_format(st_format *spec, unsigned long long *ival)
 	// printf("type: %c\n", spec[0].type);
 	// printf("----------------------\n");
 	str = ft_strnew_num(&spec[0], *ival, len);
-	/*
-	if (spec->type == 'u')
-	{
-		spec->space = 0;
-		spec->plus = 0;
-	}
-	if (spec->space)
-	{	
-		if (spec->plus || spec->sign)
-			spec->space = 0;
-		if (spec->width > len && spec->minus != 1 && spec->zero != 1)
-			spec->space = 0;
-	}
-	if (spec->accur == 0 && *ival == 0)
-		spec->accur = -2;
-	if (spec->accur > 0)
-	{
-		if (spec->accur <= len)
-			spec->accur = 0;
-		else
-			spec->accur = spec->accur - len;
-	}
-	if (spec->sharp)
-	{
-		if (spec->numsys == 10 || spec->numsys == 8)
-			if (spec->accur > 0 || (*ival == 0 && spec->accur != -2))
-				spec->sharp = 0;
-		if (spec->numsys == 16)
-			if (spec->accur == -2 || (*ival == 0 && spec->accur != -2))
-				spec->sharp = 0;
-		if (spec->numsys == 10)
-			spec->sharp = 0;
-	}
-	if (spec->zero)
-		if (spec->accur >= 0 || spec->accur == -2 || spec->minus == 1)
-			spec->zero = 0;
-	if (spec->type == 'p')
-		spec->sharp = 1;
-	if (spec->width)
-	{
-		spec->width = spec->width - spec->plus - spec->sign - spec->space - len;
-		if (spec->accur > 0)
-			spec->width = spec->width - spec->accur;
-		if (spec->sign && spec->plus)
-			spec->width = spec->width + 1;
-		if (*ival == 0 && spec->accur == -2)
-			spec->width = spec->width + 1;
-		if (spec->sharp)
-		{
-		 	if (spec->numsys == 8)
-				spec->width = spec->width - 1;
-		 	else if (spec->numsys == 16)
-				spec->width = spec->width - 2;
-		}
-		if (spec->width < 0)
-			spec->width = 0;
-	}
-	*/
 	return (str);
 }
