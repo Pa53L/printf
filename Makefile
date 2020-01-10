@@ -20,7 +20,7 @@ HEADER = h_HEAD/header.h
 _OBJS = ft_strlen.o ft_numlen.o ft_itoabasex.o \
 		ft_clean_struct.o ft_record_struct.o \
 		ft_printf.o ft_output.o \
-		out_chr.o out_str.o out_per.o \
+		out_chr.o out_str.o out_per.o out_bits.o\
 		is_flag.o is_width.o is_accuracy.o is_size.o is_type.o \
 		parse_format.o parse_dipoxu.o \
 		ft_cast_size_di.o ft_cast_size_poxu.o \

@@ -14,24 +14,51 @@
 
 size_t	out_per(st_format *spec)
 {
-	char *str_width;
+	unsigned long strlen;
+	unsigned long i;
+	char *str;
 
-	str_width = NULL;
-	if (spec->width)
+	str = NULL;
+	strlen = spec->width;
+	if (strlen > 1)
 	{
-		if (spec->width > 1)
-			spec->width--;
-		else
-			spec->width = 0;
+		str = (char *)malloc(sizeof(char) * (strlen));
+		if (!str)
+			return (0);
 	}
-	if (spec->width > 1)
-		str_width = ft_strnew_width(&spec[0]);
-	if (spec->width && spec->minus == 0)
-		write(1, str_width, spec->width);
-	write(1, "%", 1);
-	if (spec->width && spec->minus == 1)
-		write(1, str_width, spec->width);
-	if (str_width)
-		free(str_width);
-	return (spec->width + 1);
+	else
+	{
+		write(1, "%", 1);
+		return (1);
+	}
+	str[strlen - 1] = '\0';
+	i = strlen - 1;
+	if (spec->minus == 1)
+	{
+		while (i > 0)
+		{
+			str[i] = ' ';
+			i--;
+		}
+	}
+	str[i] = '%';
+	i--;
+	if (spec->minus == 0)
+	{
+		while (i > 0)
+		{
+			if (spec->zero == 0)
+				str[i] = ' ';
+			else if (spec->zero == 1)
+				str[i] = '0';
+			i--;
+		}
+		if (spec->zero == 0)
+			str[i] = ' ';
+		else if (spec->zero == 1)
+			str[i] = '0';
+	}
+	write(1, str, strlen);
+	free(str);
+	return (strlen);
 }

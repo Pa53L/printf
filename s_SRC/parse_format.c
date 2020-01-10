@@ -44,7 +44,7 @@ char 	*parse_format(st_format *spec, unsigned long long *ival)
 			else
 				spec->sharp = 1;
 		}
-		if ((spec->accur == 0 && *ival == 0 && spec->type != 'o') || *ival == 0 && spec->type != 'o' || (spec->accur > 0 && spec->type == 'o'))// || spec->accur == -1)
+		if ((spec->accur == 0 && *ival == 0 && spec->type != 'o') || (*ival == 0 && spec->type != 'o') || (spec->accur > 0 && spec->type == 'o'))
 			spec->sharp = 0;
 		if (spec->type == 'p')
 			spec->sharp = 2;
@@ -52,15 +52,19 @@ char 	*parse_format(st_format *spec, unsigned long long *ival)
 	/* PLUS */
 	if (spec->plus)
 	{
+		if (spec->type == 'u')
+			spec->plus = 0;
 		if (spec->sign == 1)
 			spec->plus = 0;
 	}
 	/* SPACE */
 	if (spec->space)
 	{	
+		if (spec->type == 'u')
+			spec->space = 0;
 		if (spec->plus || spec->sign)
 			spec->space = 0;
-		if (spec->width > len && spec->minus != 1 && spec->zero != 1)
+		if (spec->width > len + spec->accur && spec->accur != -1 && spec->minus == 0 && spec->zero == 0)
 			spec->space = 0;
 	}
 	/* WIDTH */
@@ -72,19 +76,6 @@ char 	*parse_format(st_format *spec, unsigned long long *ival)
 		if (spec->width <= 0)
 			spec->width = 0;
 	}
-	// printf("----------------------\n");
-	// printf("width: %d\n", spec[0].width);
-	// printf("len is: %d\n", len);
-	// printf("sign: %d\n", spec[0].sign);
-	// printf("minus: %d\n", spec[0].minus);
-	//printf("accuracy: %d\n", spec[0].accur);
-	// printf("plus: %d\n", spec[0].plus);
-	// printf("space: %d\n", spec[0].space);
-	// printf("sharp: %d\n", spec[0].sharp);
-	// printf("zero: %d\n", spec[0].zero);
-	// printf("size: %d\n", spec[0].size);
-	// printf("type: %c\n", spec[0].type);
-	// printf("----------------------\n");
 	str = ft_strnew_num(&spec[0], *ival, len);
 	return (str);
 }

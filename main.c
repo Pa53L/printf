@@ -14,35 +14,26 @@
 
 int		main()
 {
-	printf("MMM: %d\n", ft_printf("%-#.5hho|%-0.5hho|%#0.5hho|%-#0.5hho", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX));
-	printf("III: %d\n",    printf("%-#.5hho|%-0.5hho|%#0.5hho|%-#0.5hho", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX));
+	printf("|||MINE: %d\n",     ft_printf("%b", -16));
+   /*
+	printf("|||MINE: %d\n",     ft_printf("% 4.5i", 42));
+	printf("|||ORIGINAL: %d\n",    printf("% 4.5i", 42));
 	printf("\n");
-   // printf("|MMM: %d\n", ft_printf("% d", 8375));
-   // printf("|III: %d\n", printf("% d", 8375));
-   // printf("\n");
-   // printf("|MMM: %d\n", ft_printf("% 6.d", 0));
-   // printf("|III: %d\n", printf("% 6.d", 0));
-   // printf("\n");
-	// // printf("|M: %d\n", ft_printf("%-10.5d", 4242));
-   // printf("|I: %d\n",    printf("%-10.5d", 4242));
-   // printf("\n");
-	// printf("|M: %d\n", ft_printf("hello, %s.", "gavin"));
-   // printf("|I: %d\n",    printf("hello, %s.", "gavin"));
-	// printf("\n");
-	// printf("|M: %d\n", ft_printf("%-#23o|%-023o|%#023o|%-#23o", 0U, 0U, 0U, 0));
-   // printf("|I: %d\n",    printf("%-#23o|%-023o|%#023o|%-#23o", 0U, 0U, 0U, 0));
-   // printf("\n");
-   // printf("|M: %d\n", ft_printf("%.x|%-.x|%#.x|%0.x", 0U, 0U, 0U, 0U));
-   // printf("|I: %d\n", printf("%.x|%-.x|%#.x|%0.x", 0U, 0U, 0U, 0U));
-   // printf("\n");
-   // printf("|M: %d\n", ft_printf("%-#23.x|%-023.x|%#023.x|%-#023.x", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX));
-   // printf("|I: %d\n", printf("%-#23.x|%-023.x|%#023.x|%-#023.x", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX));
-   // printf("\n");
-   // printf("|M: %d\n", ft_printf("%23X|%-23X|%#X|%023X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX));
-   // printf("|I: %d\n", printf("%23X|%-23X|%#X|%023X", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX));
-   // printf("\n");
+	printf("|||MINE: %d\n",     ft_printf("% 5d", 52625));
+	printf("|||ORIGINAL: %d\n",    printf("% 5d", 52625));
+   */
    return (0);
 }
+/*
+Соответственно, побитовое произведение чисел 31 и 17 даст 17, так как 31 это 00011111 , а 17 это 00010001
+
+00011111
+00010001
+↓↓↓↓↓↓↓↓
+00010001
+*/
+
+
 /*
    printf("----------------------\n");
    printf("minus: %d\n", spec[0].minus);
@@ -56,3 +47,14 @@ int		main()
    printf("type: %c\n", spec[0].type);
    printf("----------------------\n");
    */
+/*
+char *itobs(unsigned long long n, char *ps)
+{
+   int i;
+   const static unsigned long long size = CHAR_BIT * sizeof(unsigned long long);
+   for (i = size - 1; i >= 0; i--, n >>= 1)
+      ps[i] = (01 & n) + '0';
+   ps[size] = '\0';
+   return (ps);
+}
+*/

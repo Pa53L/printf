@@ -12,17 +12,17 @@
 
 #include "../h_HEAD/header.h"
 
-char	*ft_record_struct(st_format *spec, char *p)
+char	*ft_record_struct(st_format *spec, char *p, va_list ap)
 {
 	if (*p == '-' || *p == '+' || *p == ' ' || *p == '#' || *p == '0')
 		p = is_flag(&spec[0], p);
-	if (*p >= '1' && *p <= '9')
-		p = is_width(&spec->width, p);
-	if (*p == '.' && *(p + 1))
-		p = is_accuracy(&spec->accur, p);
+	if ((*p >= '1' && *p <= '9') || *p == '*')
+		p = is_width(&spec->width, ap, p);
+	if ((*p == '.' && *(p + 1)) || (*p == '.' && *(p + 1) == '*'))
+		p = is_accuracy(&spec->accur, ap, p);
 	if (*p == 'l' || *p == 'L' || *p == 'h')
 		p = is_size(&spec->size, p);
-	if (*p > 'W')
+	if (*p > '$')
 		p = is_type(&spec->type, p);
 	return (p);
 }

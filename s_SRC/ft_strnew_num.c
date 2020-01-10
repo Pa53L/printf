@@ -21,7 +21,6 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 	strlen = spec->width + spec->space + spec->plus + spec->sign + spec->sharp + len;
 	if (spec->accur > 0)
 		strlen = strlen + spec->accur;
-	// printf("for malloc : %d\n", strlen + 1);
 	str = (char *)malloc(sizeof(char) * (strlen + 1));
 	if (!str)
 		return (NULL);

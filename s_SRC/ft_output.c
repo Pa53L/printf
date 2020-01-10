@@ -23,6 +23,7 @@ size_t	ft_output(st_format *spec, va_list ap)
 	ival = 0;
 	unval = 0;
 	str = NULL;
+
 	if (spec->type == 'c')
 	{
 		ival = (int)va_arg(ap, int);
@@ -59,10 +60,15 @@ size_t	ft_output(st_format *spec, va_list ap)
 		ft_cast_size_poxu(&spec[0], ap, &unval);
 		len = parse_dipoxu(&spec[0], unval);
 	}
-	// НЕ ЗАБЫТЬ ПРО ЭТУ ХУЙНЮ
-	/*
+	else if (spec->type == 'b')
+	{
+		unval = (int)va_arg(ap, long long);
+		// ft_cast_size_poxu(&spec[0], ap, &unval);
+		len = out_bits(&spec[0], unval);
+	}
 	else if (spec->type == '%')
 		len = out_per(&spec[0]);
-	*/
+	else if (spec->type == '\0')
+		return (0);
 	return (len);
 }

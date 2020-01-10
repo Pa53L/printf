@@ -7,7 +7,8 @@ char	*is_type(char *type, char *p)
 
 	i = 0;
 	tmp_p = NULL;
-	while (i < 10)
+	
+	while (i < TYPES_SIZE)
 	{
 		if (*p == TYPES[i])
 			*type = *p;
