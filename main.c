@@ -15,6 +15,7 @@
 int		main()
 {
 	printf("|||MINE: %d\n",     ft_printf("%b", -16));
+	printf("hehehehehehe");
    /*
 	printf("|||MINE: %d\n",     ft_printf("% 4.5i", 42));
 	printf("|||ORIGINAL: %d\n",    printf("% 4.5i", 42));
