@@ -14,8 +14,10 @@
 
 int		main()
 {
-	printf("|||MINE: %d\n",     ft_printf("%b", -16));
-	printf("hehehehehehe");
+   // ft_printf("hello, my name is Jessie Pinkman, bitch!\n%d\n", 10);
+	printf("|||MINE: %d\n",     ft_printf("%-9b", 15));
+   // printf("%1$d:%2$.*3$d:%4$.*3$d\n", "hour", "min", "precision", "sec");
+   // printf("%'d\n", 1000000);
    /*
 	printf("|||MINE: %d\n",     ft_printf("% 4.5i", 42));
 	printf("|||ORIGINAL: %d\n",    printf("% 4.5i", 42));

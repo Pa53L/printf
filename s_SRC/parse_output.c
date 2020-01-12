@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-size_t	ft_output(st_format *spec, va_list ap)
+size_t	parse_output(st_format *spec, va_list ap)
 {
 	size_t					len;
 	char					*str;
@@ -62,8 +62,7 @@ size_t	ft_output(st_format *spec, va_list ap)
 	}
 	else if (spec->type == 'b')
 	{
-		unval = (int)va_arg(ap, long long);
-		// ft_cast_size_poxu(&spec[0], ap, &unval);
+		unval = va_arg(ap, unsigned long long);
 		len = out_bits(&spec[0], unval);
 	}
 	else if (spec->type == '%')

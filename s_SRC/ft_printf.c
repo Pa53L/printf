@@ -29,7 +29,7 @@ int		ft_printf(const char *format, ...)
 			write(1, p, 1);
 			count++;
 		}
-		else if (*p == '%' )
+		else if (*p == '%')
 		{
 			ft_clean_struct(&spec[0]);
 			if (*(p + 1) != '\0')
@@ -41,7 +41,7 @@ int		ft_printf(const char *format, ...)
 			}
 			p = ft_record_struct(&spec[0], p, ap);
 			if (spec->type)
-				count = count + ft_output(&spec[0], ap);
+				count = count + parse_output(&spec[0], ap);
 			else
 				return (0);
 			ft_clean_struct(&spec[0]);

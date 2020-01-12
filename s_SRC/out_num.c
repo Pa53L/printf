@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
+size_t	out_num(st_format *spec, unsigned long long ival, int len)
 {
 	unsigned long strlen;
 	unsigned long i;
@@ -21,9 +21,8 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 	strlen = spec->width + spec->space + spec->plus + spec->sign + spec->sharp + len;
 	if (spec->accur > 0)
 		strlen = strlen + spec->accur;
-	str = (char *)malloc(sizeof(char) * (strlen + 1));
-	if (!str)
-		return (NULL);
+	if (!(str = (char *)malloc(sizeof(char) * (strlen + 1))))
+		return (0);
 	i = strlen - 1;
 	str[strlen] = '\0';
 	/* MINUS == 0 */
@@ -170,5 +169,7 @@ char	*ft_strnew_num(st_format *spec, unsigned long long ival, int len)
 			i--;
 		}
 	}
-	return (str);
+	write(1, str, strlen);
+	free(str);
+	return (strlen);
 }

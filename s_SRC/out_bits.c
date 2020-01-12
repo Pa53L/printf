@@ -8,22 +8,41 @@ size_t	out_bits(st_format *spec, unsigned long long unval)
 	int i;
 	char *str;
 
-	printf("%lld\n", unval);
-	if (unval <= 255)
+	i = 0;
+	if (unval <= 0xFF)
+	{
 		strlen = 8;
-	else if (unval > 255 && unval <= 65535)
+		bit = 7;
+	}
+	else if (unval > 0xFF && unval <= 0xFFFF)
+	{
 		strlen = 16;
-	else if (unval < 4294967296)
-	//4294967280
+		bit = 15;
+	}
+	else if (unval > 0xFFFF)
+	{
 		strlen = 32;
+		bit = 31;
+	}
+	if (spec->width - strlen > 0)
+	{
+		spec->width = spec->width - strlen;
+		strlen = strlen + spec->width;
+	}
 	else
-		strlen = 64;
-	str = (char *)malloc(sizeof(char) * (strlen + 1));
-	if (!str)
+		spec->width = 0;
+	if (!(str = (char *)malloc(sizeof(char) * (strlen + spec->width + 1))))
 		return (0);
 	str[strlen] = '\0';
-	bit = strlen - 1;
-	i = 0;
+	if (spec->minus == 0 && spec->width)
+	{
+		while (spec->width)
+		{
+			str[i] = ' ';
+			i++;
+			spec->width--;
+		}
+	}
 	while (bit >= 0)
 	{
 		if (unval & 1 << bit)
@@ -33,7 +52,16 @@ size_t	out_bits(st_format *spec, unsigned long long unval)
 		bit--;
 		i++;
 	}
-	printf("%s", str);
+	if (spec->minus == 1 && spec->width)
+	{
+		while (spec->width)
+		{
+			str[i] = ' ';
+			i++;
+			spec->width--;
+		}
+	}
+	write(1, str, strlen);
 	free(str);
-	return (0);
+	return (strlen);
 }
