@@ -34,22 +34,18 @@ int		ft_printf(const char *format, ...)
 		else if (*p == '%')
 		{
 			ft_clean_struct(&spec[0]);
-			p = ft_record_struct(&spec[0], p, ap);
+			p = parse_specifiers(&spec[0], p, ap);
 			if (spec->type)
 				count = count + parse_output(&spec[0], ap, first_ap);
-			//else
-			//return (0);
+			else if (*p != '%' && *p)
+			{
+				write(1, p, 1);
+				count++;
+			}
+			else if (!*p)
+				return (count);
 			ft_clean_struct(&spec[0]);
 		}
-		/*
-		if (*(p + 1) == '\0')
-		{
-			if (*p != '%')
-				write (1, p, 1);
-			va_end(ap);
-			return (count);
-		}
-		*/
 		p++;
 	}
 	va_end(ap);

@@ -6,17 +6,17 @@
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:31:23 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/21 18:38:24 by yshawn           ###   ########.fr       */
+/*   Updated: 2020/01/13 23:56:32 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-size_t	out_per(st_format *spec)
+size_t		out_per(st_format *spec)
 {
-	unsigned long strlen;
-	unsigned long i;
-	char *str;
+	unsigned long		strlen;
+	unsigned long		i;
+	char				*str;
 
 	str = NULL;
 	strlen = spec->width;

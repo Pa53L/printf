@@ -14,15 +14,9 @@
 
 int		main()
 {
-   ft_printf("%s%s%s%s", "heh", "heh", "heh", "kek");
-   // ft_printf("%3$s %2$s %1$s\n%", "hello", "geg", "third");
-   // ft_printf("% Z%s", "test");
-      // printf("% Z%s", "test");
-   //printf("%3$s %$s %1$s\n", "hello", "geg", "third");
-   // printf("%3$d\n%1$10d\n%2$d\n", 1, 2, 4, 5);
-	// printf("|||MINE: %d\n",     ft_printf("% 4.5i", 42));
-	// printf("|||ORIGINAL: %d\n",    printf("% 4.5i", 42));
-	// printf("\n");
+	printf("|||MINE: %d\n",     ft_printf("%zd", 4294967295));
+	printf("|||ORIGINAL: %d\n",    printf("%zd", 4294967295));
+	printf("\n");
 	// printf("|||MINE: %d\n",     ft_printf("% 5d", 52625));
 	// printf("|||ORIGINAL: %d\n",    printf("% 5d", 52625));
    return (0);

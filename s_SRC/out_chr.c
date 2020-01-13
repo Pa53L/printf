@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   out_chr.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/13 23:53:58 by yshawn            #+#    #+#             */
+/*   Updated: 2020/01/13 23:55:18 by yshawn           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-size_t	out_chr(st_format *spec, int ival)
+size_t		out_chr(st_format *spec, int ival)
 {
-	unsigned long strlen;
-	unsigned long i;
-	char *str;
+	unsigned long	strlen;
+	unsigned long	i;
+	char			*str;
 
 	strlen = spec->width;
 	if (strlen > 1)

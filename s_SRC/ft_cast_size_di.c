@@ -14,17 +14,17 @@
 
 void	ft_cast_size_di(st_format *spec, va_list ap, long long *ival)
 {
-	if (spec->size == 3) /* h */
+	if (spec->size == 3)
 		*ival = (short)va_arg(ap, int);
-	else if (spec->size == 4) /* hh */
+	else if (spec->size == 4)
 		*ival = (char)va_arg(ap, int);
-	else if(spec->size == 1) /* l */
+	else if (spec->size == 1)
 		*ival = (long)va_arg(ap, long);
-	else if(spec->size == 2) /* ll */
+	else if (spec->size == 2)
 		*ival = (long long)va_arg(ap, long long);
-	else if(spec->size == 5) /* L */
+	else if (spec->size == 5)
 		*ival = (long long)va_arg(ap, long long);
-	else if(spec->size == 0) /* без размера, простой INT */
+	else if (spec->size == 0)
 		*ival = (int)va_arg(ap, int);
 	return ;
 }

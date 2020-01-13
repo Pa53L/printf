@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   out_bits.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/13 23:55:23 by yshawn            #+#    #+#             */
+/*   Updated: 2020/01/13 23:55:37 by yshawn           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-size_t	out_bits(st_format *spec, unsigned long long unval)
+size_t		out_bits(st_format *spec, unsigned long long unval)
 {
-	int strlen;
-	int bit;
-	int i;
-	char *str;
+	int		strlen;
+	int		bit;
+	int		i;
+	char	*str;
 
 	i = 0;
 	if (unval <= 0xFF)

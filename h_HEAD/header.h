@@ -51,13 +51,12 @@ void		ft_cast_size_di(st_format *, va_list, long long *);
 void		ft_cast_size_poxu(st_format *, va_list, unsigned long long *);
 //
 void		ft_clean_struct(st_format *);
-char		*ft_record_struct(st_format *, char *, va_list);
 //
 char		*is_flag(st_format *, char *);
 char		*is_width(st_format *, va_list, char *);
-char		*is_accuracy(int *, va_list, char *);
+char		*is_accuracy(st_format *, va_list, char *);
 char		*is_size(short *, char *);
-char		*is_type(char *, char *);
+char		*is_type(st_format *, char *);
 //
 size_t		out_per(st_format *);
 size_t		out_str(st_format *,  char *);
@@ -65,9 +64,9 @@ size_t		out_chr(st_format *, int);
 size_t		out_bits(st_format *, unsigned long long);
 size_t		out_num(st_format *spec, unsigned long long, int);
 //
+char		*parse_specifiers(st_format *, char *, va_list);
 size_t		parse_output(st_format *, va_list, va_list);
 size_t		parse_dipoxu(st_format *, unsigned long long);
-//char 		*parse_format(st_format *, unsigned long long *);
 //
 int			ft_printf(const char *, ...);
 

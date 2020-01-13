@@ -14,15 +14,15 @@
 
 void	ft_cast_size_poxu(st_format *spec, va_list ap, unsigned long long *ival)
 {
-	if (spec->size == 3) /* h */
+	if (spec->size == 3)
 		*ival = (unsigned short)va_arg(ap, int);
-	else if (spec->size == 4) /* hh */
+	else if (spec->size == 4)
 		*ival = (unsigned char)va_arg(ap, int);
-	else if(spec->size == 1) /* l */
+	else if (spec->size == 1)
 		*ival = va_arg(ap, unsigned long);
-	else if(spec->size == 2) /* ll */
+	else if (spec->size == 2)
 		*ival = va_arg(ap, unsigned long long);
-	else if(spec->type == 'p')
+	else if (spec->type == 'p')
 		*ival = va_arg(ap, unsigned long long);
 	else
 		*ival = va_arg(ap, unsigned int);
