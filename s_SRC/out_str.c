@@ -24,8 +24,8 @@ size_t	out_str(st_format *spec, char *str)
 		return (0);
 	i = tmp_len;
 	strlen--;
-	strnew[i] = '\0';
 	i--;
+	strnew[i] = '\0';
 	width = spec->width;
 	while (strlen >= 0 && spec->minus == 0)
 	{

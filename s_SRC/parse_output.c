@@ -18,21 +18,24 @@ size_t	parse_output(st_format *spec, va_list ap, va_list first_ap)
 	long long				ival;
 	char					*str;
 	size_t					len;
+	int dollar;
 
 	len = 0;
 	ival = 0;
 	unval = 0;
+	dollar = 0;
 	str = NULL;
 
 	/* FOR $ */
 	if (spec->dollar > 1)
-		while (spec->dollar > 1)
+	{
+		dollar = spec->dollar;
+		while (dollar > 1)
 		{
 			va_arg(ap, int);
-			spec->dollar--;
+			dollar--;
 		}
-	else
-		va_copy(ap, first_ap);
+	}
 
 	if (spec->type == 'c')
 	{
@@ -81,6 +84,10 @@ size_t	parse_output(st_format *spec, va_list ap, va_list first_ap)
 		return (0);
 
 	/* FOR $ */
+	if (spec->dollar == 0)
+		va_copy(first_ap, ap);
+	else
 	va_copy(ap, first_ap);
+	
 	return (len);
 }

@@ -14,6 +14,10 @@
 
 char	*ft_record_struct(st_format *spec, char *p, va_list ap)
 {
+	if (*(p + 1) == '\0')
+		return (p);
+	else
+		p++;
 	if (*p == '-' || *p == '+' || *p == ' ' || *p == '#' || *p == '0')
 		p = is_flag(&spec[0], p);
 	if ((*p >= '1' && *p <= '9') || *p == '*')
