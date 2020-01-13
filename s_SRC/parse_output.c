@@ -12,17 +12,27 @@
 
 #include "../h_HEAD/header.h"
 
-size_t	parse_output(st_format *spec, va_list ap)
+size_t	parse_output(st_format *spec, va_list ap, va_list first_ap)
 {
-	size_t					len;
-	char					*str;
-	long long				ival;
 	unsigned long long		unval;
+	long long				ival;
+	char					*str;
+	size_t					len;
 
 	len = 0;
 	ival = 0;
 	unval = 0;
 	str = NULL;
+
+	/* FOR $ */
+	if (spec->dollar > 1)
+		while (spec->dollar > 1)
+		{
+			va_arg(ap, int);
+			spec->dollar--;
+		}
+	else
+		va_copy(ap, first_ap);
 
 	if (spec->type == 'c')
 	{
@@ -69,5 +79,8 @@ size_t	parse_output(st_format *spec, va_list ap)
 		len = out_per(&spec[0]);
 	else if (spec->type == '\0')
 		return (0);
+
+	/* FOR $ */
+	va_copy(ap, first_ap);
 	return (len);
 }

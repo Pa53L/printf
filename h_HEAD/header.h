@@ -33,6 +33,7 @@ typedef struct struct_specifer
 {
 	int width;
 	int accur;
+	int dollar;
 	short sign;
 	short numsys;
 	short minus;
@@ -53,7 +54,7 @@ void		ft_clean_struct(st_format *);
 char		*ft_record_struct(st_format *, char *, va_list);
 //
 char		*is_flag(st_format *, char *);
-char		*is_width(int *, va_list, char *);
+char		*is_width(st_format *, va_list, char *);
 char		*is_accuracy(int *, va_list, char *);
 char		*is_size(short *, char *);
 char		*is_type(char *, char *);
@@ -64,7 +65,7 @@ size_t		out_chr(st_format *, int);
 size_t		out_bits(st_format *, unsigned long long);
 size_t		out_num(st_format *spec, unsigned long long, int);
 //
-size_t		parse_output(st_format *, va_list);
+size_t		parse_output(st_format *, va_list, va_list);
 size_t		parse_dipoxu(st_format *, unsigned long long);
 //char 		*parse_format(st_format *, unsigned long long *);
 //

@@ -10,19 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../h_HEAD/header.h"
+#include "h_HEAD/header.h"
 
 int		ft_printf(const char *format, ...)
 {	
 	char *p;
 	va_list ap;
-	va_list first_ap;
+	va_list ap_2;
 	size_t count;
+	int i;
 	st_format spec[1];
 
 	count = 0;
+	i = 0;
 	va_start(ap, format); /* устанавливаем ap на 1-й аргумент без имени */
-	va_copy(first_ap, ap);
 	p = (char *)format;
 	while (*p)
 	{
@@ -33,23 +34,18 @@ int		ft_printf(const char *format, ...)
 		}
 		else if (*p == '%')
 		{
-			ft_clean_struct(&spec[0]);
-			if (*(p + 1) != '\0')
-				p++;
-			else
-			{
-				va_end(ap);
-				return (count);
-			}
-			p = ft_record_struct(&spec[0], p, ap);
-			if (spec->type)
-				count = count + parse_output(&spec[0], ap, first_ap);
-			else
-				return (0);
-			ft_clean_struct(&spec[0]);
+			va_arg(ap, int);
+			va_copy(ap_2, ap);
+			i = va_arg(ap_2, int);
+			write(1, &i, 1);
 		}
 		p++;
 	}
 	va_end(ap);
 	return (count);
+}
+
+int		main()
+{
+	ft_printf("%\n", 'm', 'k');
 }
