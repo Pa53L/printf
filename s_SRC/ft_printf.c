@@ -49,5 +49,6 @@ int		ft_printf(const char *format, ...)
 		p++;
 	}
 	va_end(ap);
+	/* kek */
 	return (count);
 }
