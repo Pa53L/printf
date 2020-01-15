@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <inttypes.h>
 #include <stdio.h> //DELETE THIS
 #include <limits.h> //DELETE THIS
 
@@ -34,29 +35,30 @@ typedef struct struct_specifer
 	int width;
 	int accur;
 	int dollar;
-	short sign;
-	short numsys;
-	short minus;
-	short plus;
-	short space;
-	short sharp;
-	short zero;
-	short size;
+	char sign;
+	char numsys;
+	char minus;
+	char plus;
+	char space;
+	char sharp;
+	char zero;
+	char size;
 	char type;
 } st_format;
 
+int			ft_atoi(const char *);
 size_t		ft_strlen(const char *);
-int			ft_numlen(unsigned long long, int);
-void		ft_cast_size_di(st_format *, va_list, long long *);
-void		ft_cast_size_poxu(st_format *, va_list, unsigned long long *);
+int			ft_numlen(u_int64_t, int);
+void		ft_cast_size_di(st_format *, va_list, int64_t *);
+void		ft_cast_size_poxu(st_format *, va_list, u_int64_t *);
 //
 void		ft_clean_struct(st_format *);
 //
 char		*is_flag(st_format *, char *);
-char		*is_width(st_format *, va_list, char *);
-char		*is_accuracy(st_format *, va_list, char *);
-char		*is_size(short *, char *);
-char		*is_type(st_format *, char *);
+char		*is_width(st_format *, char *, va_list);
+char		*is_accuracy(int *, char *, va_list);
+char		*is_size(char *, char *);
+char		*is_type(char *, char *);
 //
 size_t		out_per(st_format *);
 size_t		out_str(st_format *,  char *);

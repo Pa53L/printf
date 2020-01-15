@@ -12,19 +12,19 @@
 
 #include "../h_HEAD/header.h"
 
-void	ft_cast_size_poxu(st_format *spec, va_list ap, unsigned long long *ival)
+void	ft_cast_size_poxu(st_format *spec, va_list ap, u_int64_t *ival)
 {
-	if (spec->size == 3)
-		*ival = (unsigned short)va_arg(ap, int);
-	else if (spec->size == 4)
-		*ival = (unsigned char)va_arg(ap, int);
+	if (spec->size == 0)
+		*ival = va_arg(ap, unsigned int);
 	else if (spec->size == 1)
-		*ival = va_arg(ap, unsigned long);
+		*ival = (unsigned short)va_arg(ap, int);
 	else if (spec->size == 2)
+		*ival = (unsigned char)va_arg(ap, int);
+	else if (spec->size == 3)
+		*ival = va_arg(ap, unsigned long);
+	else if (spec->size == 4)
 		*ival = va_arg(ap, unsigned long long);
 	else if (spec->type == 'p')
 		*ival = va_arg(ap, unsigned long long);
-	else
-		*ival = va_arg(ap, unsigned int);
 	return ;
 }

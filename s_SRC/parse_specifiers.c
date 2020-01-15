@@ -12,134 +12,134 @@
 
 #include "../h_HEAD/header.h"
 
-char	*is_flag(st_format *spec, char *p)
+char	*is_flag(st_format *spec, char *str)
 {
-	while (*p == '-' || *p == '+' || *p == ' ' || *p == '#' || *p == '0')
+	while (*str == '-' || *str == '+' || *str == ' ' || *str == '#' \
+		|| *str == '0')
 	{
-		if (spec->minus == 0 && *p == '-')
+		if (spec->minus == 0 && *str == '-')
 			spec->minus = 1;
-		else if (spec->plus == 0 && *p == '+')
+		else if (spec->plus == 0 && *str == '+')
 			spec->plus = 1;
-		else if (spec->sharp == 0 && *p == '#')
+		else if (spec->sharp == 0 && *str == '#')
 			spec->sharp = 2;
-		else if (spec->zero == 0 && *p == '0')
+		else if (spec->zero == 0 && *str == '0')
 			spec->zero = 1;
-		else if (spec->space == 0 && *p == ' ')
+		else if (spec->space == 0 && *str == ' ')
 			spec->space = 1;
-		p++;
+		str++;
 	}
-	return (p);
+	return (str);
 }
 
-char	*is_width(st_format *spec, va_list ap, char *p)
+char	*is_width(st_format *spec, char *str, va_list vl)
 {
-	spec->width = atoi(p);
-	if (*p == '*')
+	if (*str == '*')
 	{
-		spec->width = va_arg(ap, int);
-		p++;
+		if ((spec->width = va_arg(vl, int)) < 0)
+			spec->width = 0;
+		str++;
 	}
 	else
-		while (*p >= '0' && *p <= '9')
-			p++;
-	if (*p == '$')
+	{
+		if ((spec->width = atoi(str)) < 0)
+			spec->width = 0;
+		while (*str >= '0' && *str <= '9')
+			str++;
+	}
+	if (*str == '$')
 	{
 		spec->dollar = spec->width;
 		spec->width = 0;
-		p++;
+		str++;
 	}
-	return (p);
+	return (str);
 }
 
-char	*is_accuracy(st_format *spec, va_list ap, char *p)
+char	*is_accuracy(int *accur, char *str, va_list vl)
 {
-	spec->accur = 0;
-	if (*(p + 1))
-		p++;
-	else
-		return (p);
-	spec->accur = atoi(p);
-	if (*p == '*')
+	*accur = 0;
+	if (!*str)
+		return (str);
+	if (*str == '*')
 	{
-		spec->accur = va_arg(ap, int);
-		p++;
+		if ((*accur = va_arg(vl, int)) < 0)
+			*accur = 0;
+		str++;
 	}
 	else
-		while (*p >= '0' && *p <= '9')
-			p++;
-	return (p);
+	{
+		if ((*accur = atoi(str)) < 0)
+			*accur = 0;
+		while (*str >= '0' && *str <= '9')
+			str++;
+	}
+	return (str);
 }
 
-char	*is_size(short *size, char *p)
+char	*is_size(char *size, char *str)
 {
-	if (*p == 'l' || *p == 'z')
+	if (*str == 'h')
 	{
 		*size = 1;
-		if (*(p + 1) == 'l')
+		if (*(str + 1) == 'h')
 			*size = 2;
 	}
-	if (*p == 'h')
+	else if (*str == 'l' || *str == 'z')
 	{
 		*size = 3;
-		if (*(p + 1) == 'h')
+		if (*(str + 1) == 'l')
 			*size = 4;
 	}
-	if (*p == 'L')
+	else if (*str == 'L')
 		*size = 5;
-	while (*p == 'l' || *p == 'L' || *p == 'h' || *p == 'z')
-		p++;
-	return (p);
+	while (*str == 'l' || *str == 'L' || *str == 'h' || *str == 'z')
+		str++;
+	return (str);
 }
 
-char	*is_type(st_format *spec, char *p)
+char	*is_type(char *type, char *str)
 {
-	int i;
-	char *tmp_p;
+	int		i;
+	char	*tmp_str;
 
 	i = 0;
-	tmp_p = NULL;
+	tmp_str = NULL;
 	while (i < TYPES_SIZE)
+		if (*str == TYPES[i++])
+			*type = *str;
+	if (!*type)
 	{
-		if (*p == TYPES[i])
-			spec->type = *p;
-		i++;
-	}
-	if (!spec->type)
-	{
-		tmp_p = p;
-		while (*tmp_p)
-		{
-			if (*tmp_p == '%')
+		tmp_str = str - 1;
+		while (*tmp_str++)
+			if (*tmp_str == '%')
 			{
-				spec->type = '%';
-				p = tmp_p;
-				break ;
+				*type = '%';
+				str = tmp_str;
+				break;
 			}
-			tmp_p++;
-		}
 	}
-	return (p);
+	return (str);
 }
 
-char	*parse_specifiers(st_format *spec, char *p, va_list ap)
+char	*parse_specifiers(st_format *spec, char *str, va_list vl)
 {
-	if (*(p + 1) == '\0')
-		return (p);
-	else
-		p++;
-	if (*p == '-' || *p == '+' || *p == ' ' || *p == '#' || *p == '0')
-		p = is_flag(&spec[0], p);
-	if (*p == '*' || (*p >= '1' && *p <= '9'))
-		p = is_width(&spec[0], ap, p);
-	if (spec->width == 0 && (*p == '*' || (*p >= '1' && *p <= '9')))
-		p = is_width(&spec[0], ap, p);
-	if ((*p == '.' && *(p + 1)) || (*p == '.' && *(p + 1) == '*'))
-		p = is_accuracy(&spec[0], ap, p);
-	if (*p == 'l' || *p == 'L' || *p == 'h' || *p == 'z')
-		p = is_size(&spec->size, p);
-	if (*p > '$')
-		p = is_type(&spec[0], p);
-	return (p);
+	if (!*str)
+		return (str);
+	ft_clean_struct(&spec[0]);
+	if (*str == '-' || *str == '+' || *str == ' ' || *str == '#' || *str == '0')
+		str = is_flag(&spec[0], str);
+	if (*str == '*' || (*str >= '1' && *str <= '9'))
+		str = is_width(&spec[0], str, vl);
+	if ((*str == '*' || (*str >= '1' && *str <= '9')) && spec->width == 0)
+		str = is_width(&spec[0], str, vl);
+	if (*str == '.')
+		str = is_accuracy(&spec->accur, ++str, vl);
+	if (*str == 'l' || *str == 'L' || *str == 'h' || *str == 'z')
+		str = is_size(&spec->size, str);
+	if (*str > '$')
+		str = is_type(&spec->type, str);
+	return (str);
 }
 	/*
 	printf("----------------------\n");

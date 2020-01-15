@@ -25,6 +25,6 @@ void	ft_clean_struct(st_format *spec)
 	spec->sharp = 0;
 	spec->zero = 0;
 	spec->size = 0;
-	spec->type = '\0';
+	spec->type = 0;
 	return ;
 }

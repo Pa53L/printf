@@ -14,41 +14,39 @@
 
 int		ft_printf(const char *format, ...)
 {
-	size_t		count;
-	char		*p;
-	va_list		ap;
-	va_list		first_ap;
+	char		*str;
+	va_list		fst_vl;
+	va_list		vl;
+	u_int64_t	cnt;
 	st_format	spec[1];
 
-	count = 0;
-	va_start(ap, format);
-	va_copy(first_ap, ap);
-	p = (char *)format;
-	while (*p)
+	cnt = 0;
+	va_start(vl, format);
+	va_copy(fst_vl, vl);
+	str = (char *)format;
+	while (*str)
 	{
-		if (*p != '%')
+		if (*str != '%')
 		{
-			write(1, p, 1);
-			count++;
+			write(1, str, 1);
+			cnt++;
 		}
-		else if (*p == '%')
+		else if (*str == '%')
 		{
-			ft_clean_struct(&spec[0]);
-			p = parse_specifiers(&spec[0], p, ap);
+			str = parse_specifiers(&spec[0], ++str, vl);
 			if (spec->type)
-				count = count + parse_output(&spec[0], ap, first_ap);
-			else if (*p != '%' && *p)
+				cnt = cnt + parse_output(&spec[0], vl, fst_vl);
+			else if (*str != '%' && *str)
 			{
-				write(1, p, 1);
-				count++;
+				write(1, str, 1);
+				cnt++;
 			}
-			else if (!*p)
-				return (count);
+			else if (!*str)
+				return (cnt);
 			ft_clean_struct(&spec[0]);
 		}
-		p++;
+		str++;
 	}
-	va_end(ap);
-	/* kek */
-	return (count);
+	va_end(vl);
+	return (cnt);
 }

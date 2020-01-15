@@ -14,11 +14,11 @@
 
 int		main()
 {
-	printf("|||MINE: %d\n",     ft_printf("%zd", 4294967295));
-	printf("|||ORIGINAL: %d\n",    printf("%zd", 4294967295));
+	printf("|||MINE: %d\n",     ft_printf("%2$12d %1$d",2, 4));
+	printf("|||ORIGINAL: %d\n",    printf("%2$12d %1$d",2, 4));
 	printf("\n");
-	// printf("|||MINE: %d\n",     ft_printf("% 5d", 52625));
-	// printf("|||ORIGINAL: %d\n",    printf("% 5d", 52625));
+	printf("|||MINE: %d\n",     ft_printf("%5%"));
+	printf("|||ORIGINAL: %d\n",    printf("%5%"));
    return (0);
 }
 /*
