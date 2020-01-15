@@ -12,13 +12,22 @@
 
 #include "h_HEAD/header.h"
 
+#define RESET   "\033[0m"
+#define RED     "\033[1;31m"
+#define YELLOW  "\033[1;33m"
+#define WHITE   "\033[1;31m"
+
 int		main()
 {
-	printf("|||MINE: %d\n",     ft_printf("%2$12d %1$d",2, 4));
-	printf("|||ORIGINAL: %d\n",    printf("%2$12d %1$d",2, 4));
+	// printf("|||MINE: %d\n",     ft_printf("%2$12d %1$d",2, 4));
+	// printf("|||ORIGINAL: %d\n",    printf("%2$12d %1$d",2, 4));
 	// printf("\n");
-	// printf("|||MINE: %d\n",     ft_printf("%.35f", 12123.23));
-	// printf("|||ORIGINAL: %d\n",    printf("%.35f", 12123.23));
+   system("color F0");
+	printf("|||MINE: %d\n",     ft_printf("%.35f", 12123.23));
+   printf("|||ORIGINAL: %d\n", printf("%.35f", 12123.23));
+   printf("%s00%s", YELLOW, RESET);
+   printf("%s===3%s ", RED, RESET);
+   printf("%s-.%s\n", WHITE, RESET);
    return (0);
 }
 /*
@@ -29,7 +38,6 @@ int		main()
 ↓↓↓↓↓↓↓↓
 00010001
 */
-
 
 /*
    printf("----------------------\n");

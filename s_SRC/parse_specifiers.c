@@ -116,7 +116,7 @@ char	*is_type(char *type, char *str)
 			{
 				*type = '%';
 				str = tmp_str;
-				break;
+				break ;
 			}
 	}
 	return (str);
