@@ -19,7 +19,9 @@
 #include <inttypes.h>
 #include <stdio.h> //DELETE THIS
 #include <limits.h> //DELETE THIS
+#include <math.h> //DELETE THIS
 
+#define BUFFSIZE 5000
 #define TYPES_SIZE 11
 #define TYPES (char[TYPES_SIZE + 1]) {'c', 's', 'd', 'i', 'u', 'o', 'p', 'x', 'X', 'f', 'b', '\0'}
 #define ITOA (char[17]) {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', \
@@ -45,6 +47,15 @@ typedef struct struct_specifer
 	char size;
 	char type;
 } st_format;
+
+typedef union {
+    long double ld;
+    struct {
+        unsigned long mantisa : 64;
+        unsigned short exponent : 15;
+        unsigned sign : 1;
+    } parts;
+} ld_cast;
 
 int			ft_atoi(const char *);
 size_t		ft_strlen(const char *);
@@ -73,8 +84,20 @@ size_t		parse_dipoxu(st_format *, unsigned long long);
 int			ft_printf(const char *, ...);
 
 // Ф-ции от П
-char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_strdup(const char *s);
-void		ft_itoabasex(unsigned long long value, char *str, int base, char type, int len);
+char *itobs(unsigned long long n, char *ps);
+char *ft_str_multiply(char *str1, char *str2, int len1, int len2, char *tmp);
+char *ft_pow(char *res, int pow);
+char *parse_double(double ld, int pres);
+char *parse_mantis(unsigned long mantisa);
+char *parse_exponent(unsigned short exponent);
+char *ft_strjoin(char const *s1, char const *s2);
+char *ft_strdup(const char *s);
+void ft_itoabasex(unsigned long long value, char *str, int base, char type, int len);
+char *make_mantisa(char *str, unsigned long mantisa);
+char *make_full_mantis(char *str, char *str2[]);
+char *ft_pow5(char *res, int pow);
+char *make_dot(char *str, unsigned short exponent);
+char *make_dot_zero(char *str, unsigned short exponent);
+char *make_rounding(char *str, int pres);
 
 #endif

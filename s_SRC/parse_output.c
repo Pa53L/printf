@@ -19,6 +19,7 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 	int64_t					ival;
 	u_int64_t				unval;
 	u_int64_t				cnt;
+	double					fval;
 
 	cnt = 0;
 	ival = 0;
@@ -72,6 +73,13 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 
 		ft_cast_size_poxu(&spec[0], vl, &unval);
 		cnt = parse_dipoxu(&spec[0], unval);
+	}
+	else if(spec->type =='f')
+	{
+		fval = (double)va_arg(vl, double);
+		// printf("here: %f\n", fval);
+		str = parse_double(fval, 14);
+		printf("%s", str);
 	}
 	else if (spec->type == 'b')
 	{
