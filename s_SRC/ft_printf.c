@@ -17,7 +17,7 @@ int		ft_printf(const char *format, ...)
 	char		*str;
 	va_list		fst_vl;
 	va_list		vl;
-	u_int64_t	cnt;
+	uint64_t	cnt;
 	st_format	spec[1];
 
 	cnt = 0;
@@ -33,9 +33,9 @@ int		ft_printf(const char *format, ...)
 		}
 		else if (*str == '%')
 		{
-			str = parse_specifiers(&spec[0], ++str, vl);
+			str = parse_specifiers(spec, ++str, vl);
 			if (spec->type)
-				cnt = cnt + parse_output(&spec[0], vl, fst_vl);
+				cnt = cnt + parse_output(spec, vl, fst_vl);
 			else if (*str != '%' && *str)
 			{
 				write(1, str, 1);
@@ -43,7 +43,7 @@ int		ft_printf(const char *format, ...)
 			}
 			else if (!*str)
 				return (cnt);
-			ft_clean_struct(&spec[0]);
+			ft_clean_struct(spec);
 		}
 		str++;
 	}

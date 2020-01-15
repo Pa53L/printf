@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-size_t	out_num(st_format *spec, unsigned long long ival, int len)
+size_t	out_num(st_format *spec, uint64_t ival, int len)
 {
 	unsigned long strlen;
 	unsigned long i;

@@ -126,13 +126,13 @@ char	*parse_specifiers(st_format *spec, char *str, va_list vl)
 {
 	if (!*str)
 		return (str);
-	ft_clean_struct(&spec[0]);
+	ft_clean_struct(spec);
 	if (*str == '-' || *str == '+' || *str == ' ' || *str == '#' || *str == '0')
-		str = is_flag(&spec[0], str);
+		str = is_flag(spec, str);
 	if (*str == '*' || (*str >= '1' && *str <= '9'))
-		str = is_width(&spec[0], str, vl);
+		str = is_width(spec, str, vl);
 	if ((*str == '*' || (*str >= '1' && *str <= '9')) && spec->width == 0)
-		str = is_width(&spec[0], str, vl);
+		str = is_width(spec, str, vl);
 	if (*str == '.')
 		str = is_accuracy(&spec->accur, ++str, vl);
 	if (*str == 'l' || *str == 'L' || *str == 'h' || *str == 'z')

@@ -17,8 +17,8 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 	int						dollar;
 	char					*str;
 	int64_t					ival;
-	u_int64_t				unval;
-	u_int64_t				cnt;
+	uint64_t				unval;
+	uint64_t				cnt;
 	double					fval;
 
 	cnt = 0;
@@ -41,17 +41,17 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 	if (spec->type == 'c')
 	{
 		ival = va_arg(vl, int);
-		cnt = out_chr(&spec[0], ival);
+		cnt = out_chr(spec, ival);
 	}
 	else if (spec->type == 's')
 	{
 		str = va_arg(vl, char *);
-		cnt = out_str(&spec[0], str);
+		cnt = out_str(spec, str);
 	}
 	else if (spec->type == 'd' || spec->type == 'i')
 	{
 		spec->numsys = 10;
-		ft_cast_size_di(&spec[0], vl, &ival);
+		ft_cast_size_di(spec, vl, &ival);
 		if (ival < 0)
 		{
 			unval = ival * (-1);
@@ -59,7 +59,7 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 		}
 		else
 			unval = ival;
-		cnt = parse_dipoxu(&spec[0], unval);
+		cnt = parse_dipoxu(spec, unval);
 	}
 	else if (spec->type == 'o' || spec->type == 'x' || spec->type == 'X' ||
 			 spec->type == 'u' || spec->type == 'p')
@@ -71,8 +71,8 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 		else
 			spec->numsys = 16;
 
-		ft_cast_size_poxu(&spec[0], vl, &unval);
-		cnt = parse_dipoxu(&spec[0], unval);
+		ft_cast_size_poxu(spec, vl, &unval);
+		cnt = parse_dipoxu(spec, unval);
 	}
 	else if(spec->type =='f')
 	{
@@ -84,10 +84,10 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 	else if (spec->type == 'b')
 	{
 		unval = va_arg(vl, unsigned long long);
-		cnt = out_bits(&spec[0], unval);
+		cnt = out_bits(spec, unval);
 	}
 	else if (spec->type == '%')
-		cnt = out_per(&spec[0]);
+		cnt = out_per(spec);
 	else if (spec->type == '\0')
 		return (0);
 
