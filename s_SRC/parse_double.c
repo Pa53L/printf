@@ -5,22 +5,19 @@ char    *make_rounding(char *str, int pres)
     char *tmp;
     if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(str) + pres + 1))))
         return (NULL);
-    tmp[ft_strlen(str) + pres] = '\0';
     int i; // Считаем до точки и после точки
     int j;
     j = 0;
-    // char zero;
+    char zero;
     i = 0;
     
     while (str[i] != '.')
     {
         tmp[i] = str[i];
-        // printf("%c\n", tmp[i]);
         i++;
     }
     tmp[i] = '.';
     i++;
-    // printf("%d\t%d\t%d\n", ft_strlen(str), i, pres);
     if ((ft_strlen(str) - i) >= pres)
     {
         j = i;
@@ -38,12 +35,13 @@ char    *make_rounding(char *str, int pres)
     else
     {
         j = i;
+        pres +=j;
         while (str[i] != '\0')
         {
             tmp[i] = str[i];
             i++;
         }
-        while (i <= ((ft_strlen(str) +  pres) - j))
+        while (i < pres)
         {
             tmp[i] = '0';
             i++;
@@ -52,8 +50,7 @@ char    *make_rounding(char *str, int pres)
     
     
 
-    tmp[i] = '\0';
-    // printf("%s\n", tmp);
+    tmp[i + 1] = '\0';
 
     return (tmp);
 }
@@ -65,19 +62,20 @@ char    *make_dot(char *str, unsigned short exponent)
     char *tmp;
 
     i = 0;
+    j = 0;
     if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1))))
         return (NULL);
     tmp[ft_strlen(str)] = '\0';
-    while (i < ((exponent - 16383) * 0.301))
-    {   
+    if (str[i] == '0')
         i++;
-        j = i - 1;
+    while (i <= ((exponent - 16383) * 0.301 + 1))
+    {   
         tmp[j] = str[i];
+        i++;
+        j++;
     }
-    j = i;
-    tmp[j] = '.';
-    i++;
-    j++;
+        tmp[j] = '.';
+        j++;
     while (str[i] != '\0')
     {
         tmp[j] = str[i];
