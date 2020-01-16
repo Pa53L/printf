@@ -208,8 +208,8 @@ char *make_mantisa(char *str, unsigned long mantisa)
             while (j >= 0)
             {
                 tmp = str[j];
-                str[j] = ((str[j] - '0') + (p2[i][j] - '0') + mem) % 10 + '0';
-                mem = ((tmp - '0') + (p2[i][j] - '0') + mem) / 10;
+                str[j] = ((str[j] - '0') + (DEG_ARR[i][j] - '0') + mem) % 10 + '0';
+                mem = ((tmp - '0') + (DEG_ARR[i][j] - '0') + mem) / 10;
                 j--;
             }
         }
