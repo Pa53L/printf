@@ -1,5 +1,44 @@
 #include "../h_HEAD/header.h"
 
+char    *parse_double(long double number, int pres)
+{
+    ld_cast d1 = { .ld = number };
+    char *str_right;
+    char *str_left;
+    char *full_str;
+    
+    // КУСОК ПАРСА МАНТИССЫ
+    str_right = (char *)malloc(sizeof(char) * 65);
+    str_right = parse_mantis(d1.parts.mantisa);
+    // КУСОК ПАРСА ЭКСПОНЕНТЫ
+    str_left = (char *)malloc(sizeof(char) * 5000);
+    str_left = parse_exponent(d1.parts.exponent);
+    // СОБИРАЕМ ПОЛНУЮ СТРОКУ
+    full_str = (char *)malloc(sizeof(char) * 5000);
+    int len1 = ft_strlen(str_left) - 1;
+    int len2 = ft_strlen(str_right) - 1;
+    int k = 0;
+    while (k < (len1 + len2))
+    {
+        full_str[k] = '0';
+        k++;
+    }
+    
+    len1 < len2 ? (full_str = ft_str_multiply(str_left, str_right, len1, len2, full_str)) : (full_str = ft_str_multiply(str_right, str_left, len2, len1, full_str));
+    full_str[len1 + len2 - 1] = '\0';
+    
+    // ПОРА ПЕРЕПИСАТЬ ЭТОТ КУСОК
+    //printf("%s\n", full_str);
+    if (number > 1 || number < -1)
+        full_str = make_dot(full_str, d1.parts.exponent);
+    else
+        full_str = make_dot_zero(full_str, d1.parts.exponent);
+    //printf("%s\n", full_str);
+    full_str = make_rounding(full_str, pres);
+    //printf("PORNONAL %s\n", full_str);
+    return (full_str);
+}
+// ОКРУГЛЯЕМ ДО ЗАДАННОГО ЗНАЧЕНИЯ
 char    *make_rounding(char *str, int pres)
 {
     char *tmp;
@@ -7,54 +46,58 @@ char    *make_rounding(char *str, int pres)
         return (NULL);
     int i; // Считаем до точки и после точки
     int j;
-    j = 0;
-    char zero;
-    i = 0;
+    int mem;
     
+    j = 0;
+    i = 0;
     while (str[i] != '.')
     {
         tmp[i] = str[i];
         i++;
     }
-    tmp[i] = '.';
-    i++;
-    if ((ft_strlen(str) - i) >= pres)
+    tmp[i++] = '.';
+    j = i;
+    while (pres-- >= 0)
     {
-        j = i;
-        while (i < (j + pres + 1))
-        {
-            tmp[i] = str[i];
-            i++;
-        }
-        if (tmp[i - 1] >= '5')
-        {
-            tmp[i - 2] = tmp[i - 2] + 1; // НУЖНА НОВАЯ Ф-ЦИЯ ОКРУГЛЕНИЯ (НОРМАЛЬНАЯ!!!)
-            tmp[i - 1] = '\0';
-        }
+        while (str[j] != '\0' && pres-- >= 0)
+            tmp[i++] = str[j++];
+        tmp[i++] = '0';
     }
-    else
-    {
-        j = i;
-        pres +=j;
-        while (str[i] != '\0')
-        {
-            tmp[i] = str[i];
-            i++;
-        }
-        while (i < pres)
-        {
-            tmp[i] = '0';
-            i++;
-        }
-    }
-    
-    
 
-    tmp[i + 1] = '\0';
+    i--;
+    (str[i] >= '5' ? (mem = 1) : (mem = 0));
+    tmp[i] = '\0';
+    tmp = ft_rounding(tmp, mem);
 
     return (tmp);
 }
 
+// НАКОНЕЦ ОКРУГЛЯЕМ ДО КОНЦА
+char    *ft_rounding(char *str, int mem)
+{
+    int i;
+    i = ft_strlen(str) - 1;
+    while (i >= 0)
+    {
+        if (str[i] == '.')
+            i--;
+        if (mem == 1 && str[i] >= '0' && str[i] < '9')
+        {
+            str[i] = ((str[i] - '0') + mem) + '0';
+            mem = 0;
+            break ;
+        }
+        else if (mem == 1 && str[i] == '9')
+        {
+            str[i] = '0';
+            i--;
+        }
+    }
+    if (i == -1 && mem == 1)
+        str = ft_strjoin("1", str);
+    return (str);
+}
+// СТАВИТ ТОЧКУ В ЧИСЛЕ. ВРОДЕ НОРМ. ПОКА НЕ ТРОГАТЬ
 char    *make_dot(char *str, unsigned short exponent)
 {
     int i;
@@ -69,19 +112,11 @@ char    *make_dot(char *str, unsigned short exponent)
     if (str[i] == '0')
         i++;
     while (i <= ((exponent - 16383) * 0.301 + 1))
-    {   
-        tmp[j] = str[i];
-        i++;
-        j++;
-    }
-        tmp[j] = '.';
-        j++;
+        tmp[j++] = str[i++];
+    tmp[j] = '.';
+    j++;
     while (str[i] != '\0')
-    {
-        tmp[j] = str[i];
-        i++;
-        j++;
-    }
+        tmp[j++] = str[i++];
 
     return (tmp);
 }
@@ -173,8 +208,8 @@ char *make_mantisa(char *str, unsigned long mantisa)
             while (j >= 0)
             {
                 tmp = str[j];
-                str[j] = ((str[j] - '0') + (DEG_ARR[i][j] - '0') + mem) % 10 + '0';
-                mem = ((tmp - '0') + (DEG_ARR[i][j] - '0') + mem) / 10;
+                str[j] = ((str[j] - '0') + (p2[i][j] - '0') + mem) % 10 + '0';
+                mem = ((tmp - '0') + (p2[i][j] - '0') + mem) / 10;
                 j--;
             }
         }
@@ -289,42 +324,4 @@ char *ft_pow5(char *res, int pow)
         pow--;
     }
     return (res);
-}
-
-char    *parse_double(double num, int pres)
-{
-    long double number;
-    number = (long double)num;
-    ld_cast d1 = { .ld = number };
-    char *str_right;
-    char *str_left;
-    char *full_str;
-    
-    // КУСОК ПАРСА МАНТИССЫ
-    str_right = (char *)malloc(sizeof(char) * 65);
-    str_right = parse_mantis(d1.parts.mantisa);
-    // КУСОК ПАРСА ЭКСПОНЕНТЫ
-    str_left = (char *)malloc(sizeof(char) * 5000);
-    str_left = parse_exponent(d1.parts.exponent);
-    // СОБИРАЕМ ПОЛНУЮ СТРОКУ
-    full_str = (char *)malloc(sizeof(char) * 5000);
-    int len1 = ft_strlen(str_left) - 1;
-    int len2 = ft_strlen(str_right) - 1;
-    int k = 0;
-    while (k < (len1 + len2))
-    {
-        full_str[k] = '0';
-        k++;
-    }
-    
-    len1 < len2 ? (full_str = ft_str_multiply(str_left, str_right, len1, len2, full_str)) : (full_str = ft_str_multiply(str_right, str_left, len2, len1, full_str));
-    full_str[len1 + len2 - 1] = '\0';
-    if (number > 1 || number < -1)
-        full_str = make_dot(full_str, d1.parts.exponent);
-    else
-        full_str = make_dot_zero(full_str, d1.parts.exponent);
-    //printf("%s\n", full_str);
-    full_str = make_rounding(full_str, pres);
-    // printf("%s\n", full_str);
-    return (full_str);
 }
