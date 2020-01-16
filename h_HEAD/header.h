@@ -165,5 +165,6 @@ char *ft_pow5(char *res, int pow);
 char *make_dot(char *str, unsigned short exponent);
 char *make_dot_zero(char *str, unsigned short exponent);
 char *make_rounding(char *str, int pres);
+char *ft_rounding(char *str, int mem);
 
 #endif
