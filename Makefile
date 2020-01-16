@@ -17,11 +17,11 @@ CC = gcc -g
 ODIR = o_OBJ
 SDIR = s_SRC
 HEADER = h_HEAD/header.h
-_OBJS = ft_strlen.o ft_numlen.o ft_itoabasex.o ft_atoi.o \
+_OBJS = ft_strlen.o ft_numlen.o ft_itoabasex.o ft_atoi.o ft_str_sym_cmp.o \
 		ft_clean_struct.o \
 		ft_printf.o \
 		out_chr.o out_str.o out_per.o out_num.o out_bits.o \
-		parse_specifiers.o parse_output.o parse_dipoxu.o \
+		parse_specifiers.o parse_output.o parse_dipoxu.o parse_color.o \
 		ft_cast_size_di.o ft_cast_size_poxu.o \
 		ft_strdup.o ft_strjoin.o \
 		parse_double.o

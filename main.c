@@ -19,15 +19,11 @@
 
 int		main()
 {
-	// printf("|||MINE: %d\n",     ft_printf("%2$12d %1$d",2, 4));
-	// printf("|||ORIGINAL: %d\n",    printf("%2$12d %1$d",2, 4));
+	printf("|||MINE: %d\n",     ft_printf("{red}%12s", "hello, world!"));
+	printf("|||ORIGINAL: %d\n",    printf("%12d %d",2, 4));
 	// printf("\n");
-   system("color F0");
-	printf("|||MINE: %d\n",     ft_printf("%.35f", 12123.23));
-   printf("|||ORIGINAL: %d\n", printf("%.35f", 12123.23));
-   printf("%s00%s", YELLOW, RESET);
-   printf("%s===3%s ", RED, RESET);
-   printf("%s-.%s\n", WHITE, RESET);
+	// printf("|||MINE: %d\n",     ft_printf("%.f", 1024.00));
+   // printf("|||ORIGINAL: %d\n", printf("%.f", 1024.00));
    return (0);
 }
 /*

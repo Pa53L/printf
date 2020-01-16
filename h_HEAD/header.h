@@ -21,7 +21,6 @@
 #include <limits.h> //DELETE THIS
 #include <math.h> //DELETE THIS
 
-//#define BUFFSIZE 5000
 #define TYPES_SIZE 11
 #define TYPES (char[TYPES_SIZE + 1]) {'c', 's', 'd', 'i', 'u', 'o', 'p', 'x', 'X', 'f', 'b', '\0'}
 #define ITOA (char[17]) {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', \
@@ -29,8 +28,18 @@
 #define ITOAX (char[17]) {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', \
 						'A', 'B', 'C', 'D', 'E', 'F', '\0'}
 #define NULL_STRING (char[7]) {'(', 'n', 'u', 'l', 'l', ')', '\0'}
-//#define SIZE (char[5][3]) {"h\0\0", "hh\0", "l\0\0", "ll\0", "L\0\0"}
-#define DEG_ARR (char[64][65]) { \
+#define COLORS_POINT (int[8]) {4, 6, 5, 7, 7, 5, 5, 4}
+#define COLORS (char[8][7]) { \
+				"red\0\0\0\0", \
+				"green\0\0", \
+				"blue\0\0\0", \
+				"yellow\0", \
+				"orange\0", \
+				"pink\0\0\0", \
+				"neon\0\0\0", \
+				"eoc\0\0\0\0" \
+							}
+#define DEGI_ARR (char[64][65]) { \
 	"1000000000000000000000000000000000000000000000000000000000000000", \
 	"0500000000000000000000000000000000000000000000000000000000000000", \
 	"0250000000000000000000000000000000000000000000000000000000000000", \
@@ -123,9 +132,10 @@ typedef union {
 	} parts;
 } ld_cast;
 
-int ft_atoi(const char *);
 size_t ft_strlen(const char *);
+int ft_atoi(const char *);
 int ft_numlen(uint64_t, int);
+int	ft_str_sym_cmp(char *str_dad, char *str_son, char ch);
 void ft_cast_size_di(st_format *, va_list, int64_t *);
 void ft_cast_size_poxu(st_format *, va_list, uint64_t *);
 //
@@ -144,6 +154,7 @@ size_t out_bits(st_format *, unsigned long long);
 size_t out_num(st_format *spec, unsigned long long, int);
 //
 char *parse_specifiers(st_format *, char *, va_list);
+char	*parse_color(char *);
 size_t parse_output(st_format *, va_list, va_list);
 size_t parse_dipoxu(st_format *, unsigned long long);
 //
@@ -153,17 +164,18 @@ int ft_printf(const char *, ...);
 char *itobs(unsigned long long n, char *ps);
 char *ft_str_multiply(char *str1, char *str2, int len1, int len2, char *tmp);
 char *ft_pow(char *res, int pow);
-char *parse_double(double ld, int pres);
+char *parse_double(long double ld, int pres);
 char *parse_mantis(unsigned long mantisa);
 char *parse_exponent(unsigned short exponent);
 char *ft_strjoin(char const *s1, char const *s2);
 char *ft_strdup(const char *s);
-void ft_itoabasex(unsigned long long value, char *str, int base, char type, int len);
+void ft_itoabasex(unsigned long long value, char *str, uint8_t base, char type, int len);
 char *make_mantisa(char *str, unsigned long mantisa);
 char *make_full_mantis(char *str, char *str2[]);
 char *ft_pow5(char *res, int pow);
 char *make_dot(char *str, unsigned short exponent);
 char *make_dot_zero(char *str, unsigned short exponent);
 char *make_rounding(char *str, int pres);
+char *ft_rounding(char *str, int mem);
 
 #endif

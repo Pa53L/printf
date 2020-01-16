@@ -26,7 +26,11 @@ int		ft_printf(const char *format, ...)
 	str = (char *)format;
 	while (*str)
 	{
-		if (*str != '%')
+		if (*str == '{')
+		{
+			str = parse_color(++str);
+		}
+		if (*str != '%' && *str !='{')
 		{
 			write(1, str, 1);
 			cnt++;

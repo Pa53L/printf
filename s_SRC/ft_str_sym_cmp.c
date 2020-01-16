@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoabasex.c                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 23:53:11 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/13 23:54:52 by yshawn           ###   ########.fr       */
+/*   Created: 2019/09/15 20:18:41 by yshawn            #+#    #+#             */
+/*   Updated: 2019/12/11 19:32:33 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-void	ft_itoabasex(unsigned long long ival, char *str, uint8_t base, char type, int len)
+int		ft_str_sym_cmp(char *str_dad, char *str_son, char ch)
 {
-	while (ival > 0)
+	while (*str_dad && *str_dad != ch)
 	{
-		if (ival < base)
-		{
-			if (type != 'X')
-				str[len] = ITOA[ival];
-			else
-				str[len] = ITOAX[ival];
-			return ;
-		}
-		else
-		{
-			if (type != 'X')
-				str[len] = ITOA[ival % base];
-			else
-				str[len] = ITOAX[ival % base];
-		}
-		ival = ival / base;
-		len--;
+		if (*str_dad != *str_son)
+			return (0);
+		str_dad++;
+		str_son++;
 	}
-	return ;
+	return *str_dad == '}' ? 1 : 0;
 }

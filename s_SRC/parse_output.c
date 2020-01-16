@@ -19,7 +19,7 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 	int64_t					ival;
 	uint64_t				unval;
 	uint64_t				cnt;
-	double					fval;
+	long double					fval;
 
 	cnt = 0;
 	ival = 0;
@@ -76,9 +76,13 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 	}
 	else if(spec->type =='f')
 	{
-		fval = (double)va_arg(vl, double);
-		// printf("here: %f\n", fval);
-		str = parse_double(fval, 14);
+		fval = (long double)va_arg(vl, double);
+		// printf("here: %Lf\n", fval);
+		if (spec->accur > 0)
+			str = parse_double(fval, spec->accur);
+		else
+			str = parse_double(fval, -1);
+		cnt = ft_strlen(str);
 		printf("%s", str);
 	}
 	else if (spec->type == 'b')
