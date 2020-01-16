@@ -14,7 +14,8 @@
 
 int		main()
 {
-	printf("|||MINE: %d\n",     ft_printf("{red}%12s{green} %5s", "hello, world!", "no color"));
+	printf("|||MINE: %d\n",     ft_printf("{red}%12s {green}%5s{neon}", "hello, world!", "no color"));
+   ft_printf("{eoc}");
 	printf("|||ORIGINAL: %d\n",    printf("%12s", "hello, world!"));
 	// printf("\n");
 	// printf("|||MINE: %d\n",     ft_printf("%.f", 1024.00));

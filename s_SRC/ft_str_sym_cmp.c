@@ -21,5 +21,5 @@ int		ft_str_sym_cmp(char *str_dad, char *str_son, char ch)
 		str_dad++;
 		str_son++;
 	}
-	return *str_dad == '}' ? 1 : 0;
+	return (*str_dad == '}' && !*str_son) ? 1 : 0;
 }

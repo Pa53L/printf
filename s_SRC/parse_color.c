@@ -24,12 +24,12 @@ char	*parse_color(char *str)
 		{
 			if (ft_str_sym_cmp(str, COLOR[i], '}') == 1)
 			{	
+				write(1, OUT_COLOR[i], OUT_COLOR_POINT[i]);
 				i = COLOR_POINT[i];
-				write(1, OUT_COLOR[i], 11);
+				break ;
 			}
 			else
 				return (--str);
-			break ;
 		}
 		i++;
 	}
