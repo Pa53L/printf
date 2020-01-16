@@ -74,6 +74,7 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 		ft_cast_size_poxu(spec, vl, &unval);
 		cnt = parse_dipoxu(spec, unval);
 	}
+	/*
 	else if(spec->type =='f')
 	{
 		fval = (long double)va_arg(vl, double);
@@ -85,6 +86,7 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 		cnt = ft_strlen(str);
 		printf("%s", str);
 	}
+	*/
 	else if (spec->type == 'b')
 	{
 		unval = va_arg(vl, unsigned long long);

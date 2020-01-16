@@ -12,15 +12,10 @@
 
 #include "h_HEAD/header.h"
 
-#define RESET   "\033[0m"
-#define RED     "\033[1;31m"
-#define YELLOW  "\033[1;33m"
-#define WHITE   "\033[1;31m"
-
 int		main()
 {
-	printf("|||MINE: %d\n",     ft_printf("{red}%12s", "hello, world!"));
-	printf("|||ORIGINAL: %d\n",    printf("%12d %d",2, 4));
+	printf("|||MINE: %d\n",     ft_printf("{red}%12s{green} %5s", "hello, world!", "no color"));
+	printf("|||ORIGINAL: %d\n",    printf("%12s", "hello, world!"));
 	// printf("\n");
 	// printf("|||MINE: %d\n",     ft_printf("%.f", 1024.00));
    // printf("|||ORIGINAL: %d\n", printf("%.f", 1024.00));

@@ -28,8 +28,9 @@
 #define ITOAX (char[17]) {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', \
 						'A', 'B', 'C', 'D', 'E', 'F', '\0'}
 #define NULL_STRING (char[7]) {'(', 'n', 'u', 'l', 'l', ')', '\0'}
-#define COLORS_POINT (int[8]) {4, 6, 5, 7, 7, 5, 5, 4}
-#define COLORS (char[8][7]) { \
+#define COLOR_SIZE 8
+#define COLOR_POINT (int[COLOR_SIZE + 1]) {4, 6, 5, 7, 7, 5, 5, 4}
+#define COLOR (char[COLOR_SIZE + 1][7]) { \
 				"red\0\0\0\0", \
 				"green\0\0", \
 				"blue\0\0\0", \
@@ -38,6 +39,18 @@
 				"pink\0\0\0", \
 				"neon\0\0\0", \
 				"eoc\0\0\0\0" \
+							}
+#define OUT_COLOR_POINT (int[COLOR_SIZE + 1]) {11, 11, 11, 10, 10, 11, 22, 4}
+#define OUT_COLOR (char[COLOR_SIZE + 1][23]) { \
+				"\e[38;5;196m\0\0\0\0\0\0\0\0\0\0\0\0", \
+				"\e[38;5;48m\0\0\0\0\0\0\0\0\0\0\0\0\0", \
+				"\e[38;5;69m\0\0\0\0\0\0\0\0\0\0\0\0\0", \
+				"\e[38;5;226m\0\0\0\0\0\0\0\0\0\0\0\0", \
+				"\e[38;5;172m\0\0\0\0\0\0\0\0\0\0\0\0", \
+				"\e[38;5;205m\0\0\0\0\0\0\0\0\0\0\0\0", \
+				"\e[1;3;4;95m\e[48;5;123m", \
+				"\e[0m", \
+				"\0" \
 							}
 #define DEGI_ARR (char[64][65]) { \
 	"1000000000000000000000000000000000000000000000000000000000000000", \
@@ -151,10 +164,10 @@ size_t out_per(st_format *);
 size_t out_str(st_format *, char *);
 size_t out_chr(st_format *, int);
 size_t out_bits(st_format *, unsigned long long);
-size_t out_num(st_format *spec, unsigned long long, int);
+size_t out_num(st_format *spec, uint64_t, int);
 //
 char *parse_specifiers(st_format *, char *, va_list);
-char	*parse_color(char *);
+char *parse_color(char *);
 size_t parse_output(st_format *, va_list, va_list);
 size_t parse_dipoxu(st_format *, unsigned long long);
 //

@@ -1,6 +1,5 @@
 #include "../h_HEAD/header.h"
 
-<<<<<<< HEAD
 char DEG_ARR[64][65] =
  {  "1000000000000000000000000000000000000000000000000000000000000000",   // 0
     "0500000000000000000000000000000000000000000000000000000000000000",   // 1
@@ -67,8 +66,6 @@ char DEG_ARR[64][65] =
     "0000000000000000000216840434497100886801490560173988342285156250",   // 62
     "0000000000000000000108420217248550443400745280086994171142578125" }; // 63
 
-=======
->>>>>>> bb0213eb14a607ec313ea3c8a08a214c88be869d
 char    *parse_double(long double number, int pres)
 {
     ld_cast d1 = { .ld = number };
@@ -82,10 +79,7 @@ char    *parse_double(long double number, int pres)
     // КУСОК ПАРСА ЭКСПОНЕНТЫ
     str_left = (char *)malloc(sizeof(char) * 5000);
     str_left = parse_exponent(d1.parts.exponent);
-<<<<<<< HEAD
     
-=======
->>>>>>> bb0213eb14a607ec313ea3c8a08a214c88be869d
     // СОБИРАЕМ ПОЛНУЮ СТРОКУ
     full_str = (char *)malloc(sizeof(char) * 5000);
     int len1 = ft_strlen(str_left) - 1;
@@ -96,17 +90,10 @@ char    *parse_double(long double number, int pres)
         full_str[k] = '0';
         k++;
     }
-<<<<<<< HEAD
 
     len1 < len2 ? (full_str = ft_str_multiply(str_left, str_right, len1, len2, full_str)) : (full_str = ft_str_multiply(str_right, str_left, len2, len1, full_str));
     full_str[len1 + len2 - 1] = '\0';
 
-=======
-    
-    len1 < len2 ? (full_str = ft_str_multiply(str_left, str_right, len1, len2, full_str)) : (full_str = ft_str_multiply(str_right, str_left, len2, len1, full_str));
-    full_str[len1 + len2 - 1] = '\0';
-    
->>>>>>> bb0213eb14a607ec313ea3c8a08a214c88be869d
     // ПОРА ПЕРЕПИСАТЬ ЭТОТ КУСОК
     //printf("%s\n", full_str);
     if (number > 1 || number < -1)
