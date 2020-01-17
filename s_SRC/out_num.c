@@ -27,8 +27,8 @@ size_t	out_num(st_format *spec, uint64_t ival, int len)
 	str[strlen] = '\0';
 	/* MINUS == 0 */
 	if (spec->minus == 0)
-	{	
-		
+	{
+
 		if (ival == 0 && len > 0)
 		{
 			str[i] = '0';

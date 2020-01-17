@@ -24,6 +24,7 @@ size_t		parse_float(st_format *spec, long double fval)
 	str_number = NULL;
 	str_flag = NULL;
 
+	// printf("accur: %d\n", spec->accur);
 	if (spec->accur >= 0)
 	{
 		if (spec->accur == 0)

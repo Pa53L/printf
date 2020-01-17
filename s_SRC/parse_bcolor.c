@@ -26,12 +26,12 @@ char	*parse_bcolor(char *str)
 			{	
 				write(1, OUT_COLOR[i], OUT_COLOR_POINT[i]);
 				i = COLOR_POINT[i];
-				break ;
+				return (str + i);
 			}
 			else
-				return (--str);
+				break ;
 		}
 		i++;
 	}
-	return (str + i);
+	return (--str);
 }

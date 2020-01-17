@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-void	ft_itoabasex(unsigned long long ival, char *str, uint8_t base, char type, int len)
+void	ft_itoabasex(unsigned long long ival, char *str, int base, char type, int len)
 {
 	while (ival > 0)
 	{

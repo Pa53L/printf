@@ -37,10 +37,17 @@ char	*is_width(st_format *spec, char *str, va_list vl)
 	if (*str == '*')
 	{
 		if ((spec->width = va_arg(vl, int)) < 0)
+		{
+			spec->minus = 1;
+			spec->width = spec->width * (-1);
+		}
+		if (spec->width < 0)
+		{
 			spec->width = 0;
+		}
 		str++;
 	}
-	else
+	if (*str >= '1' && *str <= '9')
 	{
 		if ((spec->width = atoi(str)) < 0)
 			spec->width = 0;
@@ -64,13 +71,13 @@ char	*is_accuracy(int *accur, char *str, va_list vl)
 	if (*str == '*')
 	{
 		if ((*accur = va_arg(vl, int)) < 0)
-			*accur = 0;
+			*accur = -1;
 		str++;
 	}
 	else
 	{
 		if ((*accur = atoi(str)) < 0)
-			*accur = 0;
+			*accur = -1;
 		while (*str >= '0' && *str <= '9')
 			str++;
 	}
@@ -124,9 +131,9 @@ char	*is_type(char *type, char *str)
 
 char	*parse_specifiers(st_format *spec, char *str, va_list vl)
 {
+	ft_clean_struct(spec);
 	if (!*str)
 		return (str);
-	ft_clean_struct(spec);
 	if (*str == '-' || *str == '+' || *str == ' ' || *str == '#' || *str == '0')
 		str = is_flag(spec, str);
 	if (*str == '*' || (*str >= '1' && *str <= '9'))

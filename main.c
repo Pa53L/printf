@@ -14,7 +14,7 @@
 
 int		main()
 {
-   ft_printf("{red}");
+   // ft_printf("{red}");
 	// printf("|||MINE: %d\n",     ft_printf("{red}%12s {green}%5s{neon}", "hello, world!", "no color"));
 	// printf("|||ORIGINAL: %d\n",    printf("%12s", "hello, world!"));
 	// printf("\n");
@@ -25,8 +25,11 @@ int		main()
 	// printf("|||MINE: %d\n",     ft_printf("{orange}%Lf", 1024.1234567899));
 	// printf("|||MINE: %d\n",     ft_printf("{pink}%Lf", 1024.1234567899));
 	// printf("|||MINE: %d\n",     ft_printf("{neon}%Lf", 1024.1234567899));
-   printf("|||MINE: %d\n", ft_printf("%5.8f|%-5.8f|%+5.8f|% 5.8f|%#5.8f|%05.8f", INFINITY, INFINITY, INFINITY, INFINITY, INFINITY, INFINITY));
-   printf("|||ORIGINAL: %d\n",    printf("%5.8f|%-5.8f|%+5.8f|% 5.8f|%#5.8f|%05.8f", INFINITY, INFINITY, INFINITY, INFINITY, INFINITY, INFINITY));
+   // printf("|||MINE: %d\n", ft_printf("%*3d", 5, 0));
+   // printf("|||ORIGINAL: %d\n",    printf("%*3d", 5, 0));
+   // printf("\n");
+   // printf("|||MINE: %d\n", ft_printf("%.f", -958.125));
+   // printf("|||ORIGINAL: %d\n",    printf("%.f", -958.125));
    /*
    printf("\n");
    printf("|||MINE: %d\n", ft_printf("% 5.3f", 7.3));

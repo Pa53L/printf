@@ -1,28 +1,10 @@
-Test 1996 (f_L_limits_ndblmin_prec0) : FAILED.
-    First line of code: {return test("%.0Lf", -LDBL_MIN);}
+Test 2485 (nocrash_mandatory_f_size_LL) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%LLf", 42.5);}
     SEGFAULT
 
-Test 1997 (f_L_limits_ndblmin_prec3) : FAILED.
-    First line of code: {return test("%.3Lf", -LDBL_MIN);}
-    SEGFAULT
-
-Test 1998 (f_L_limits_ndblmin_precd) : FAILED.
-    First line of code: {return test("%Lf", -LDBL_MIN);}
-    SEGFAULT
-
-Test 1999 (f_L_limits_ndblmin_prec8) : FAILED.
-    First line of code: {return test("%.8Lf", -LDBL_MIN);}
-    SEGFAULT
-
-Test 2000 (f_L_stress_limits_ndblmin_prec12) : FAILED.
-    First line of code: {return test("%.12Lf", -LDBL_MIN);}
-    SEGFAULT
-
-Test 2001 (f_L_stress_limits_ndblmin_prec16) : FAILED.
-    First line of code: {return test("%.16Lf", -LDBL_MIN);}
-    SEGFAULT
-
-Test 2002 (f_L_stress_limits_ndblmin_prec18) : FAILED.
-    First line of code: {return test("%.18Lf", -LDBL_MIN);}
+Test 2486 (nocrash_mandatory_f_size_Ll) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%Llf", 42.5);}
     SEGFAULT
 

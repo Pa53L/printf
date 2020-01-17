@@ -187,7 +187,7 @@ char *parse_mantis(unsigned long mantisa);
 char *parse_exponent(unsigned short exponent);
 char *ft_strjoin(char const *s1, char const *s2);
 char *ft_strdup(const char *s);
-void ft_itoabasex(unsigned long long value, char *str, uint8_t base, char type, int len);
+void ft_itoabasex(unsigned long long value, char *str, int base, char type, int len);
 char *make_mantisa(char *str, unsigned long mantisa);
 char *make_full_mantis(char *str, char *str2[]);
 char *ft_pow5(char *res, int pow);

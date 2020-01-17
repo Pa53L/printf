@@ -72,8 +72,10 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 			fval = va_arg(vl, long double); //must be in ft_cast_size_f
 		else
 			fval = (long double)va_arg(vl, double); //must be in ft_cast_size_f
-		if (fval == LDBL_MIN)
+		if (fval == LDBL_MIN || fval == -LDBL_MIN)
 		{
+			if (fval == -LDBL_MIN)
+				spec->sign = 1;
 			fval = (long double)0.0;
 		}
 		if (fval < 0)
