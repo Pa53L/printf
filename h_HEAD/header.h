@@ -19,6 +19,7 @@
 #include <inttypes.h>
 #include <stdio.h> //DELETE THIS
 #include <limits.h> //DELETE THIS
+#include <float.h> //DELETE THIS
 #include <math.h> //DELETE THIS
 
 #define TYPES_SIZE 11

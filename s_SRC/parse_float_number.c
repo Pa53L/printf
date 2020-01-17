@@ -10,7 +10,7 @@ char *parse_float_number(long double number, int pres, char sharp)
         pres = 0;
     //if (d1.parts.exponent == 32767)
     //    return(inf_nan(d1.parts.mantisa));
-    //printf("%lu\n", d1.parts.mantisa);
+    // printf("%lu\n", d1.parts.mantisa);
     // printf("IM HERE %hu\n", d1.parts.exponent);
     // КУСОК ПАРСА МАНТИССЫ
     str_right = (char *)malloc(sizeof(char) * 65);

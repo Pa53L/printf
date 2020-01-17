@@ -25,8 +25,9 @@ int		main()
 	// printf("|||MINE: %d\n",     ft_printf("{orange}%Lf", 1024.1234567899));
 	// printf("|||MINE: %d\n",     ft_printf("{pink}%Lf", 1024.1234567899));
 	// printf("|||MINE: %d\n",     ft_printf("{neon}%Lf", 1024.1234567899));
-   printf("|||MINE: %d\n", ft_printf("% 05.0f", 7.3));
-   printf("|||ORIGINAL: %d\n",    printf("% 05.0f", 7.3));
+   printf("|||MINE: %d\n", ft_printf("%.0Lf", LDBL_MIN));
+   printf("|||ORIGINAL: %d\n",    printf("%.0Lf", LDBL_MIN));
+   /*
    printf("\n");
    printf("|||MINE: %d\n", ft_printf("% 5.3f", 7.3));
    printf("|||ORIGINAL: %d\n",    printf("% 5.3f", 7.3));
@@ -42,6 +43,7 @@ int		main()
    printf("\n");
    printf("|||MINE: %d\n", ft_printf("% -5.0f", 7.3));
    printf("|||ORIGINAL: %d\n",    printf("% -5.0f", 7.3));
+   */
    return (0);
 }
 /*

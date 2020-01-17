@@ -1,87 +1,56 @@
-Test 1758 (f_L_basic_1) : FAILED.
-    First line of code: {return test("this %Lf float", 1.5l);}
+Test 1989 (f_L_limits_dblmin_prec0) : FAILED.
+    First line of code: {return test("%.0Lf", LDBL_MIN);}
     Timed out
 
-Test 1759 (f_L_basic_fltonly) : FAILED.
-    First line of code: {return test("%Lf", 7.5l);}
+Test 1990 (f_L_limits_dblmin_prec3) : FAILED.
+    First line of code: {return test("%.3Lf", LDBL_MIN);}
     SEGFAULT
 
-Test 1760 (f_L_basic_whole) : FAILED.
-    First line of code: {return test("%Lf", 1.0l);}
+Test 1991 (f_L_limits_dblmin_precd) : FAILED.
+    First line of code: {return test("%Lf", LDBL_MIN);}
     Timed out
 
-Test 1761 (f_L_basic_negative) : FAILED.
-    First line of code: {return test("%Lf", -3.85l);}
-    Timed out
-
-Test 1762 (f_L_basic_positive_3_3) : FAILED.
-    First line of code: {return test("%Lf", 573.924l);}
-    Timed out
-
-Test 1763 (f_L_basic_negative_3_3) : FAILED.
-    First line of code: {return test("%Lf", -958.125l);}
-    Timed out
-
-Test 1764 (f_L_basic_positive_smallfpart) : FAILED.
-    First line of code: {return test("%Lf", 23.00041l);}
-    Timed out
-
-Test 1765 (f_L_basic_positive_allsmall) : FAILED.
-    First line of code: {return test("%Lf", 0.000039l);}
-    Timed out
-
-Test 1766 (f_L_basic_negative_smallfpart) : FAILED.
-    First line of code: {return test("%Lf", -7.00036l);}
-    Timed out
-
-Test 1767 (f_L_basic_negative_allsmall) : FAILED.
-    First line of code: {return test("%Lf", -0.00032l);}
-    Timed out
-
-Test 1768 (f_L_basic_limits_allsmall_pos) : FAILED.
-    First line of code: {return test("%Lf", 0.000001l);}
-    Timed out
-
-Test 1769 (f_L_basic_limits_allsmall_neg) : FAILED.
-    First line of code: {return test("%Lf", -0.000001l);}
-    Timed out
-
-Test 1770 (f_L_basic_limits_smallfpart_pos) : FAILED.
-    First line of code: {return test("%Lf", 9873.000001l);}
-    Timed out
-
-Test 1771 (f_L_basic_limits_smallfpart_neg) : FAILED.
-    First line of code: {return test("%Lf", -875.000001l);}
-    Timed out
-
-Test 1772 (f_L_basic_limits_allbig_pos) : FAILED.
-    First line of code: {return test("%Lf", 999.999999l);}
-    Timed out
-
-Test 1773 (f_L_basic_limits_allbig_neg) : FAILED.
-    First line of code: {return test("%Lf", -99.999999l);}
-    Timed out
-
-Test 1774 (f_L_basic_limits_bigfpart_pos) : FAILED.
-    First line of code: {return test("%Lf", 0.999999l);}
-    Timed out
-
-Test 1775 (f_L_basic_limits_bigfpart_neg) : FAILED.
-    First line of code: {return test("%Lf", -0.999999l);}
-    Timed out
-
-Test 1776 (f_L_rndd_pos) : FAILED.
-    First line of code: {return test("%Lf", 23.375094499l);}
+Test 1992 (f_L_limits_dblmin_prec8) : FAILED.
+    First line of code: {return test("%.8Lf", LDBL_MIN);}
     SEGFAULT
 
-Test 1777 (f_L_rndd_neg) : FAILED.
-    First line of code: {return test("%Lf", -985.765426499l);}
+Test 1993 (f_L_stress_limits_dblmin_prec12) : FAILED.
+    First line of code: {return test("%.12Lf", LDBL_MIN);}
+    Timed out
+
+Test 1994 (f_L_stress_limits_dblmin_prec16) : FAILED.
+    First line of code: {return test("%.16Lf", LDBL_MIN);}
     SEGFAULT
 
-Test 1778 (f_L_rndu_pos) : FAILED.
-    First line of code: {return test("%Lf", 0.08942555l);}
-      expected output : "0.089426"
-      your output     : "0.000000"
-      expected (nonprintable as hex) : "0.089426"
-      actual   (nonprintable as hex) : "0.000000"
+Test 1995 (f_L_stress_limits_dblmin_prec18) : FAILED.
+    First line of code: {return test("%.18Lf", LDBL_MIN);}
+    Timed out
+
+Test 1996 (f_L_limits_ndblmin_prec0) : FAILED.
+    First line of code: {return test("%.0Lf", -LDBL_MIN);}
+    SEGFAULT
+
+Test 1997 (f_L_limits_ndblmin_prec3) : FAILED.
+    First line of code: {return test("%.3Lf", -LDBL_MIN);}
+    SEGFAULT
+
+Test 1998 (f_L_limits_ndblmin_precd) : FAILED.
+    First line of code: {return test("%Lf", -LDBL_MIN);}
+    SEGFAULT
+
+Test 1999 (f_L_limits_ndblmin_prec8) : FAILED.
+    First line of code: {return test("%.8Lf", -LDBL_MIN);}
+    SEGFAULT
+
+Test 2000 (f_L_stress_limits_ndblmin_prec12) : FAILED.
+    First line of code: {return test("%.12Lf", -LDBL_MIN);}
+    SEGFAULT
+
+Test 2001 (f_L_stress_limits_ndblmin_prec16) : FAILED.
+    First line of code: {return test("%.16Lf", -LDBL_MIN);}
+    SEGFAULT
+
+Test 2002 (f_L_stress_limits_ndblmin_prec18) : FAILED.
+    First line of code: {return test("%.18Lf", -LDBL_MIN);}
+    SEGFAULT
 
