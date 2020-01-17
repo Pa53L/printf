@@ -8,6 +8,7 @@ char *parse_float_number(long double number, int pres, char sharp)
     char *full_str;
     if (pres == -1)
         pres = 0;
+    //printf("%d\n", pres);
     //if (d1.parts.exponent == 32767)
     //    return(inf_nan(d1.parts.mantisa));
     // printf("%lu\n", d1.parts.mantisa);
@@ -18,7 +19,12 @@ char *parse_float_number(long double number, int pres, char sharp)
     if (d1.parts.exponent == 0 && d1.parts.exponent == 0)
     {
         if (pres == 0)
+        {
+            if (sharp)
+                return ("0.");
             return ("0");
+        }
+
         else
             {
                 int g = 2;
@@ -32,6 +38,8 @@ char *parse_float_number(long double number, int pres, char sharp)
                     g++;
                 }
                 full_str[g] = '\0';
+                //if (pres == 0 && sharp)
+                //   full_str = ft_strjoin(full_str, ".");
                 return (full_str);
             }
     }
@@ -112,7 +120,7 @@ char *make_rounding(char *str, int pres)
     }
     tmp[i++] = '.';
     j = i;
-    while (pres-- >= -1)
+    while (pres-- > -1)
     {
         while (str[j] != '\0' && pres-- >= 0)
             tmp[i++] = str[j++];
@@ -130,6 +138,7 @@ char *ft_rounding(char *str, int mem)
 {
     int i;
     i = ft_strlen(str) - 1;
+    //printf("%d\n", i);
     while (i >= 0)
     {
         if (str[i] == '.')
@@ -304,16 +313,18 @@ char *ft_str_multiply(char *str1, char *str2, int len1, int len2, char *tmp)
     //tmp[len1 + len2 - 3] = '\0';
     return (tmp);
 }
-char *ft_pow(char *res, int pow)
+char *ft_pow(char *res, int pow) // 26 STRINGS
 {
     int len;
     int ret;
     int dec;
+    int j;
+    
     len = pow * 0.301 + 1;
     ret = 0;
     res[len] = '\0';
     res[len - 1] = '2';
-    int j = -1;
+    j = -1;
     while (j++ < (len - 2))
         res[j] = '0';
     while (pow > 1)
@@ -329,6 +340,7 @@ char *ft_pow(char *res, int pow)
         res[len] = ret + '0';
         pow--;
     }
+
     return (res);
 }
 char *ft_pow5(char *res, int pow)  // 26 STRINGS

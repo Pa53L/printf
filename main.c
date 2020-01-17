@@ -6,7 +6,7 @@
 /*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:31:27 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/17 19:06:35 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/17 20:18:51 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int		main()
 	// printf("|||MINE: %d\n",     ft_printf("{orange}%Lf", 1024.1234567899));
 	// printf("|||MINE: %d\n",     ft_printf("{pink}%Lf", 1024.1234567899));
 	// printf("|||MINE: %d\n",     ft_printf("{neon}%Lf", 1024.1234567899));
-   //printf("|||MINE: %d\n", ft_printf("%.3Lf", -LDBL_MIN));
-   printf("|||ORIGINAL: %d\n",    printf("%.3Lf", -LDBL_MIN));
+   printf("|||MINE: %d\n", ft_printf("%5.8f|%-5.8f|%+5.8f|% 5.8f|%#5.8f|%05.8f", INFINITY, INFINITY, INFINITY, INFINITY, INFINITY, INFINITY));
+   printf("|||ORIGINAL: %d\n",    printf("%5.8f|%-5.8f|%+5.8f|% 5.8f|%#5.8f|%05.8f", INFINITY, INFINITY, INFINITY, INFINITY, INFINITY, INFINITY));
    /*
    printf("\n");
    printf("|||MINE: %d\n", ft_printf("% 5.3f", 7.3));
