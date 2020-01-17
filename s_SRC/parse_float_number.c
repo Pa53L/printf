@@ -1,19 +1,23 @@
 #include "../h_HEAD/header.h"
 
-char    *parse_double(long double number, int pres)
+char *parse_float_number(long double number, int pres, char sharp)
 {
     ld_cast d1 = { .ld = number };
     char *str_right;
     char *str_left;
     char *full_str;
-    
+    if (pres == -1)
+        pres = 0;
+    //if (d1.parts.exponent == 32767)
+    //    return(inf_nan(d1.parts.mantisa));
+    //printf("%lu\n", d1.parts.mantisa);
+    // printf("IM HERE %hu\n", d1.parts.exponent);
     // КУСОК ПАРСА МАНТИССЫ
     str_right = (char *)malloc(sizeof(char) * 65);
     str_right = parse_mantis(d1.parts.mantisa);
     // КУСОК ПАРСА ЭКСПОНЕНТЫ
     str_left = (char *)malloc(sizeof(char) * 5000);
     str_left = parse_exponent(d1.parts.exponent);
-    
     // СОБИРАЕМ ПОЛНУЮ СТРОКУ
     full_str = (char *)malloc(sizeof(char) * 5000);
     int len1 = ft_strlen(str_left) - 1;
@@ -24,23 +28,25 @@ char    *parse_double(long double number, int pres)
         full_str[k] = '0';
         k++;
     }
-
     len1 < len2 ? (full_str = ft_str_multiply(str_left, str_right, len1, len2, full_str)) : (full_str = ft_str_multiply(str_right, str_left, len2, len1, full_str));
     full_str[len1 + len2 - 1] = '\0';
-
     // ПОРА ПЕРЕПИСАТЬ ЭТОТ КУСОК
     //printf("%s\n", full_str);
-    if (number > 1 || number < -1)
+    if (number >= 1 || number <= -1)
         full_str = make_dot(full_str, d1.parts.exponent);
     else
         full_str = make_dot_zero(full_str, d1.parts.exponent);
     //printf("%s\n", full_str);
     full_str = make_rounding(full_str, pres);
     //printf("PORNONAL %s\n", full_str);
+    if (full_str[ft_strlen(full_str) - 1] == '.')
+        full_str[ft_strlen(full_str) - 1] = '\0';
+    if (pres == 0 && sharp)
+        full_str = ft_strjoin(full_str, ".");
     return (full_str);
 }
 // ОКРУГЛЯЕМ ДО ЗАДАННОГО ЗНАЧЕНИЯ
-char    *make_rounding(char *str, int pres)
+char *make_rounding(char *str, int pres)
 {
     char *tmp;
     if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(str) + pres + 1))))
@@ -48,7 +54,7 @@ char    *make_rounding(char *str, int pres)
     int i; // Считаем до точки и после точки
     int j;
     int mem;
-    
+    int gg = pres;
     j = 0;
     i = 0;
     while (str[i] != '.')
@@ -58,23 +64,20 @@ char    *make_rounding(char *str, int pres)
     }
     tmp[i++] = '.';
     j = i;
-    while (pres-- >= 0)
+    while (pres-- >= -1)
     {
         while (str[j] != '\0' && pres-- >= 0)
             tmp[i++] = str[j++];
         tmp[i++] = '0';
     }
-
     i--;
     (str[i] >= '5' ? (mem = 1) : (mem = 0));
     tmp[i] = '\0';
     tmp = ft_rounding(tmp, mem);
-
     return (tmp);
 }
-
 // НАКОНЕЦ ОКРУГЛЯЕМ ДО КОНЦА
-char    *ft_rounding(char *str, int mem)
+char *ft_rounding(char *str, int mem)
 {
     int i;
     i = ft_strlen(str) - 1;
@@ -86,7 +89,7 @@ char    *ft_rounding(char *str, int mem)
         {
             str[i] = ((str[i] - '0') + mem) + '0';
             mem = 0;
-            break ;
+            break;
         }
         else if (mem == 1 && str[i] == '9')
         {
@@ -94,19 +97,20 @@ char    *ft_rounding(char *str, int mem)
             i--;
         }
         else
-            break ;
+        {
+            break;
+        }
     }
     if (i == -1 && mem == 1)
         str = ft_strjoin("1", str);
     return (str);
 }
 // СТАВИТ ТОЧКУ В ЧИСЛЕ. ВРОДЕ НОРМ. ПОКА НЕ ТРОГАТЬ
-char    *make_dot(char *str, unsigned short exponent)
+char *make_dot(char *str, unsigned short exponent)
 {
     int i;
     int j;
     char *tmp;
-
     i = 0;
     j = 0;
     if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1))))
@@ -120,16 +124,13 @@ char    *make_dot(char *str, unsigned short exponent)
     j++;
     while (str[i] != '\0')
         tmp[j++] = str[i++];
-
     return (tmp);
 }
-
-char    *make_dot_zero(char *str, unsigned short exponent)
+char *make_dot_zero(char *str, unsigned short exponent)
 {
     int i;
     int j;
     char *tmp;
-
     i = 2;
     j = 2;
     if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2))))
@@ -143,15 +144,13 @@ char    *make_dot_zero(char *str, unsigned short exponent)
         i++;
         j++;
     }
-
-    return (tmp);    
+    return (tmp);
 }
 // Парсим экспоненту в строку
-char    *parse_exponent(unsigned short exponent)
+char *parse_exponent(unsigned short exponent)
 {
     int pow;
     char *str;
-    
     pow = exponent - 16383;
     if (pow > 0)
     {
@@ -168,16 +167,13 @@ char    *parse_exponent(unsigned short exponent)
         str = (char *)malloc(sizeof(char) * (pow + 1));
         str = ft_pow5(str, pow);
     }
-
     return (str);
 }
-
 // Начинаем парсить МАНТИССУ в строку
-char    *parse_mantis(unsigned long mantisa)
+char *parse_mantis(unsigned long mantisa)
 {
     // мантисса в виде степеней -2 в нужных местах (массив строк)
     char *str;
-    
     str = (char *)malloc(sizeof(char) * 65);
     str[64] = '\0';
     int j = 0;
@@ -187,22 +183,18 @@ char    *parse_mantis(unsigned long mantisa)
         j++;
     }
     str = make_mantisa(str, mantisa);
-    return(str);
-    
+    return (str);
 }
-
 // Собирает МАНТИССУ из индексов массива
 char *make_mantisa(char *str, unsigned long mantisa)
 {
-    char bin_str[8 * sizeof(unsigned long) + 1];
+    char bin_str[CHAR_BIT * sizeof(unsigned long) + 1];
     int i;
     int j;
     int mem;
     char tmp;
-    
     mem = 0;
     i = 0;
-    // printf("%s\n", itobs(mantisa, bin_str));
     while (itobs(mantisa, bin_str)[i] != '\0')
     {
         j = 63;
@@ -218,16 +210,13 @@ char *make_mantisa(char *str, unsigned long mantisa)
         }
         i++;
     }
-
     return (str);
 }
-
 // Мантиссу в строку битов
 char *itobs(unsigned long long n, char *ps)
 {
     int i;
-    uint64_t size = 8 * sizeof(uint64_t);
-    
+    uint64_t size = CHAR_BIT * sizeof(uint64_t);
     i = size - 1;
     while (i >= 0)
     {
@@ -236,18 +225,15 @@ char *itobs(unsigned long long n, char *ps)
         n >>= 1;
     }
     ps[size] = '\0';
-
     return (ps);
 }
-
 char *ft_str_multiply(char *str1, char *str2, int len1, int len2, char *tmp)
 {
     int i;
     int j;
-    int shift;  // Поразрядный сдвиг
-    int mem;    // Число "в уме"
+    int shift; // Поразрядный сдвиг
+    int mem;   // Число "в уме"
     int res;
-    
     shift = 0;
     i = len2;
     while (i >= 0)
@@ -267,16 +253,13 @@ char *ft_str_multiply(char *str1, char *str2, int len1, int len2, char *tmp)
         i--;
     }
     //tmp[len1 + len2 - 3] = '\0';
-
     return (tmp);
 }
-
 char *ft_pow(char *res, int pow)
 {
     int len;
     int ret;
     int dec;
-
     len = pow * 0.301 + 1;
     ret = 0;
     res[len] = '\0';
@@ -299,13 +282,11 @@ char *ft_pow(char *res, int pow)
     }
     return (res);
 }
-
 char *ft_pow5(char *res, int pow)
 {
     int len;
     int ret;
     int dec;
-
     len = pow + 1;
     ret = 0;
     res[len] = '\0';

@@ -30,25 +30,25 @@
 #define NULL_STRING (char[7]) {'(', 'n', 'u', 'l', 'l', ')', '\0'}
 #define COLOR_SIZE 8
 #define COLOR_POINT (int[COLOR_SIZE + 1]) {4, 6, 5, 7, 7, 5, 5, 4}
-#define COLOR (char[COLOR_SIZE + 1][6]) { \
+#define COLOR (char[COLOR_SIZE + 1][7]) { \
 				"red\0\0\0", \
 				"green\0", \
 				"blue\0\0", \
-				"yellow", \
-				"orange", \
+				"yellow\0", \
+				"orange\0", \
 				"pink\0\0", \
 				"neon\0\0", \
 				"eoc\0\0\0" \
 							}
-#define OUT_COLOR_POINT (int[COLOR_SIZE + 1]) {11, 11, 11, 10, 10, 11, 22, 4}
+#define OUT_COLOR_POINT (int[COLOR_SIZE + 1]) {11, 11, 11, 11, 11, 11, 11, 4}
 #define OUT_COLOR (char[COLOR_SIZE + 1][11]) { \
 				"\e[38;5;196m", \
 				"\e[38;5;48m\0", \
 				"\e[38;5;69m\0", \
 				"\e[38;5;226m", \
-				"\e[38;5;172m", \
+				"\e[38;5;208m", \
 				"\e[38;5;205m", \
-				"\e[38;5;159m", \
+				"\e[38;5;123m", \
 				"\e[0m\0\0\0\0\0\0\0" \
 							}
 #define DEG_ARR (char[64][65]) { \
@@ -148,10 +148,11 @@ size_t ft_strlen(const char *);
 int ft_atoi(const char *);
 int ft_numlen(uint64_t, int);
 int	ft_str_sym_cmp(char *str_dad, char *str_son, char ch);
-void ft_cast_size_di(st_format *, va_list, int64_t *);
-void ft_cast_size_poxu(st_format *, va_list, uint64_t *);
 //
 void ft_clean_struct(st_format *);
+//
+void ft_cast_size_di(st_format *, va_list, int64_t *);
+void ft_cast_size_poxu(st_format *, va_list, uint64_t *);
 //
 char *is_flag(st_format *, char *);
 char *is_width(st_format *, char *, va_list);
@@ -162,13 +163,18 @@ char *is_type(char *, char *);
 size_t out_per(st_format *);
 size_t out_str(st_format *, char *);
 size_t out_chr(st_format *, int);
-size_t out_bits(st_format *, unsigned long long);
-size_t out_num(st_format *spec, uint64_t, int);
+size_t out_bits(st_format *, uint64_t);
+size_t out_num(st_format *, uint64_t, int);
+size_t out_float(char *, char *);
 //
+void parse_bdollar(int, va_list);
+char *parse_bcolor(char *);
 char *parse_specifiers(st_format *, char *, va_list);
-char *parse_color(char *);
 size_t parse_output(st_format *, va_list, va_list);
-size_t parse_dipoxu(st_format *, unsigned long long);
+size_t parse_dipoxu(st_format *, uint64_t);
+size_t parse_float(st_format *, long double);
+char *parse_float_number(long double ld, int, char);
+char *parse_float_flag(st_format *, int);
 //
 int ft_printf(const char *, ...);
 
@@ -176,7 +182,6 @@ int ft_printf(const char *, ...);
 char *itobs(unsigned long long n, char *ps);
 char *ft_str_multiply(char *str1, char *str2, int len1, int len2, char *tmp);
 char *ft_pow(char *res, int pow);
-char *parse_double(long double ld, int pres);
 char *parse_mantis(unsigned long mantisa);
 char *parse_exponent(unsigned short exponent);
 char *ft_strjoin(char const *s1, char const *s2);

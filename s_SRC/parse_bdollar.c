@@ -12,34 +12,12 @@
 
 #include "../h_HEAD/header.h"
 
-char	*parse_color(char *str)
+void	parse_bdollar(int dollar, va_list vl)
 {
-	int		i;
-
-	i = 0;
-	str++;
-	while (i < COLOR_SIZE)
+	while (dollar > 1)
 	{
-		if (*str == COLOR[i][0])
-		{
-			if (ft_str_sym_cmp(str, COLOR[i], '}') == 1)
-			{	
-				write(1, OUT_COLOR[i], OUT_COLOR_POINT[i]);
-				i = COLOR_POINT[i];
-				break ;
-			}
-			else
-				return (--str);
-		}
-		i++;
+		va_arg(vl, int);
+		dollar--;
 	}
-	return (str + i);
+	return ;
 }
-
-// printf("\033[38;5;196m"); //red
-// printf("\033[38;5;48m"); //green
-// printf("\033[38;5;69m"); //blue
-// printf("\033[38;5;226m"); //yellow;
-// printf("\033[38;5;172m"); //orange 208
-// printf("\033[38;5;205m"); //pink
-// printf("\033[1;3;4;95m\033[48;5;123m"); // neon

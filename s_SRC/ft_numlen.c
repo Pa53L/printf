@@ -19,10 +19,11 @@ int		ft_numlen(u_int64_t num, int base)
 	i = 0;
 	if (num == 0)
 		return (1);
-	while (num)
-	{
-		num /= base;
-		i++;
-	}
+	else
+		while (num)
+		{
+			num /= base;
+			i++;
+		}
 	return (i);
 }

@@ -27,7 +27,7 @@ int		ft_printf(const char *format, ...)
 	while (*str)
 	{
 		if (*str == '{')
-			str = parse_color(str);
+			str = parse_bcolor(str);
 		if (*str == '\0')
 			return (cnt);
 		else if (*str != '%')

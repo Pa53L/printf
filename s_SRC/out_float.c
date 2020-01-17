@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   out_str.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/15 20:18:41 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/11 19:32:33 by yshawn           ###   ########.fr       */
+/*   Created: 2020/01/13 23:56:42 by yshawn            #+#    #+#             */
+/*   Updated: 2020/01/13 23:57:01 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-size_t	ft_strlen(const char *s)
+size_t	out_float(char *float_str, char *float_flag)
 {
-	size_t i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	/*
+	if (spec->minus == 0)
+	{
+		write(1, tmp, strlen);
+	}
+	if (spec->sign)
+		write(1, "-", 1);
+	write(1, str, cnt);
+	if (spec->minus == 1)
+		write(1, tmp, strlen);
+	
+	if (str)
+		free(str);
+	if (tmp)
+		free(tmp);
+		
+	if (spec->minus == 0 && spec->sign)
+		strlen++;
+	return (tmp);
+    */
+   	return (0);
 }

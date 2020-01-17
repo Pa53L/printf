@@ -12,14 +12,26 @@
 
 #include "../h_HEAD/header.h"
 
-size_t	ft_strlen(const char *s)
+char	*parse_bcolor(char *str)
 {
-	size_t i;
+	int	i;
 
 	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
+	str++;
+	while (i < COLOR_SIZE)
+	{
+		if (*str == COLOR[i][0])
+		{
+			if (ft_str_sym_cmp(str, COLOR[i], '}'))
+			{	
+				write(1, OUT_COLOR[i], OUT_COLOR_POINT[i]);
+				i = COLOR_POINT[i];
+				break ;
+			}
+			else
+				return (--str);
+		}
 		i++;
-	return (i);
+	}
+	return (str + i);
 }

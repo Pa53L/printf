@@ -14,29 +14,20 @@
 
 size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 {
-	int						dollar;
 	char					*str;
 	int64_t					ival;
 	uint64_t				unval;
 	uint64_t				cnt;
-	long double					fval;
+	long double				fval;
 
 	cnt = 0;
 	ival = 0;
 	unval = 0;
-	dollar = 0;
 	str = NULL;
 
 	/* FOR $ */
 	if (spec->dollar > 1)
-	{
-		dollar = spec->dollar;
-		while (dollar > 1)
-		{
-			va_arg(vl, int);
-			dollar--;
-		}
-	}
+		parse_bdollar(spec->dollar, vl);
 
 	if (spec->type == 'c')
 	{
@@ -74,19 +65,17 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 		ft_cast_size_poxu(spec, vl, &unval);
 		cnt = parse_dipoxu(spec, unval);
 	}
-	/*
 	else if(spec->type =='f')
 	{
-		fval = (long double)va_arg(vl, double);
-		// printf("here: %Lf\n", fval);
-		if (spec->accur > 0)
-			str = parse_double(fval, spec->accur);
-		else
-			str = parse_double(fval, -1);
-		cnt = ft_strlen(str);
-		printf("%s", str);
+		//ft_cast_size_f();
+		fval = (long double)va_arg(vl, double); //must be in ft_cast_size_f
+		if (fval < 0)
+		{
+			fval = fval * (-1);
+			spec->sign = 1;
+		}
+		cnt = parse_float(spec, fval);
 	}
-	*/
 	else if (spec->type == 'b')
 	{
 		unval = va_arg(vl, unsigned long long);
@@ -98,9 +87,6 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 		return (0);
 
 	/* FOR $ */
-	if (spec->dollar == 0)
-		va_copy(fst_vl, vl);
-	else
-		va_copy(vl, fst_vl);
+	(spec->dollar == 0) ? va_copy(fst_vl, vl) : va_copy(vl, fst_vl);
 	return (cnt);
 }
