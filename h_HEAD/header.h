@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erodd <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:10:31 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/24 00:20:52 by yshawn           ###   ########.fr       */
+/*   Updated: 2020/01/17 19:25:37 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,5 +195,6 @@ char *make_dot(char *str, unsigned short exponent);
 char *make_dot_zero(char *str, unsigned short exponent);
 char *make_rounding(char *str, int pres);
 char *ft_rounding(char *str, int mem);
+char *ft_is_nan(unsigned long mantisa);
 
 #endif

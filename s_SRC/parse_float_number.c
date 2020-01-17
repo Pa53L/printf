@@ -12,6 +12,30 @@ char *parse_float_number(long double number, int pres, char sharp)
     //    return(inf_nan(d1.parts.mantisa));
     // printf("%lu\n", d1.parts.mantisa);
     // printf("IM HERE %hu\n", d1.parts.exponent);
+    // ZERO INF NAN
+    if (d1.parts.exponent == 32767)
+        return (ft_is_nan(d1.parts.mantisa));
+    if (d1.parts.exponent == 0 && d1.parts.exponent == 0)
+    {
+        if (pres == 0)
+            return ("0");
+        else
+            {
+                int g = 2;
+                if(!(full_str = (char *)malloc(sizeof(char) * (pres + 3))))
+                    return (NULL);
+                full_str[0] = '0';
+                full_str[1] = '.';
+                while (g < pres + 2)
+                {
+                    full_str[g] = '0';
+                    g++;
+                }
+                full_str[g] = '\0';
+                return (full_str);
+            }
+    }
+
     // КУСОК ПАРСА МАНТИССЫ
     str_right = (char *)malloc(sizeof(char) * 65);
     str_right = parse_mantis(d1.parts.mantisa);
@@ -45,6 +69,31 @@ char *parse_float_number(long double number, int pres, char sharp)
         full_str = ft_strjoin(full_str, ".");
     return (full_str);
 }
+
+//ZERO NAN INF
+char    *ft_is_nan(unsigned long mantisa)
+{
+    uint64_t head = (mantisa >> 62);
+    uint64_t tail = (mantisa << 2);
+
+    if (head == 0)
+    {
+        if (tail == 0)
+            return ("inf");
+        else
+            return ("nan");
+    }
+    else if ((head == 1) || (head == 3))
+        return ("nan");
+    else
+    {
+        if (tail == 0)
+            return ("inf");
+        else
+            return ("nan");
+    }
+}
+
 // ОКРУГЛЯЕМ ДО ЗАДАННОГО ЗНАЧЕНИЯ
 char *make_rounding(char *str, int pres)
 {
@@ -54,7 +103,6 @@ char *make_rounding(char *str, int pres)
     int i; // Считаем до точки и после точки
     int j;
     int mem;
-    int gg = pres;
     j = 0;
     i = 0;
     while (str[i] != '.')
@@ -72,6 +120,7 @@ char *make_rounding(char *str, int pres)
     }
     i--;
     (str[i] >= '5' ? (mem = 1) : (mem = 0));
+    //printf("HERE: %c\n", str[i]);
     tmp[i] = '\0';
     tmp = ft_rounding(tmp, mem);
     return (tmp);
@@ -282,16 +331,18 @@ char *ft_pow(char *res, int pow)
     }
     return (res);
 }
-char *ft_pow5(char *res, int pow)
+char *ft_pow5(char *res, int pow)  // 26 STRINGS
 {
     int len;
     int ret;
     int dec;
+    int j;
+    
     len = pow + 1;
     ret = 0;
     res[len] = '\0';
     res[len - 1] = '5';
-    int j = -1;
+    j = -1;
     while (j++ < (len - 2))
         res[j] = '0';
     while (pow > 1)
@@ -307,5 +358,6 @@ char *ft_pow5(char *res, int pow)
         res[len] = ret + '0';
         pow--;
     }
+    
     return (res);
 }
