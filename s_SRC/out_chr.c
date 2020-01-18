@@ -12,46 +12,38 @@
 
 #include "../h_HEAD/header.h"
 
-size_t		out_chr(st_format *spec, int ival)
+size_t		out_chr(st_format *spec, va_list vl)
 {
-	unsigned long	strlen;
-	unsigned long	i;
+	uint32_t		i;
+	char			ch;
 	char			*str;
 
-	strlen = spec->width;
-	if (strlen > 1)
+	ch = (char)va_arg(vl, int);
+	if (spec->width > 1)
 	{
-		str = (char*)malloc(sizeof(char) * (strlen));
-		if (!str)
+		if(!(str = (char*)malloc(sizeof(char) * (spec->width))))
 			return (0);
 	}
 	else
 	{
-		write(1, &ival, 1);
+		write(1, &ch, 1);
 		return (1);
 	}
-	str[strlen - 1] = '\0';
-	i = strlen - 1;
+	str[spec->width - 1] = '\0';
+	i = spec->width - 1;
 	if (spec->minus == 1)
 	{
 		while (i > 0)
-		{
-			str[i] = ' ';
-			i--;
-		}
+			str[i--] = ' ';
 	}
-	str[i] = ival;
-	i--;
+	str[i--] = ch;
 	if (spec->minus == 0)
 	{
 		while (i > 0)
-		{
-			str[i] = ' ';
-			i--;
-		}
+			str[i--] = ' ';
 		str[i] = ' ';
 	}
-	write(1, str, strlen);
+	write(1, str, spec->width);
 	free(str);
-	return (strlen);
+	return (spec->width);
 }

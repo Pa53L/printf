@@ -41,7 +41,7 @@
 				"neon\0\0", \
 				"eoc\0\0\0" \
 							}
-#define OUT_COLOR_POINT (int[COLOR_SIZE + 1]) {11, 11, 11, 11, 11, 11, 11, 4}
+#define OUT_COLOR_POINT (int[COLOR_SIZE + 1]) {11, 10, 10, 11, 11, 11, 11, 4}
 #define OUT_COLOR (char[COLOR_SIZE + 1][11]) { \
 				"\e[38;5;196m", \
 				"\e[38;5;48m\0", \
@@ -162,9 +162,9 @@ char *is_size(char *, char *);
 char *is_type(char *, char *);
 //
 size_t out_per(st_format *);
-size_t out_str(st_format *, char *);
-size_t out_chr(st_format *, int);
-size_t out_bits(st_format *, uint64_t);
+size_t out_str(st_format *, va_list);
+size_t out_chr(st_format *, va_list);
+size_t out_bits(st_format *, va_list);
 size_t out_num(st_format *, uint64_t, int);
 size_t out_float(char *, char *);
 //

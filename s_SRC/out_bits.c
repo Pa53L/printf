@@ -12,13 +12,15 @@
 
 #include "../h_HEAD/header.h"
 
-size_t		out_bits(st_format *spec, unsigned long long unval)
+size_t		out_bits(st_format *spec, va_list vl)
 {
 	int		strlen;
 	int		bit;
 	int		i;
 	char	*str;
+	uint64_t	unval;
 
+	unval = va_arg(vl, unsigned long long);
 	i = 0;
 	if (unval <= 0xFF)
 	{

@@ -1,3 +1,6 @@
-SRC_NAME += mix/000_launcher \
-mix/001_various_mix_simple \
-mix/002_various_mix_with_flags
+SRC_NAME += conv_c/000_launcher \
+conv_c/001_char_null \
+conv_c/002_ascii_chars \
+conv_c/003_ascii_chars_8_width \
+conv_c/004_ascii_chars_8_width_flag \
+conv_c/005_short_max

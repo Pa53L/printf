@@ -14,34 +14,29 @@
 
 size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 {
-	char					*str;
 	int64_t					ival;
 	uint64_t				unval;
-	uint64_t				cnt;
 	long double				fval;
+	uint64_t				cnt;
 
 	cnt = 0;
 	ival = 0;
 	unval = 0;
-	str = NULL;
 
 	/* FOR $ */
 	if (spec->dollar > 1)
 		parse_bdollar(spec->dollar, vl);
 
 	if (spec->type == 'c')
-	{
-		ival = va_arg(vl, int);
-		cnt = out_chr(spec, ival);
-	}
+		cnt = out_chr(spec, vl);
 	else if (spec->type == 's')
-	{
-		str = va_arg(vl, char *);
-		cnt = out_str(spec, str);
-	}
+		cnt = out_str(spec, vl);
+	else if (spec->type == '%')
+		cnt = out_per(spec);
+	else if (spec->type == 'b')
+		cnt = out_bits(spec, vl);
 	else if (spec->type == 'd' || spec->type == 'i')
 	{
-		spec->numsys = 10;
 		ft_cast_size_di(spec, vl, &ival);
 		if (ival < 0)
 		{
@@ -85,15 +80,6 @@ size_t	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 		}
 		cnt = parse_float(spec, fval);
 	}
-	else if (spec->type == 'b')
-	{
-		unval = va_arg(vl, unsigned long long);
-		cnt = out_bits(spec, unval);
-	}
-	else if (spec->type == '%')
-		cnt = out_per(spec);
-	else if (spec->type == '\0')
-		return (0);
 
 	/* FOR $ */
 	(spec->dollar == 0) ? va_copy(fst_vl, vl) : va_copy(vl, fst_vl);

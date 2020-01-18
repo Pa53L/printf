@@ -12,14 +12,16 @@
 
 #include "../h_HEAD/header.h"
 
-size_t		out_str(st_format *spec, char *str)
+size_t		out_str(st_format *spec, va_list vl)
 {
 	int		tmp_len;
 	int		width;
 	int		strlen;
 	int		i;
 	char	*strnew;
+	char *str;
 
+	str = va_arg(vl, char *);
 	if (!str)
 		str = NULL_STRING;
 	strlen = ft_strlen(str);
