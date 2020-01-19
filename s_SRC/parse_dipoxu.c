@@ -12,15 +12,27 @@
 
 #include "../h_HEAD/header.h"
 
-size_t	parse_dipoxu(st_format *spec, unsigned long long ival)
+size_t	parse_dipoxu(st_format *spec, va_list vl)
 {
 	int len;
+	int64_t					ival;
+	uint64_t				unval;
 	size_t tmp_len;
 
 	tmp_len = 0;
+	ival = 0;
+	unval = 0;
+
+	if (spec->type == 'd' || spec->type == 'i')
+	{
+		ft_cast_size_di(spec, vl, &ival);
+		(ival < 0) ? (unval = ival * (-1)) : (unval = ival);
+	}
+	else
+		ft_cast_size_poxu(spec, vl, &unval);
 
 	/* start of parse format */
-	len = ft_numlen(ival, spec->numsys);
+	len = ft_numlen(unval, spec->numsys);
 	/* ZERO */
 	if (spec->zero)
 	{
@@ -30,7 +42,7 @@ size_t	parse_dipoxu(st_format *spec, unsigned long long ival)
 	/* ACCUR */
 	if (spec->accur >= 0)
 	{
-		if (spec->accur == 0 && ival == 0)
+		if (spec->accur == 0 && unval == 0)
 			len = 0;
 		if (spec->accur > len)
 			spec->accur = spec->accur - len;
@@ -42,12 +54,12 @@ size_t	parse_dipoxu(st_format *spec, unsigned long long ival)
 	{
 		if (spec->type == 'o')
 		{
-			if (ival == 0 && spec->accur != 0)
+			if (unval == 0 && spec->accur != 0)
 				spec->sharp = 0;
 			else
 				spec->sharp = 1;
 		}
-		if ((spec->accur == 0 && ival == 0 && spec->type != 'o') || (ival == 0 && spec->type != 'o') || (spec->accur > 0 && spec->type == 'o'))
+		if ((spec->accur == 0 && unval == 0 && spec->type != 'o') || (unval == 0 && spec->type != 'o') || (spec->accur > 0 && spec->type == 'o'))
 			spec->sharp = 0;
 		if (spec->type == 'p')
 			spec->sharp = 2;
@@ -81,6 +93,6 @@ size_t	parse_dipoxu(st_format *spec, unsigned long long ival)
 	}
 	/* end of parse format */
 
-	tmp_len = out_num(&spec[0], ival, len);
+	tmp_len = out_num(&spec[0], unval, len);
 	return (tmp_len);
 }

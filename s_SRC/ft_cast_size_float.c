@@ -12,20 +12,26 @@
 
 #include "../h_HEAD/header.h"
 
-void	ft_cast_size_di(st_format *spec, va_list ap, int64_t *ival)
+void	ft_cast_size_float(st_format *spec, va_list vl, long double *fval)
 {
-	if (spec->size == 0)
-		*ival = va_arg(ap, int);
-	else if (spec->size == 1)
-		*ival = (short)va_arg(ap, int);
-	else if (spec->size == 2)
-		*ival = (char)va_arg(ap, int);
-	else if (spec->size == 3)
-		*ival = va_arg(ap, long);
-	else if (spec->size == 4)
-		*ival = va_arg(ap, long long);
-	spec->numsys = 10;
-	if (*ival < 0)
-		spec->sign = 1;
+	ld_cast sign_bit;
+	if (spec->size == 5)
+		*fval = va_arg(vl, long double);
+	else
+		*fval = (long double)va_arg(vl, double);
+
+	if (*fval == LDBL_MIN || *fval == -LDBL_MIN)
+	{
+		if (*fval == -LDBL_MIN)
+			spec->sign = 1;
+		*fval = (long double)0.0;
+	}
+	if (*fval <= 0)
+	{
+		sign_bit = (ld_cast){ .ld = *fval };
+		if (sign_bit.parts.sign & 1)
+			spec->sign = 1;
+		*fval = *fval * (-1);
+	}
 	return;
 }

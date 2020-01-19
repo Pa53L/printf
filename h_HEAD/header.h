@@ -154,6 +154,7 @@ void ft_clean_struct(st_format *);
 //
 void ft_cast_size_di(st_format *, va_list, int64_t *);
 void ft_cast_size_poxu(st_format *, va_list, uint64_t *);
+void ft_cast_size_float(st_format *, va_list, long double *);
 //
 char *is_flag(st_format *, char *);
 char *is_width(st_format *, char *, va_list);
@@ -161,19 +162,28 @@ char *is_accuracy(int *, char *, va_list);
 char *is_size(char *, char *);
 char *is_type(char *, char *);
 //
+void out_chr(st_format *, char *);
 size_t out_per(st_format *);
+size_t out_str(st_format *, va_list);
+size_t out_bits(st_format *, va_list);
+size_t out_num(st_format *, uint64_t, int);
+size_t out_float(char *, char *);
+//
+size_t parse_chr(st_format *, va_list);
+/*
 size_t out_str(st_format *, va_list);
 size_t out_chr(st_format *, va_list);
 size_t out_bits(st_format *, va_list);
 size_t out_num(st_format *, uint64_t, int);
 size_t out_float(char *, char *);
+*/
 //
 void parse_bdollar(int, va_list);
 char *parse_bcolor(char *);
 char *parse_specifiers(st_format *, char *, va_list);
 size_t parse_output(st_format *, va_list, va_list);
-size_t parse_dipoxu(st_format *, uint64_t);
-size_t parse_float(st_format *, long double);
+size_t parse_dipoxu(st_format *, va_list);
+size_t parse_float(st_format *, va_list);
 char *parse_float_number(long double ld, int, char);
 char *parse_float_flag(st_format *, int);
 //

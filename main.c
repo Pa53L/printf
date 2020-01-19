@@ -21,11 +21,14 @@ int		main()
    // printf("|||MINE: %d\n", ft_printf("%*3d", 5, 0));
    // printf("|||ORIGINAL: %d\n",    printf("%*3d", 5, 0));
    // printf("\n");
-   printf("|||MINE: %d\n", ft_printf("%Llf", 42.5));
-   printf("|||ORIGINAL: %d\n",    printf("%Llf", 42.5));
+   // printf("|||MINE: %d\n",     ft_printf("%-+f|%-f|%-#f|%f|%+#f|%+f", 0., 0., 0., 0., -0., -0));
+   // printf("|||ORIGINAL: %d\n",    printf("%-+f|%-f|%-#f|%f|%+#f|%+f", 0., 0., 0., 0., -0., -0));
+   // printf("\n");
+   // printf("|||MINE: %d\n",     ft_printf("%.f|%.f|%.f|%.f|%.f", 44.5, 44.4, 44.6, 44.50000000000001, 44.5 + 1e-52));
+   // printf("|||ORIGINAL: %d\n",    printf("%.f|%.f|%.f|%.f|%.f", 44.5, 44.4, 44.6, 44.50000000000001, 44.5 + 1e-52));
    printf("\n");
-   printf("|||MINE: %d\n", ft_printf("%c", -100));
-   printf("|||ORIGINAL: %d\n",    printf("%c", -100));
+   printf("|||MINE: %d\n",     ft_printf("%d", -10));
+   printf("|||ORIGINAL: %d\n",    printf("%d", -10));
    /*
    printf("|||MINE: %d\n", ft_printf("% 5.3f", 7.3));
    printf("|||ORIGINAL: %d\n",    printf("% 5.3f", 7.3));

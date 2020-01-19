@@ -24,10 +24,8 @@ char		*parse_float_flag(st_format *spec, int len_num)
 		(spec->width >= len_num) ? (spec->width -= len_num) : (spec->width = 0);
 	// printf("width: %d\n", spec->width);
 	if (spec->space)
-	{
 		if (spec->plus || spec->sign)
 			spec->space = 0;
-	}
 	if (spec->plus)
 		if (spec->sign == 1)
 			spec->plus = 0;

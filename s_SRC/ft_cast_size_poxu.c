@@ -26,5 +26,11 @@ void	ft_cast_size_poxu(st_format *spec, va_list ap, u_int64_t *ival)
 		*ival = va_arg(ap, unsigned long long);
 	else
 		*ival = va_arg(ap, unsigned int);
-	return ;
+	if (spec->type == 'u')
+		spec->numsys = 10;
+	else if (spec->type == 'o')
+		spec->numsys = 8;
+	else
+		spec->numsys = 16;
+	return;
 }

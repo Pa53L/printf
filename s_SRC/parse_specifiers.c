@@ -42,9 +42,7 @@ char	*is_width(st_format *spec, char *str, va_list vl)
 			spec->width = spec->width * (-1);
 		}
 		if (spec->width < 0)
-		{
 			spec->width = 0;
-		}
 		str++;
 	}
 	if (*str >= '1' && *str <= '9')
@@ -73,6 +71,8 @@ char	*is_accuracy(int *accur, char *str, va_list vl)
 		if ((*accur = va_arg(vl, int)) < 0)
 			*accur = -1;
 		str++;
+		while (*str >= '0' && *str <= '9')
+			str++;
 	}
 	else
 	{
@@ -148,17 +148,3 @@ char	*parse_specifiers(st_format *spec, char *str, va_list vl)
 		str = is_type(&spec->type, str);
 	return (str);
 }
-	/*
-	printf("----------------------\n");
-	printf("minus: %d\n", spec[0].minus);
-	printf("plus: %d\n", spec[0].plus);
-	printf("space: %d\n", spec[0].space);
-	printf("sharp: %d\n", spec[0].sharp);
-	printf("zero: %d\n", spec[0].zero);
-	printf("width: %d\n", spec[0].width);
-	printf("accuracy: %d\n", spec[0].accur);
-	printf("DOLLAR: %d\n", spec[0].dollar);
-	printf("size: %d\n", spec[0].size);
-	printf("type: %c\n", spec[0].type);
-	printf("----------------------\n");
-	*/

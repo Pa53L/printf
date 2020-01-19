@@ -12,23 +12,54 @@
 
 #include "../h_HEAD/header.h"
 
-void		out_chr(st_format *spec, char *str)
+size_t		parse_chr(st_format *spec, va_list vl)
 {
 	uint32_t		i;
+	char			ch;
+	char			*str;
 
-	i = 0;
-	str[spec->width] = '\0';
-	i = spec->width;
+	ch = (char)va_arg(vl, int);
+	if (spec->width > 1)
+	{
+		if (!(str = (char*)malloc(sizeof(char) * (spec->width))))
+			return (0);
+	}
+	else
+	{
+		write(1, &ch, 1);
+		return (1);
+	}
+
+	str[spec->width - 1] = '\0';
+	i = spec->width - 1;
 	if (spec->minus == 1)
+	{
 		while (i > 0)
 			str[i--] = ' ';
-	// str[i--] = ch;
+	}
+	str[i--] = ch;
 	if (spec->minus == 0)
 	{
 		while (i > 0)
 			str[i--] = ' ';
 		str[i] = ' ';
 	}
+
+	/*
+	str[--spec->width] = '\0';
+	i = spec->width;
+	if (spec->minus == 1)
+		while (i > 0)
+			str[i--] = ' ';
+	str[i--] = ch;
+	if (spec->minus == 0)
+	{
+		while (i > 0)
+			str[i--] = ' ';
+		str[i] = ' ';
+	}
+	*/
 	write(1, str, spec->width);
-	return ;
+	free(str);
+	return (spec->width);
 }

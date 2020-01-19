@@ -24,7 +24,8 @@ _OBJS = ft_strlen.o ft_numlen.o ft_itoabasex.o ft_atoi.o ft_str_sym_cmp.o \
 		parse_specifiers.o parse_output.o parse_dipoxu.o \
 		parse_float.o parse_float_number.o parse_float_flag.o \
 		parse_bcolor.o parse_bdollar.o \
-		ft_cast_size_di.o ft_cast_size_poxu.o \
+		parse_chr.o \
+		ft_cast_size_di.o ft_cast_size_poxu.o ft_cast_size_float.o \
 		ft_strdup.o ft_strjoin.o
 
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
