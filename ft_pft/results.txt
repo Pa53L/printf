@@ -1,0 +1,10 @@
+Test 2485 (nocrash_mandatory_f_size_LL) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%LLf", 42.5);}
+    SEGFAULT
+
+Test 2486 (nocrash_mandatory_f_size_Ll) : FAILED.
+    (nocrash test: automatically passes provided no unexpected failure)
+    First line of code: {return test("%Llf", 42.5);}
+    SEGFAULT
+

@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoabasex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 23:53:11 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/13 23:54:52 by yshawn           ###   ########.fr       */
+/*   Updated: 2020/01/20 23:46:36 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-void	ft_itoabasex(unsigned long long ival, char *str, int base, char type, int len)
+void ft_itoabasex(unsigned long long value, char *str, uint8_t base, char type, int len)
 {
-	while (ival > 0)
+	while (value > 0)
 	{
-		if (ival < base)
+		if (value < base)
 		{
 			if (type != 'X')
-				str[len] = ITOA[ival];
+				str[len] = ITOA[value];
 			else
-				str[len] = ITOAX[ival];
+				str[len] = ITOAX[value];
 			return ;
 		}
 		else
 		{
 			if (type != 'X')
-				str[len] = ITOA[ival % base];
+				str[len] = ITOA[value % base];
 			else
-				str[len] = ITOAX[ival % base];
+				str[len] = ITOAX[value % base];
 		}
-		ival = ival / base;
+		value = value / base;
 		len--;
 	}
 	return ;

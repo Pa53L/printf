@@ -6,7 +6,7 @@
 /*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:10:31 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/17 19:25:37 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/20 23:47:38 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,14 @@ typedef union {
 	} parts;
 } ld_cast;
 
+typedef struct mult
+{
+	int len1;
+	int len2;
+	char *right;
+	char *left;
+} t_mult;
+
 size_t ft_strlen(const char *);
 int ft_atoi(const char *);
 int ft_numlen(uint64_t, int);
@@ -191,13 +199,13 @@ int ft_printf(const char *, ...);
 
 // Ф-ции от П
 char *itobs(unsigned long long n, char *ps);
-char *ft_str_multiply(char *str1, char *str2, int len1, int len2, char *tmp);
+char	*ft_str_multiply(t_mult m, char *tmp);
 char *ft_pow(char *res, int pow);
 char *parse_mantis(unsigned long mantisa);
 char *parse_exponent(unsigned short exponent);
 char *ft_strjoin(char const *s1, char const *s2);
 char *ft_strdup(const char *s);
-void ft_itoabasex(unsigned long long value, char *str, int base, char type, int len);
+void ft_itoabasex(unsigned long long value, char *str, uint8_t base, char type, int len);
 char *make_mantisa(char *str, unsigned long mantisa);
 char *make_full_mantis(char *str, char *str2[]);
 char *ft_pow5(char *res, int pow);
@@ -206,5 +214,6 @@ char *make_dot_zero(char *str, unsigned short exponent);
 char *make_rounding(char *str, int pres);
 char *ft_rounding(char *str, int mem);
 char *ft_is_nan(unsigned long mantisa);
+char *ft_make_f_str(char *full, char *right, char *left);
 
 #endif
