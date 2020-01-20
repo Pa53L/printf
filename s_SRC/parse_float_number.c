@@ -6,7 +6,7 @@
 /*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 23:39:07 by erodd             #+#    #+#             */
-/*   Updated: 2020/01/21 00:13:50 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/21 00:25:58 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*parse_float_number(long double number, int pres, char sharp)
 	str_left = parse_exponent(d1.parts.exponent);
 	full_str = (char *)malloc(sizeof(char) * 5000);
 	full_str = ft_make_f_str(full_str, str_right, str_left);
-	//full_str[ft_strlen(str_left) + ft_strlen(str_right) - 3] = '\0';
 	if (number >= 1 || number <= -1)
 		full_str = make_dot(full_str, d1.parts.exponent);
 	else
