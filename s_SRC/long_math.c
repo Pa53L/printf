@@ -12,6 +12,29 @@
 
 #include "../h_HEAD/header.h"
 
+char	*str_nan_inf(char ch)
+{
+	char *str;
+
+	if (!(str = (char *)malloc(sizeof(char) * 4)))
+		return (NULL);
+	if (ch == 'i')
+	{
+		str[0] = 'i';
+		str[1] = 'n';
+		str[2] = 'f';
+		str[3] = '\0';
+	}
+	else if (ch == 'n')
+	{
+		str[0] = 'n';
+		str[1] = 'a';
+		str[2] = 'n';
+		str[3] = '\0';
+	}
+	return (str);
+}
+
 char	*ft_is_nan(unsigned long mantisa)
 {
 	uint64_t head;
@@ -22,18 +45,18 @@ char	*ft_is_nan(unsigned long mantisa)
 	if (head == 0)
 	{
 		if (tail == 0)
-			return ("inf");
+			return (str_nan_inf('i'));
 		else
-			return ("nan");
+			return (str_nan_inf('n'));
 	}
 	else if ((head == 1) || (head == 3))
-		return ("nan");
+		return (str_nan_inf('n'));
 	else
 	{
 		if (tail == 0)
-			return ("inf");
+			return (str_nan_inf('i'));
 		else
-			return ("nan");
+			return (str_nan_inf('n'));
 	}
 }
 

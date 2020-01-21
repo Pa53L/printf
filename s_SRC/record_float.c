@@ -52,15 +52,15 @@ void		out_float_minus(st_format *spec, char *str_flag, char *str_number)
 	return ;
 }
 
-void		record_float(st_format *spec, char **str_flag, char **str_number)
+void		record_float(st_format *spec, char *str_flag, char *str_number)
 {
 	if (spec->minus == 0)
-		out_float(spec, *str_flag, *str_number);
+		out_float(spec, str_flag, str_number);
 	else
-		out_float_minus(spec, *str_flag, *str_number);
-	if (*str_flag)
-		free(*str_flag);
-	if (*str_number)
-		free(*str_number);
+		out_float_minus(spec, str_flag, str_number);
+	if (str_flag)
+		free(str_flag);
+	if (str_number)
+		free(str_number);
 	return ;
 }

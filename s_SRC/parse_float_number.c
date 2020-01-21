@@ -28,6 +28,10 @@ char	*parse_float_number(long double number, int pres, char sharp)
 	str_right = parse_mantis(d1.parts.mantisa);
 	str_left = parse_exponent(d1.parts.exponent);
 	full_str = ft_make_f_str(full_str, str_right, str_left);
+	if (str_right)
+		free(str_right);
+	if (str_left)
+		free(str_left);
 	if (number >= 1 || number <= -1)
 		full_str = make_dot(full_str, d1.parts.exponent);
 	else
@@ -47,22 +51,12 @@ char	*ft_make_f_str(char *full, char *right, char *left)
 
 	k = -1;
 	ft_clean_mult(&m);
-	if(!(full = (char *)malloc(sizeof(char) * 5000)))
+	if (!(full = (char *)malloc(sizeof(char) * 5000)))
 		return (NULL);
 	if (ft_strlen(left) < ft_strlen(right))
-	{
-		m.str2 = left;
-		m.str1 = right;
-		m.len1 = ft_strlen(left) - 1;
-		m.len2 = ft_strlen(right) - 1;
-	}
+		fill_rigth_left(&m, left, right);
 	else
-	{
-		m.str2 = right;
-		m.str1 = left;
-		m.len1 = ft_strlen(right) - 1;
-		m.len2 = ft_strlen(left) - 1;
-	}
+		fill_rigth_left(&m, right, left);
 	while (++k < (m.len1 + m.len2))
 		full[k] = '0';
 	full = ft_str_multiply(&m, full);
@@ -76,11 +70,7 @@ char	*ft_zero_str(int pres, char sharp, char *full_str)
 
 	g = 2;
 	if (pres == 0)
-	{
-		if (sharp)
-			return ("0.");
-		return ("0");
-	}
+		return (str_no_prec(sharp));
 	else
 	{
 		if (!(full_str = (char *)malloc(sizeof(char) * (pres + 3))))
@@ -88,10 +78,7 @@ char	*ft_zero_str(int pres, char sharp, char *full_str)
 		full_str[0] = '0';
 		full_str[1] = '.';
 		while (g < (pres + 2))
-		{
-			full_str[g] = '0';
-			g++;
-		}
+			full_str[g++] = '0';
 		full_str[g] = '\0';
 		return (full_str);
 	}
@@ -105,16 +92,22 @@ char	*parse_exponent(unsigned short exponent)
 	pow = exponent - 16383;
 	if (pow > 0)
 	{
-		if(!(str = (char *)malloc(sizeof(char) * (pow * 0.301 + 1))))
+		if (!(str = (char *)malloc(sizeof(char) * (pow * 0.301 + 1))))
 			return (NULL);
 		str = ft_pow(str, pow);
 	}
 	else if (pow == 0)
-		return ("1");
+	{
+		if (!(str = (char *)malloc(sizeof(char) * 2)))
+			return (NULL);
+		str[0] = '1';
+		str[1] = '\0';
+		return (str);
+	}
 	else
 	{
 		pow = pow * -1;
-		if(!(str = (char *)malloc(sizeof(char) * (pow + 1))))
+		if (!(str = (char *)malloc(sizeof(char) * (pow + 1))))
 			return (NULL);
 		str = ft_pow5(str, pow);
 	}

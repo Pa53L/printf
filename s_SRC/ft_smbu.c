@@ -73,3 +73,34 @@ char	*itobs(unsigned long long n, char *ps)
 	ps[size] = '\0';
 	return (ps);
 }
+
+void	fill_rigth_left(t_mult *m, char *a, char *b)
+{
+	m->str2 = a;
+	m->str1 = b;
+	m->len1 = ft_strlen(a) - 1;
+	m->len2 = ft_strlen(b) - 1;
+}
+
+char	*str_no_prec(char sharp)
+{
+	char	*full_str;
+
+	full_str = NULL;
+	if (sharp)
+	{
+		if (!(full_str = (char *)malloc(sizeof(char) * 3)))
+			return (NULL);
+		full_str[0] = '0';
+		full_str[1] = '.';
+		full_str[2] = '\0';
+	}
+	else
+	{
+		if (!(full_str = (char *)malloc(sizeof(char) * 2)))
+			return (NULL);
+		full_str[0] = '0';
+		full_str[1] = '\0';
+	}
+	return (full_str);
+}

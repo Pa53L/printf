@@ -19,6 +19,7 @@ char	*make_rounding(char *str, int pres)
 	if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(str) + pres + 1))))
 		return (NULL);
 	tmp = ft_fill_str(str, tmp, pres);
+	free(str);
 	return (tmp);
 }
 
@@ -53,6 +54,7 @@ char	*ft_fill_str(char *str, char *tmp, int pres)
 char	*ft_rounding(char *str, int mem)
 {
 	int i;
+	char *new_str;
 
 	i = ft_strlen(str) - 1;
 	while (i >= 0)
@@ -73,9 +75,13 @@ char	*ft_rounding(char *str, int mem)
 		else
 			break ;
 	}
+	new_str = str;
 	if (i == -1 && mem == 1)
-		str = ft_strjoin("1", str);
-	return (str);
+	{
+		new_str = ft_strjoin("1", str);
+		free(str);
+	}
+	return (new_str);
 }
 
 char	*make_dot(char *str, unsigned short exponent)
@@ -97,6 +103,7 @@ char	*make_dot(char *str, unsigned short exponent)
 	j++;
 	while (str[i] != '\0')
 		tmp[j++] = str[i++];
+	free(str);
 	return (tmp);
 }
 
@@ -119,5 +126,6 @@ char	*make_dot_zero(char *str, unsigned short exponent)
 		i++;
 		j++;
 	}
+	free(str);
 	return (tmp);
 }

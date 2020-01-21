@@ -50,6 +50,6 @@ int		parse_float(st_format *spec, va_list vl)
 	parse_float_nan_inf(spec, *str_number);
 	str_flag = parse_float_flag(spec, len_num);
 	len_flag = ft_strlen(str_flag);
-	record_float(spec, &str_flag, &str_number);
+	record_float(spec, str_flag, str_number);
 	return (len_num + len_flag + (spec->sign | spec->plus) + spec->space);
 }

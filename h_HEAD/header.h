@@ -210,7 +210,7 @@ char *parse_float_number(long double ld, int, char);
 void parse_float_nan_inf(st_format *, char);
 char *parse_float_flag(st_format *, int);
 int parse_float_flag_2(st_format *, int);
-void record_float(st_format *, char **, char **);
+void record_float(st_format *, char *, char *);
 void out_float(st_format *, char *, char *);
 void out_float_minus(st_format *, char *, char *);
 //
@@ -237,6 +237,8 @@ char *ft_is_nan(unsigned long mantisa);
 char *ft_make_f_str(char *full, char *right, char *left);
 void    ft_clean_mult(t_mult *m);
 char *ft_zero_str(int pres, char sharp, char *full_str);
+void	fill_rigth_left(t_mult *, char *, char *);
+char *str_no_prec(char);
 char *ft_fill_str(char *str, char *tmp, int pres);
 
 #endif

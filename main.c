@@ -14,9 +14,11 @@
 
 int main(int ac, char **av)
 {
-   // printf("|||MINE: %d\n",     ft_printf("%.0Lf", LDBL_MIN));
-   // printf("|||ORIGINAL: %d\n",    printf("%.0Lf", LDBL_MIN));
-   ft_printf("|||MINE: %d\n",     ft_printf("%.20Lf", 10.5));
+   printf("|||MINE: %d\n",     ft_printf("%f|%-f|%+f|% f|%#f|%0f", DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX));
+   printf("|||ORIGINAL: %d\n",    printf("%f|%-f|%+f|% f|%#f|%0f", DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX));
+   printf("|||MINE: %d\n",     ft_printf("this %f float", 1.5));
+   printf("|||ORIGINAL: %d\n",    printf("this %f float", 1.5));
+   // ft_printf("|||MINE: %d\n",     ft_printf("%.20Lf", 10.5));
    // printf("|||ORIGINAL: %d\n",    printf("%.20Lf", 10.5));
    // printf("|||ORIGINAL: %d\n",    printf("%-12c", 0, 0, 0, 0));
    // printf("\n");
