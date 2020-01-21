@@ -23,7 +23,7 @@ char	*parse_bcolor(char *str)
 		if (*str == COLOR[i][0])
 		{
 			if (ft_str_sym_cmp(str, COLOR[i], '}'))
-			{	
+			{
 				write(1, OUT_COLOR[i], OUT_COLOR_POINT[i]);
 				i = COLOR_POINT[i];
 				return (str + i);

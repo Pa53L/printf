@@ -21,9 +21,9 @@
 #include <limits.h> //DELETE THIS
 #include <float.h> //DELETE THIS
 #include <math.h> //DELETE THIS
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
+# include <sys/types.h> //DELETE THIS
+# include <sys/stat.h> //DELETE THIS
+# include <fcntl.h> //DELETE THIS
 
 #define TYPES_SIZE 12
 #define BLYAT_SIZE 5
@@ -54,7 +54,7 @@
 				"\e[38;5;123m", \
 				"\e[0m\0\0\0\0\0\0\0" \
 							}
-#define DEG_ARR (char[64][65]) { \
+#define DG (char[64][65]) { \
 	"1000000000000000000000000000000000000000000000000000000000000000", \
 	"0500000000000000000000000000000000000000000000000000000000000000", \
 	"0250000000000000000000000000000000000000000000000000000000000000", \
@@ -126,7 +126,7 @@ typedef struct struct_specifer
 	int accur;
 	int dollar;
 	char sign;
-	char numsys;
+	char base;
 	char minus;
 	char plus;
 	char space;
@@ -155,16 +155,15 @@ typedef struct mult
 } t_mult;
 
 typedef int (*FUN)(st_format *, va_list);
-#define BLYAT (FUN[6]) {parse_chr, parse_str, out_per, parse_bit, parse_float, parse_dipoxu}
+#define BLYAT (FUN[6]) {parse_chr, parse_str, parse_per, parse_bit, parse_float, parse_dipoxu}
 
-void bar();
-void foo();
 int ft_atoi(const char *);
 size_t ft_strlen(const char *);
 int ft_numlen(uint64_t, int);
 int	ft_str_sym_cmp(char *str_dad, char *str_son, char ch);
 //
 void ft_clean_struct(st_format *);
+void ft_clean_mult(t_mult *);
 //
 void ft_cast_size_di(st_format *, va_list, int64_t *);
 void ft_cast_size_poxu(st_format *, va_list, uint64_t *);
@@ -178,35 +177,55 @@ char *is_type(char *, char *);
 //
 int parse_chr(st_format *, va_list);
 int parse_bit(st_format *, va_list);
-size_t out_per(st_format *, va_list);
-size_t parse_str(st_format *, va_list);
-size_t out_num(st_format *, uint64_t, int);
-size_t out_float(char *, char *);
+int parse_per(st_format *, va_list);
+int parse_str(st_format *, va_list);
+int parse_num(st_format *, uint64_t, int);
 //
 char *record_chr(st_format *, char *, char);
+char *record_str(st_format *, char *, int, int);
 char *record_bit(st_format *, char *, int, uint64_t);
+char *record_per(st_format *, int);
 // char *record_chr(st_format *, char *, char);
+//
+int pcomic_i_num(st_format *, char *, uint64_t, int);
+void record_sharp(st_format *, char *, int *);
+void record_sign(st_format *, char *, int *);
+void record_num(st_format *, char *, int, uint64_t);
+void record_minus_num(st_format *, char *, int, uint64_t);
 //
 void parse_bdollar(int, va_list);
 char *parse_bcolor(char *);
 char *parse_specifiers(st_format *, char *, va_list);
-size_t parse_output(st_format *, va_list, va_list);
-size_t parse_dipoxu(st_format *, va_list);
-uint64_t parse_float(st_format *, va_list);
+int parse_output(st_format *, va_list, va_list);
+int parse_dipoxu(st_format *, va_list);
+void parse_dipoxu_cases(st_format *, uint64_t, int *);
+void parse_dipoxu_sharp(st_format *, uint64_t);
+void parse_dipoxu_space(st_format *, int);
+void parse_dipoxu_accur(st_format *, uint64_t, int *);
+void parse_dipoxu_width(st_format *, int);
+void parse_dipoxu_plus(st_format *);
+//
+int parse_float(st_format *, va_list);
 char *parse_float_number(long double ld, int, char);
+void parse_float_nan_inf(st_format *, char);
 char *parse_float_flag(st_format *, int);
+int parse_float_flag_2(st_format *, int);
+void record_float(st_format *, char **, char **);
+void out_float(st_format *, char *, char *);
+void out_float_minus(st_format *, char *, char *);
 //
 int ft_printf(const char *, ...);
-
-// Ф-ции от П
+uint64_t printf_body(st_format *, char *, va_list, va_list);
+void printf_printf(char *, uint64_t *);
+//
+void ft_itoabasex(st_format *, uint64_t, char *, int);
 char *itobs(unsigned long long n, char *ps);
-char *ft_str_multiply(t_mult *m, char *tmp);
+char    *ft_str_multiply(t_mult *m, char *tmp);
 char *ft_pow(char *res, int pow);
 char *parse_mantis(unsigned long mantisa);
 char *parse_exponent(unsigned short exponent);
 char *ft_strjoin(char const *s1, char const *s2);
 char *ft_strdup(const char *s);
-void ft_itoabasex(uint64_t, char *, int, char, int);
 char *make_mantisa(char *str, unsigned long mantisa);
 char *make_full_mantis(char *str, char *str2[]);
 char *ft_pow5(char *res, int pow);
@@ -216,5 +235,8 @@ char *make_rounding(char *str, int pres);
 char *ft_rounding(char *str, int mem);
 char *ft_is_nan(unsigned long mantisa);
 char *ft_make_f_str(char *full, char *right, char *left);
+void    ft_clean_mult(t_mult *m);
+char *ft_zero_str(int pres, char sharp, char *full_str);
+char *ft_fill_str(char *str, char *tmp, int pres);
 
 #endif

@@ -12,87 +12,43 @@
 
 #include "../h_HEAD/header.h"
 
-size_t	parse_dipoxu(st_format *spec, va_list vl)
+void	parse_dipoxu_case(st_format *spec, uint64_t unval, int *len)
 {
-	int len;
-	int64_t					ival;
-	uint64_t				unval;
-	size_t tmp_len;
+	if (spec->zero)
+		if (spec->accur >= 0)
+			spec->zero = 0;
+	if (spec->accur >= 0)
+		parse_dipoxu_accur(spec, unval, len);
+	if (spec->sharp || spec->type == 'p')
+		parse_dipoxu_sharp(spec, unval);
+	if (spec->plus)
+		parse_dipoxu_plus(spec);
+	if (spec->space)
+		parse_dipoxu_space(spec, *len);
+	if (spec->width)
+		parse_dipoxu_width(spec, *len);
+	return ;
+}
 
-	tmp_len = 0;
+int		parse_dipoxu(st_format *spec, va_list vl)
+{
+	int			len;
+	int64_t		ival;
+	uint64_t	unval;
+
 	ival = 0;
 	unval = 0;
-
 	if (spec->type == 'd' || spec->type == 'i')
 	{
 		ft_cast_size_di(spec, vl, &ival);
-		(ival < 0) ? (unval = ival * (-1)) : (unval = ival);
+		if (ival < 0)
+			(unval = ival * (-1));
+		else
+			(unval = ival);
 	}
 	else
 		ft_cast_size_poxu(spec, vl, &unval);
-
-	/* start of parse format */
-	len = ft_numlen(unval, spec->numsys);
-	/* ZERO */
-	if (spec->zero)
-	{
-		if (spec->accur >= 0)
-			spec->zero = 0;
-	}
-	/* ACCUR */
-	if (spec->accur >= 0)
-	{
-		if (spec->accur == 0 && unval == 0)
-			len = 0;
-		if (spec->accur > len)
-			spec->accur = spec->accur - len;
-		else
-			spec->accur = 0;
-	}
-	/* SHARP EBANYI */
-	if (spec->sharp || spec->type == 'p')
-	{
-		if (spec->type == 'o')
-		{
-			if (unval == 0 && spec->accur != 0)
-				spec->sharp = 0;
-			else
-				spec->sharp = 1;
-		}
-		if ((spec->accur == 0 && unval == 0 && spec->type != 'o') || (unval == 0 && spec->type != 'o') || (spec->accur > 0 && spec->type == 'o'))
-			spec->sharp = 0;
-		if (spec->type == 'p')
-			spec->sharp = 2;
-	}
-	/* PLUS */
-	if (spec->plus)
-	{
-		if (spec->type == 'u')
-			spec->plus = 0;
-		if (spec->sign == 1)
-			spec->plus = 0;
-	}
-	/* SPACE */
-	if (spec->space)
-	{
-		if (spec->type == 'u')
-			spec->space = 0;
-		if (spec->plus || spec->sign)
-			spec->space = 0;
-		if (spec->width > len + spec->accur && spec->accur != -1 && spec->minus == 0 && spec->zero == 0)
-			spec->space = 0;
-	}
-	/* WIDTH */
-	if (spec->width)
-	{
-		spec->width = spec->width - spec->sign - spec->space - spec->plus - spec->sharp - len;
-		if (spec->accur > 0)
-			spec->width = spec->width - spec->accur;
-		if (spec->width <= 0)
-			spec->width = 0;
-	}
-	/* end of parse format */
-
-	tmp_len = out_num(&spec[0], unval, len);
-	return (tmp_len);
+	len = ft_numlen(unval, spec->base);
+	parse_dipoxu_case(spec, unval, &len);
+	return (parse_num(spec, unval, len));
 }

@@ -12,15 +12,8 @@
 
 #include "../h_HEAD/header.h"
 
-char		*parse_float_flag(st_format *spec, int len_num)
+int			parse_float_flag_2(st_format *spec, int len_num)
 {
-	uint64_t	i;
-	int 		strlen;
-	char		*str_flag;
-
-	i = 0;
-	strlen = 0;
-	str_flag = NULL;
 	if (spec->width)
 		(spec->width >= len_num) ? (spec->width -= len_num) : (spec->width = 0);
 	if (spec->space)
@@ -32,19 +25,30 @@ char		*parse_float_flag(st_format *spec, int len_num)
 	if (spec->zero)
 		if (spec->minus)
 			spec->zero = 0;
-	strlen = spec->width - spec->plus - spec->sign - spec->space;
+	return (spec->width - spec->plus - spec->sign - spec->space);
+}
+
+char		*parse_float_flag(st_format *spec, int len_num)
+{
+	uint64_t	i;
+	int			strlen;
+	char		*str_flag;
+
+	i = 0;
+	str_flag = NULL;
+	strlen = parse_float_flag_2(spec, len_num);
 	if (strlen > 0)
 	{
-		if(!(str_flag = (char *)malloc(sizeof(char) * (strlen + 1))))
+		if (!(str_flag = (char *)malloc(sizeof(char) * (strlen + 1))))
 			return (NULL);
 	}
 	else
 		return (NULL);
 	str_flag[strlen] = '\0';
 	while (i < strlen)
-	{
-		(spec->zero == 1) ? (str_flag[i] = '0') : (str_flag[i] = ' ');
-		i++;
-	}
+		if (spec->zero == 1)
+			str_flag[i++] = '0';
+		else
+			(str_flag[i++] = ' ');
 	return (str_flag);
 }

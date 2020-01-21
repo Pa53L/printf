@@ -18,7 +18,7 @@ void	ft_clean_struct(st_format *spec)
 	spec->accur = -1;
 	spec->dollar = 0;
 	spec->sign = 0;
-	spec->numsys = 0;
+	spec->base = 0;
 	spec->minus = 0;
 	spec->plus = 0;
 	spec->space = 0;
