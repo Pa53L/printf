@@ -27,5 +27,5 @@ void	ft_cast_size_di(st_format *spec, va_list ap, int64_t *ival)
 	spec->numsys = 10;
 	if (*ival < 0)
 		spec->sign = 1;
-	return;
+	return ;
 }

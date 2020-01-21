@@ -32,5 +32,5 @@ void	ft_cast_size_poxu(st_format *spec, va_list ap, u_int64_t *ival)
 		spec->numsys = 8;
 	else
 		spec->numsys = 16;
-	return;
+	return ;
 }

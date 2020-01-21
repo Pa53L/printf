@@ -6,7 +6,7 @@
 /*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:10:31 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/21 02:20:39 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/17 19:25:37 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@
 #include <limits.h> //DELETE THIS
 #include <float.h> //DELETE THIS
 #include <math.h> //DELETE THIS
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
-#define TYPES_SIZE 11
-#define TYPES (char[TYPES_SIZE + 1]) {'c', 's', 'd', 'i', 'u', 'o', 'p', 'x', 'X', 'f', 'b', '\0'}
-#define ITOA (char[17]) {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', \
-						'a', 'b', 'c', 'd', 'e', 'f', '\0'}
-#define ITOAX (char[17]) {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', \
-						'A', 'B', 'C', 'D', 'E', 'F', '\0'}
+#define TYPES_SIZE 12
+#define BLYAT_SIZE 5
+#define TYPES (char[TYPES_SIZE + 1]) {'c', 's', '%', 'b', 'f', 'd', 'i', 'u', 'o', 'p', 'x', 'X', '\0'}
+#define IT (char[17]) {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', '\0'}
+#define ITX (char[17]) {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', '\0'}
 #define NULL_STRING (char[7]) {'(', 'n', 'u', 'l', 'l', ')', '\0'}
 #define COLOR_SIZE 8
 #define COLOR_POINT (int[COLOR_SIZE + 1]) {4, 6, 5, 7, 7, 5, 5, 4}
@@ -118,7 +120,6 @@
 	"0000000000000000000216840434497100886801490560173988342285156250", \
 	"0000000000000000000108420217248550443400745280086994171142578125"  \
 }
-
 typedef struct struct_specifer
 {
 	int width;
@@ -153,8 +154,13 @@ typedef struct mult
 	char *str2;
 } t_mult;
 
-size_t ft_strlen(const char *);
+typedef int (*FUN)(st_format *, va_list);
+#define BLYAT (FUN[6]) {parse_chr, parse_str, out_per, parse_bit, parse_float, parse_dipoxu}
+
+void bar();
+void foo();
 int ft_atoi(const char *);
+size_t ft_strlen(const char *);
 int ft_numlen(uint64_t, int);
 int	ft_str_sym_cmp(char *str_dad, char *str_son, char ch);
 //
@@ -170,28 +176,23 @@ char *is_accuracy(int *, char *, va_list);
 char *is_size(char *, char *);
 char *is_type(char *, char *);
 //
-void out_chr(st_format *, char *);
-size_t out_per(st_format *);
-size_t out_str(st_format *, va_list);
-size_t out_bits(st_format *, va_list);
+int parse_chr(st_format *, va_list);
+int parse_bit(st_format *, va_list);
+size_t out_per(st_format *, va_list);
+size_t parse_str(st_format *, va_list);
 size_t out_num(st_format *, uint64_t, int);
 size_t out_float(char *, char *);
 //
-size_t parse_chr(st_format *, va_list);
-/*
-size_t out_str(st_format *, va_list);
-size_t out_chr(st_format *, va_list);
-size_t out_bits(st_format *, va_list);
-size_t out_num(st_format *, uint64_t, int);
-size_t out_float(char *, char *);
-*/
+char *record_chr(st_format *, char *, char);
+char *record_bit(st_format *, char *, int, uint64_t);
+// char *record_chr(st_format *, char *, char);
 //
 void parse_bdollar(int, va_list);
 char *parse_bcolor(char *);
 char *parse_specifiers(st_format *, char *, va_list);
 size_t parse_output(st_format *, va_list, va_list);
 size_t parse_dipoxu(st_format *, va_list);
-size_t parse_float(st_format *, va_list);
+uint64_t parse_float(st_format *, va_list);
 char *parse_float_number(long double ld, int, char);
 char *parse_float_flag(st_format *, int);
 //
@@ -199,13 +200,13 @@ int ft_printf(const char *, ...);
 
 // Ф-ции от П
 char *itobs(unsigned long long n, char *ps);
-char	*ft_str_multiply(t_mult *m, char *tmp);
+char *ft_str_multiply(t_mult *m, char *tmp);
 char *ft_pow(char *res, int pow);
 char *parse_mantis(unsigned long mantisa);
 char *parse_exponent(unsigned short exponent);
 char *ft_strjoin(char const *s1, char const *s2);
 char *ft_strdup(const char *s);
-void ft_itoabasex(unsigned long long value, char *str, uint8_t base, char type, int len);
+void ft_itoabasex(uint64_t, char *, int, char, int);
 char *make_mantisa(char *str, unsigned long mantisa);
 char *make_full_mantis(char *str, char *str2[]);
 char *ft_pow5(char *res, int pow);
@@ -215,6 +216,5 @@ char *make_rounding(char *str, int pres);
 char *ft_rounding(char *str, int mem);
 char *ft_is_nan(unsigned long mantisa);
 char *ft_make_f_str(char *full, char *right, char *left);
-void	ft_clean_mult(t_mult *m);
 
 #endif

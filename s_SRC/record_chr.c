@@ -12,26 +12,26 @@
 
 #include "../h_HEAD/header.h"
 
-int		parse_chr(st_format *spec, va_list vl)
+char	*record_chr(st_format *spec, char *str, char ch)
 {
-	char			ch;
-	char			*str;
+	int	i;
 
-	str = NULL;
-	ch = (char)va_arg(vl, int);
-	if (spec->width > 1)
+	i = 0;
+	if (!(str = (char *)malloc(sizeof(char) * (spec->width))))
+		return (NULL);
+	i = spec->width - 1;
+	str[i] = '\0';
+	if (spec->minus == 1)
 	{
-		str = record_chr(spec, str, ch);
-		if (str)
-		{
-			write(1, str, spec->width);
-			free(str);
-		}
+		while (i > 0)
+			str[i--] = ' ';
 	}
-	else
+	str[i--] = ch;
+	if (spec->minus == 0)
 	{
-		write(1, &ch, 1);
-		return (1);
+		while (i > 0)
+			str[i--] = ' ';
+		str[i] = ' ';
 	}
-	return (spec->width);
+	return (str);
 }

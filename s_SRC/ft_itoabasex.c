@@ -3,35 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoabasex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 23:53:11 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/20 23:46:36 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/13 23:54:52 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-void ft_itoabasex(unsigned long long value, char *str, uint8_t base, char type, int len)
+void	ft_itoabasex(uint64_t i, char *s, int base, char type, int len)
 {
-	while (value > 0)
+	while (i > 0)
 	{
-		if (value < base)
+		if (i < base)
 		{
-			if (type != 'X')
-				str[len] = ITOA[value];
-			else
-				str[len] = ITOAX[value];
+			(type != 'X') ? (s[len] = IT[i]) : (s[len] = ITX[i]);
 			return ;
 		}
 		else
-		{
-			if (type != 'X')
-				str[len] = ITOA[value % base];
-			else
-				str[len] = ITOAX[value % base];
-		}
-		value = value / base;
+			(type != 'X') ? (s[len] = IT[i % base]) : (s[len] = ITX[i % base]);
+		i = i / base;
 		len--;
 	}
 	return ;

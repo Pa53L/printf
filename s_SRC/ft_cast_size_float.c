@@ -14,12 +14,12 @@
 
 void	ft_cast_size_float(st_format *spec, va_list vl, long double *fval)
 {
-	ld_cast sign_bit;
+	ld_cast		sign_bit;
+
 	if (spec->size == 5)
 		*fval = va_arg(vl, long double);
 	else
 		*fval = (long double)va_arg(vl, double);
-
 	if (*fval == LDBL_MIN || *fval == -LDBL_MIN)
 	{
 		if (*fval == -LDBL_MIN)
@@ -33,5 +33,5 @@ void	ft_cast_size_float(st_format *spec, va_list vl, long double *fval)
 			spec->sign = 1;
 		*fval = *fval * (-1);
 	}
-	return;
+	return ;
 }

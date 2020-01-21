@@ -12,39 +12,52 @@
 
 #include "../h_HEAD/header.h"
 
-char		*parse_float_flag(st_format *spec, int len_num)
+size_t		parse_str(st_format *spec, va_list vl)
 {
-	uint64_t	i;
-	int 		strlen;
-	char		*str_flag;
+	int		tmp_len;
+	int		strlen;
+	int		i;
+	char	*strnew;
+	char 	*str;
 
-	i = 0;
-	strlen = 0;
-	str_flag = NULL;
-	if (spec->width)
-		(spec->width >= len_num) ? (spec->width -= len_num) : (spec->width = 0);
-	if (spec->space)
-		if (spec->plus || spec->sign)
-			spec->space = 0;
-	if (spec->plus)
-		if (spec->sign == 1)
-			spec->plus = 0;
-	if (spec->zero)
-		if (spec->minus)
-			spec->zero = 0;
-	strlen = spec->width - spec->plus - spec->sign - spec->space;
-	if (strlen > 0)
-	{
-		if(!(str_flag = (char *)malloc(sizeof(char) * (strlen + 1))))
-			return (NULL);
-	}
+	str = va_arg(vl, char *);
+	if (!str)
+		str = NULL_STRING;
+	strlen = ft_strlen(str);
+	if (spec->accur >= 0 && spec->accur < strlen)
+		strlen = spec->accur;
+	if (spec->width > strlen)
+		spec->width = spec->width - strlen;
 	else
-		return (NULL);
-	str_flag[strlen] = '\0';
-	while (i < strlen)
+		spec->width = 0;
+	tmp_len = spec->width + strlen;
+
+	// strnew = record_str(spec, strnew, str, )
+	if (!(strnew = (char *)malloc(sizeof(char) * (tmp_len))))
+		return (0);
+	i = tmp_len;
+	strlen--;
+	i--;
+	strnew[i] = '\0';
+	while (strlen >= 0 && spec->minus == 0)
 	{
-		(spec->zero == 1) ? (str_flag[i] = '0') : (str_flag[i] = ' ');
-		i++;
+		strnew[i] = str[strlen];
+		i--;
+		strlen--;
 	}
-	return (str_flag);
+	while (spec->width > 0)
+	{
+		strnew[i] = ' ';
+		i--;
+		spec->width--;
+	}
+	while (strlen >= 0 && spec->minus == 1)
+	{
+		strnew[i] = str[strlen];
+		i--;
+		strlen--;
+	}
+	write(1, strnew, tmp_len);
+	free(strnew);
+	return (tmp_len);
 }

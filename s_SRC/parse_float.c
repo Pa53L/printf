@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-size_t		parse_float(st_format *spec, va_list vl)
+uint64_t		parse_float(st_format *spec, va_list vl)
 {
 	long double				fval;
 	size_t len_num;
