@@ -6,7 +6,7 @@
 /*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:10:31 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/20 23:47:38 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/21 02:20:39 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,8 +149,8 @@ typedef struct mult
 {
 	int len1;
 	int len2;
-	char *right;
-	char *left;
+	char *str1;
+	char *str2;
 } t_mult;
 
 size_t ft_strlen(const char *);
@@ -199,7 +199,7 @@ int ft_printf(const char *, ...);
 
 // Ф-ции от П
 char *itobs(unsigned long long n, char *ps);
-char	*ft_str_multiply(t_mult m, char *tmp);
+char	*ft_str_multiply(t_mult *m, char *tmp);
 char *ft_pow(char *res, int pow);
 char *parse_mantis(unsigned long mantisa);
 char *parse_exponent(unsigned short exponent);
@@ -215,5 +215,6 @@ char *make_rounding(char *str, int pres);
 char *ft_rounding(char *str, int mem);
 char *ft_is_nan(unsigned long mantisa);
 char *ft_make_f_str(char *full, char *right, char *left);
+void	ft_clean_mult(t_mult *m);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 23:39:07 by erodd             #+#    #+#             */
-/*   Updated: 2020/01/21 00:25:58 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/21 03:01:02 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*parse_float_number(long double number, int pres, char sharp)
 	str_right = parse_mantis(d1.parts.mantisa);
 	str_left = (char *)malloc(sizeof(char) * 5000);
 	str_left = parse_exponent(d1.parts.exponent);
-	full_str = (char *)malloc(sizeof(char) * 5000);
 	full_str = ft_make_f_str(full_str, str_right, str_left);
 	if (number >= 1 || number <= -1)
 		full_str = make_dot(full_str, d1.parts.exponent);
@@ -51,30 +50,33 @@ char *ft_make_f_str(char *full, char *right, char *left)
 	t_mult m;
 	int k;
 
+
 	k = 0;
-	while (k < (m.len1 + m.len2))
-	{
-		full[k] = '0';
-		k++;
-	}
+	ft_clean_mult(&m);
+	full = (char *)malloc(sizeof(char) * 5000);
+
+
 	if (ft_strlen(left) < ft_strlen(right))
 	{
-		m.left = left;
-		m.right = right;
+		m.str2 = left;
+		m.str1 = right;
 		m.len1 = ft_strlen(left) - 1;
 		m.len2 = ft_strlen(right) - 1;
 	}
 	else
 	{
-		m.left = right;
-		m.right = left;
+		m.str2 = right;
+		m.str1 = left;
 		m.len1 = ft_strlen(right) - 1;
 		m.len2 = ft_strlen(left) - 1;
 	}
-	
-	full = ft_str_multiply(m, full);
+	while (k < (m.len1 + m.len2))
+	{
+		full[k] = '0';
+		k++;
+	}
+	full = ft_str_multiply(&m, full);
 	full[m.len1 + m.len2 - 1] = '\0';
-
 	return (full);
 }
 
@@ -93,7 +95,7 @@ char	*ft_zero_str(int pres, char sharp, char *full_str)
 			return (NULL);
 		full_str[0] = '0';
 		full_str[1] = '.';
-		while (g < pres + 2)
+		while (g < (pres + 2))
 		{
 			full_str[g] = '0';
 			g++;
@@ -310,7 +312,7 @@ char	*itobs(unsigned long long n, char *ps)
 	return (ps);
 }
 
-char	*ft_str_multiply(t_mult m, char *tmp)
+char	*ft_str_multiply(t_mult *m, char *tmp)
 {
 	int i;
 	int j;
@@ -318,18 +320,19 @@ char	*ft_str_multiply(t_mult m, char *tmp)
 	int mem;
 	int res;
 
+
 	shift = 0;
-	i = m.len2 + 1;
+	i = m->len2 + 1;
 	while (--i >= 0)
 	{
-		j = m.len1 + 1;
+		j = m->len1 + 1;
 		mem = 0;
 		while (--j >= 0)
 		{
-			res = (m.left[j] - '0') * (m.right[i] - '0') +
-			(tmp[j + m.len2 + 1 - shift] - '0') + mem;
+			res = (m->str2[j] - '0') * (m->str1[i] - '0') +
+			(tmp[j + m->len2 + 1 - shift] - '0') + mem;
 			mem = res / 10;
-			tmp[j + m.len2 + 1 - shift] = res % 10 + '0';
+			tmp[j + m->len2 + 1 - shift] = res % 10 + '0';
 			if (j == 0)
 				tmp[i] = mem + '0';
 		}

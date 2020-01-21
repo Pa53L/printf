@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: erodd <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: erodd <erodd@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/10 19:41:13 by yshawn            #+#    #+#              #
-#    Updated: 2019/12/24 00:20:25 by yshawn           ###   ########.fr        #
+#    Updated: 2020/01/21 01:50:06 by erodd            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ ODIR = o_OBJ
 SDIR = s_SRC
 HEADER = h_HEAD/header.h
 _OBJS = ft_strlen.o ft_numlen.o ft_itoabasex.o ft_atoi.o ft_str_sym_cmp.o \
-		ft_clean_struct.o \
+		ft_clean_struct.o ft_clean_mult.o \
 		ft_printf.o \
 		out_chr.o out_str.o out_per.o out_num.o out_float.o out_bits.o \
 		parse_specifiers.o parse_output.o parse_dipoxu.o \

@@ -6,7 +6,7 @@
 /*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:31:27 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/21 00:20:24 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/21 02:53:35 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		main()
 {
-   ft_printf("{green}");
+   //ft_printf("{green}");
 	// printf("|||MINE: %d\n",     ft_printf("{red}%12s {green}%5s{neon}", "hello, world!", "no color"));
 	// printf("|||ORIGINAL: %d\n",    printf("%12s", "hello, world!"));
 	// printf("\n");
@@ -24,8 +24,8 @@ int		main()
    // printf("|||MINE: %d\n",     ft_printf("%-+f|%-f|%-#f|%f|%+#f|%+f", 0., 0., 0., 0., -0., -0));
    // printf("|||ORIGINAL: %d\n",    printf("%-+f|%-f|%-#f|%f|%+#f|%+f", 0., 0., 0., 0., -0., -0));
    // printf("\n");
-   printf("|||MINE: %d\n",     ft_printf("%.350f|%.350f|%.350f|%.350f|%.350f", 1.e-1, 1.e-2, 1.e-18, 1.e-57, 1.e-201));
-   printf("|||ORIGINAL: %d\n",    printf("%.350f|%.350f|%.350f|%.350f|%.350f", 1.e-1, 1.e-2, 1.e-18, 1.e-57, 1.e-201));
+   printf("|||MINE: %d\n",     ft_printf("%.1150f|%.1150f|%.1150f|%.1150f", 0x1p-1074, 0x1.ffffffffffffep-1023, 0x1.4e46p-1058, 0x1.59a8b0c3dp-1037));
+   printf("|||ORIGINAL: %d\n",    printf("%.1150f|%.1150f|%.1150f|%.1150f", 0x1p-1074, 0x1.ffffffffffffep-1023, 0x1.4e46p-1058, 0x1.59a8b0c3dp-1037));
    printf("\n");
    // printf("|||MINE: %d\n",     ft_printf("%d", -10));
    // printf("|||ORIGINAL: %d\n",    printf("%d", -10));
