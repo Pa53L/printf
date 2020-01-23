@@ -14,20 +14,32 @@
 
 int main(int ac, char **av)
 {
-   ft_printf("{blue}%s{green}%s{red}%s{yellow}%s{orange}%s{pink}%s", "hello", "hello", "hello", "hello", "hello", "hello");
-   // printf("|||MINE: %d\n",     ft_printf("%f", -875.000001));
-   // printf("|||ORIGINAL: %d\n",    printf("%f", -875.000001));
-   // printf("|||MINE: %d\n",     ft_printf("%400d|%-400d|%+d", 10, 10, 10));
-   // printf("|||ORIGINAL: %d\n",    printf("%400d|%-400d|%+d", 10, 10, 10));
-   //printf("|||MINE: %d\n",     ft_printf("this %f %f %f %f %f %f %f %f %f %ffloat", 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5));
-   //printf("|||ORIGINAL: %d\n",    printf("this %f float", 1.5));
-   // ft_printf("|||MINE: %d\n",     ft_printf("%.20Lf", 10.5));
-   // printf("|||ORIGINAL: %d\n",    printf("%.20Lf", 10.5));
-   // printf("|||ORIGINAL: %d\n",    printf("%-12c", 0, 0, 0, 0));
+   // ft_printf("{blue}%s{green}%s{red}%s{yellow}%s{orange}%s{pink}%s", "hello", "hello", "hello", "hello", "hello", "hello");
+
+
+
+   // PROBLEMS THAT WE HAVE
+   // printf("|||MINE: %d\n",     ft_printf("%.350f|", 1.e-57));
+   // printf("|||ORIGINAL: %d\n",    printf("%.350f|", 1.e-57));
    // printf("\n");
+   // printf("|||MINE: %d\n",     ft_printf("%.f|%.f|%.f|%.f|%.f", 44.5, 44.4, 44.6, 44.50001, 44.5 + 1e-52));
+   // printf("|||ORIGINAL: %d\n",    printf("%.f|%.f|%.f|%.f|%.f", 44.5, 44.4, 44.6, 44.50001, 44.5 + 1e-52));
+   // printf("\n");
+   // printf("|||MINE: %d\n",     ft_printf("%|%%|%%%|%%%%"));
+   // printf("|||ORIGINAL: %d\n",    printf("%|%%|%%%|%%%%"));
+   // printf("\n");
+   // printf("|||MINE: %d\n",     ft_printf("% |% h|% hZ"));
+   // printf("|||ORIGINAL: %d\n",    printf("% |% h|% hZ"));
+   // printf("\n");
+   // printf("|||MINE: %d\n",     ft_printf("%%-%|%%+%|%% %|%%#%"));
+   // printf("|||ORIGINAL: %d\n",    printf("%%-%|%%+%|%% %|%%#%"));
+   // printf("\n");
+   // conv_cap_f:
+   // переделать makefile
+   // проверить бонусы
+   // дописать бонус
+   // разобраться с процентами ебаными
    
-   // printf("|||MINE: %d\n",     ft_printf("%s", buf));
-   // printf("|||ORIGINAL: %d\n", printf("%s", buf));
    return 0;
 }
 
