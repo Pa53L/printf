@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   out_str.c                                          :+:      :+:    :+:   */
+/*   out_chr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/19 19:31:23 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/13 23:56:32 by yshawn           ###   ########.fr       */
+/*   Created: 2020/01/13 23:53:58 by yshawn            #+#    #+#             */
+/*   Updated: 2020/01/13 23:55:18 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-int		parse_per(st_format *spec, va_list vl)
+int		p_chr(t_format *spec, va_list vl)
 {
-	int		strlen;
-	char	*str;
-	int		i;
+	char			ch;
+	char			*str;
 
 	str = NULL;
-	strlen = spec->width;
-	if (strlen > 1)
-		str = record_per(spec, strlen);
+	ch = (char)va_arg(vl, int);
+	if (spec->width > 1)
+	{
+		str = record_chr(spec, str, ch);
+		if (str)
+		{
+			write(1, str, spec->width);
+			free(str);
+		}
+	}
 	else
 	{
-		write(1, "%", 1);
+		write(1, &ch, 1);
 		return (1);
 	}
-	write(1, str, strlen);
-	free(str);
-	return (strlen);
+	return (spec->width);
 }

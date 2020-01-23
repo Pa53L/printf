@@ -12,27 +12,27 @@
 
 #include "../h_HEAD/header.h"
 
-void	parse_dipoxu_case(st_format *spec, uint64_t unval, int *len)
+void	parse_dipoxu_case(t_format *spec, uint64_t unval, int *num_len)
 {
 	if (spec->zero)
 		if (spec->accur >= 0)
 			spec->zero = 0;
 	if (spec->accur >= 0)
-		parse_dipoxu_accur(spec, unval, len);
+		parse_dipoxu_accur(spec, unval, num_len);
 	if (spec->sharp || spec->type == 'p')
 		parse_dipoxu_sharp(spec, unval);
 	if (spec->plus)
 		parse_dipoxu_plus(spec);
 	if (spec->space)
-		parse_dipoxu_space(spec, *len);
+		parse_dipoxu_space(spec, *num_len);
 	if (spec->width)
-		parse_dipoxu_width(spec, *len);
+		parse_dipoxu_width(spec, *num_len);
 	return ;
 }
 
-int		parse_dipoxu(st_format *spec, va_list vl)
+int		p_dipoxu(t_format *spec, va_list vl)
 {
-	int			len;
+	int			num_len;
 	int64_t		ival;
 	uint64_t	unval;
 
@@ -48,7 +48,7 @@ int		parse_dipoxu(st_format *spec, va_list vl)
 	}
 	else
 		ft_cast_size_poxu(spec, vl, &unval);
-	len = ft_numlen(unval, spec->base);
-	parse_dipoxu_case(spec, unval, &len);
-	return (parse_num(spec, unval, len));
+	num_len = ft_numlen(unval, spec->base);
+	parse_dipoxu_case(spec, unval, &num_len);
+	return (p_num(spec, unval, num_len));
 }

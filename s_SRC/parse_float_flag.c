@@ -6,16 +6,16 @@
 /*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 23:56:42 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/22 21:44:53 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/23 07:02:08 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-int			parse_float_flag_2(st_format *spec, int len_num)
+int			parse_float_flag_2(t_format *spec, int num_len)
 {
 	if (spec->width)
-		(spec->width >= len_num) ? (spec->width -= len_num) : (spec->width = 0);
+		(spec->width >= num_len) ? (spec->width -= num_len) : (spec->width = 0);
 	if (spec->space)
 		if (spec->plus || spec->sign)
 			spec->space = 0;
@@ -28,25 +28,24 @@ int			parse_float_flag_2(st_format *spec, int len_num)
 	return (spec->width - spec->plus - spec->sign - spec->space);
 }
 
-char		*parse_float_flag(st_format *spec, int len_num)
+char		*parse_float_flag(t_format *spec, int num_len)
 {
 	uint64_t	i;
-	int			strlen;
+	int			str_len;
 	char		*str_flag;
 
 	i = 0;
 	str_flag = NULL;
-	strlen = parse_float_flag_2(spec, len_num);
-	
-	if (strlen > 0)
+	str_len = parse_float_flag_2(spec, num_len);
+	if (str_len > 0)
 	{
-		if (!(str_flag = (char *)malloc(sizeof(char) * (strlen + 1))))
+		if (!(str_flag = (char *)malloc(sizeof(char) * (str_len + 1))))
 			return (NULL);
 	}
 	else
 		return (NULL);
-	str_flag[strlen] = '\0';
-	while (i < strlen)
+	str_flag[str_len] = '\0';
+	while (i < str_len)
 		if (spec->zero == 1)
 			str_flag[i++] = '0';
 		else

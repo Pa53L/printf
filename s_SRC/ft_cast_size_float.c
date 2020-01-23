@@ -12,9 +12,9 @@
 
 #include "../h_HEAD/header.h"
 
-void	ft_cast_size_float(st_format *spec, va_list vl, long double *fval)
+void	ft_cast_size_float(t_format *spec, va_list vl, long double *fval)
 {
-	ld_cast		sign_bit;
+	t_cast		sign_bit;
 
 	if (spec->size == 5)
 		*fval = va_arg(vl, long double);
@@ -28,8 +28,8 @@ void	ft_cast_size_float(st_format *spec, va_list vl, long double *fval)
 	}
 	if (*fval <= 0)
 	{
-		sign_bit = (ld_cast){ .ld = *fval };
-		if (sign_bit.parts.sign & 1)
+		sign_bit = (t_cast){ .ld = *fval };
+		if (sign_bit.t_parts.sign & 1)
 			spec->sign = 1;
 		*fval = *fval * (-1);
 	}

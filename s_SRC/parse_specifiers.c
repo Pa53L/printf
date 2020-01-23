@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-char	*parse_specifiers(st_format *spec, char *str, va_list vl)
+char	*parse_specifiers(t_format *spec, char *str, va_list vl)
 {
 	ft_clean_struct(spec);
 	if (!*str)

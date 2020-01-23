@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-int	parse_output(st_format *spec, va_list vl, va_list fst_vl)
+int	parse_output(t_format *spec, va_list vl, va_list fst_vl)
 {
 	int			i;
 	uint64_t	cnt;
@@ -20,7 +20,7 @@ int	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 	i = 0;
 	cnt = 0;
 	if (spec->dollar > 1)
-		parse_bdollar(spec->dollar, vl);
+		p_bdollar(spec->dollar, vl);
 	while (i < BLYAT_SIZE)
 	{
 		if (spec->type == TYPES[i])
@@ -33,6 +33,5 @@ int	parse_output(st_format *spec, va_list vl, va_list fst_vl)
 	if (i == 5)
 		cnt = BLYAT[i](spec, vl);
 	(spec->dollar == 0) ? va_copy(fst_vl, vl) : va_copy(vl, fst_vl);
-	//ft_clean_struct(spec);
 	return (cnt);
 }

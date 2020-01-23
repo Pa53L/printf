@@ -12,27 +12,30 @@
 
 #include "../h_HEAD/header.h"
 
-void	ft_itoabasex(st_format *spec, uint64_t i, char *s, int len)
+void	ft_itoabasex(t_format *spec, uint64_t i, char *s, int num_len)
 {
+	uint64_t nymsys;
+
+	nymsys = spec->base;
 	while (i > 0)
 	{
-		if (i < spec->base)
+		if (i < nymsys)
 		{
 			if (spec->type != 'X')
-				(s[len] = IT[i]);
+				(s[num_len] = IT[i]);
 			else
-				(s[len] = ITX[i]);
+				(s[num_len] = ITX[i]);
 			return ;
 		}
 		else
 		{
 			if (spec->type != 'X')
-				(s[len] = IT[i % spec->base]);
+				(s[num_len] = IT[i % nymsys]);
 			else
-				(s[len] = ITX[i % spec->base]);
+				(s[num_len] = ITX[i % nymsys]);
 		}
-		i = i / spec->base;
-		len--;
+		i = i / nymsys;
+		num_len--;
 	}
 	return ;
 }

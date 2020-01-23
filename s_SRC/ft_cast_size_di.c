@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-void	ft_cast_size_di(st_format *spec, va_list ap, int64_t *ival)
+void	ft_cast_size_di(t_format *spec, va_list ap, int64_t *ival)
 {
 	if (spec->size == 0)
 		*ival = va_arg(ap, int);

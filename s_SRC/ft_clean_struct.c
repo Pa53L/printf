@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-void	ft_clean_struct(st_format *spec)
+void	ft_clean_struct(t_format *spec)
 {
 	spec->width = 0;
 	spec->accur = -1;

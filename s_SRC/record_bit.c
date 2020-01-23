@@ -12,16 +12,16 @@
 
 #include "../h_HEAD/header.h"
 
-char	*record_bit(st_format *spec, char *str, int strlen, uint64_t unval)
+char	*record_bit(t_format *spec, char *str, int str_len, uint64_t unval)
 {
 	int	i;
 	int bit;
 
 	i = 0;
-	bit = strlen - spec->width - 1;
-	if (!(str = (char *)malloc(sizeof(char) * (strlen + spec->width + 1))))
+	bit = str_len - spec->width - 1;
+	if (!(str = (char *)malloc(sizeof(char) * (str_len + spec->width + 1))))
 		return (0);
-	str[strlen] = '\0';
+	str[str_len] = '\0';
 	if (spec->minus == 0 && spec->width)
 		while (spec->width--)
 			str[i++] = ' ';

@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-char		*record_str(st_format *spec, char *str, int strlen, int tmp_len)
+char		*record_str(t_format *spec, char *str, int str_len, int tmp_len)
 {
 	char	*strnew;
 	int		i;
@@ -22,14 +22,14 @@ char		*record_str(st_format *spec, char *str, int strlen, int tmp_len)
 	if (!(strnew = (char *)malloc(sizeof(char) * (tmp_len))))
 		return (NULL);
 	strnew[i] = '\0';
-	while (strlen >= 0 && spec->minus == 0)
-		strnew[i--] = str[strlen--];
+	while (str_len >= 0 && spec->minus == 0)
+		strnew[i--] = str[str_len--];
 	while (spec->width > 0)
 	{
 		strnew[i--] = ' ';
 		spec->width--;
 	}
-	while (strlen >= 0 && spec->minus == 1)
-		strnew[i--] = str[strlen--];
+	while (str_len >= 0 && spec->minus == 1)
+		strnew[i--] = str[str_len--];
 	return (strnew);
 }

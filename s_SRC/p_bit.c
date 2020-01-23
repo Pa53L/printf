@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-int		parse_bit(st_format *spec, va_list vl)
+int		p_bit(t_format *spec, va_list vl)
 {
 	int			i;
 	char		*str;

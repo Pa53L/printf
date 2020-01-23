@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-int		parse_str(st_format *spec, va_list vl)
+int		p_str(t_format *spec, va_list vl)
 {
 	int		tmp_len;
 	int		strlen;
@@ -20,7 +20,7 @@ int		parse_str(st_format *spec, va_list vl)
 	char	*str;
 
 	if (!(str = va_arg(vl, char *)))
-		str = NULL_STRING;
+		str = (char *)NULL_STRING;
 	strlen = ft_strlen(str);
 	if (spec->accur >= 0 && spec->accur < strlen)
 		strlen = spec->accur;

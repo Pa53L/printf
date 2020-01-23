@@ -12,15 +12,11 @@
 
 #include "../h_HEAD/header.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_bzero(void *str, size_t n)
 {
-	char *snew;
+	char *str_new;
 
-	snew = s;
-	while (n > 0)
-	{
-		*snew = '0';
-		snew++;
-		n--;
-	}
+	str_new = str;
+	while (n--)
+		*(str_new++) = '0';
 }

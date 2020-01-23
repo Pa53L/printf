@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-void	record_sharp(st_format *spec, char *str, int *i)
+void	record_sharp(t_format *spec, char *str, int *i)
 {
 	if (spec->sharp == 2)
 	{
@@ -27,7 +27,7 @@ void	record_sharp(st_format *spec, char *str, int *i)
 	return ;
 }
 
-void	record_sign(st_format *spec, char *str, int *i)
+void	record_sign(t_format *spec, char *str, int *i)
 {
 	if (spec->sign)
 		str[(*i)--] = '-';
@@ -36,12 +36,12 @@ void	record_sign(st_format *spec, char *str, int *i)
 	return ;
 }
 
-int		pcomic_i_num(st_format *spec, char *str, uint64_t ival, int len)
+int		pcomic_i_num(t_format *spec, char *str, uint64_t unval, int num_len)
 {
 	int i;
 
 	i = spec->width + spec->space + spec->plus + spec->sign +
-		spec->sharp + len - 1;
+		spec->sharp + num_len - 1;
 	if (spec->accur > 0)
 		i = i + spec->accur;
 	while (spec->width > 0 && spec->minus == 1)
@@ -49,12 +49,12 @@ int		pcomic_i_num(st_format *spec, char *str, uint64_t ival, int len)
 		str[i--] = ' ';
 		spec->width--;
 	}
-	if (ival == 0 && len > 0)
+	if (unval == 0 && num_len > 0)
 		str[i--] = '0';
-	else if (ival > 0)
+	else if (unval > 0)
 	{
-		ft_itoabasex(spec, ival, str, i);
-		i = i - len;
+		ft_itoabasex(spec, unval, str, i);
+		i = i - num_len;
 	}
 	while (spec->accur > 0)
 	{
@@ -64,11 +64,11 @@ int		pcomic_i_num(st_format *spec, char *str, uint64_t ival, int len)
 	return (i);
 }
 
-void	record_minus_num(st_format *spec, char *str, int len, uint64_t ival)
+void	record_minus_num(t_format *spec, char *str, uint64_t unval, int nlen)
 {
 	int i;
 
-	i = pcomic_i_num(spec, str, ival, len);
+	i = pcomic_i_num(spec, str, unval, nlen);
 	if (spec->sharp)
 		record_sharp(spec, str, &i);
 	if (spec->plus || spec->sign)
@@ -78,11 +78,11 @@ void	record_minus_num(st_format *spec, char *str, int len, uint64_t ival)
 	return ;
 }
 
-void	record_num(st_format *spec, char *str, int len, uint64_t ival)
+void	record_num(t_format *spec, char *str, uint64_t unval, int num_len)
 {
 	int i;
 
-	i = pcomic_i_num(spec, str, ival, len);
+	i = pcomic_i_num(spec, str, unval, num_len);
 	if (spec->zero == 0 && (spec->plus || spec->sign))
 		record_sign(spec, str, &i);
 	if (spec->sharp && spec->zero == 0)

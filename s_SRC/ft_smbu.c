@@ -6,7 +6,7 @@
 /*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 05:39:01 by erodd             #+#    #+#             */
-/*   Updated: 2020/01/23 03:18:05 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/23 05:23:05 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*make_mantisa(char *str, unsigned long mantisa)
 	return (str);
 }
 
-char	*itobs(unsigned long long n, char *ps)
+char	*itobs(uint64_t num, char *str)
 {
 	int			i;
 	uint64_t	size;
@@ -66,12 +66,12 @@ char	*itobs(unsigned long long n, char *ps)
 	i = size - 1;
 	while (i >= 0)
 	{
-		ps[i] = (01 & n) + '0';
+		str[i] = (01 & num) + '0';
 		i--;
-		n >>= 1;
+		num >>= 1;
 	}
-	ps[size] = '\0';
-	return (ps);
+	str[size] = '\0';
+	return (str);
 }
 
 void	fill_rigth_left(t_mult *m, char **a, char **b)
@@ -80,8 +80,6 @@ void	fill_rigth_left(t_mult *m, char **a, char **b)
 	m->str1 = *b;
 	m->len1 = ft_strlen(*a) - 1;
 	m->len2 = ft_strlen(*b) - 1;
-	//printf("AEAE %s\n", *a);
-	//printf("BEBE %s\n", *b);
 }
 
 char	*str_no_prec(char sharp)

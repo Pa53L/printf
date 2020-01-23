@@ -14,8 +14,9 @@
 
 int main(int ac, char **av)
 {
-   printf("|||MINE: %d\n",     ft_printf("%.5f|%.12f", 0.000099, 0.000099, 0.000099, 0.000099, 0.000099));
-   printf("|||ORIGINAL: %d\n",    printf("%.5f|%.12f", 0.000099, 0.000099, 0.000099, 0.000099, 0.000099));
+   ft_printf("{blue}%s{green}%s{red}%s{yellow}%s{orange}%s{pink}%s", "hello", "hello", "hello", "hello", "hello", "hello");
+   // printf("|||MINE: %d\n",     ft_printf("%f", -875.000001));
+   // printf("|||ORIGINAL: %d\n",    printf("%f", -875.000001));
    // printf("|||MINE: %d\n",     ft_printf("%400d|%-400d|%+d", 10, 10, 10));
    // printf("|||ORIGINAL: %d\n",    printf("%400d|%-400d|%+d", 10, 10, 10));
    //printf("|||MINE: %d\n",     ft_printf("this %f %f %f %f %f %f %f %f %f %ffloat", 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5));

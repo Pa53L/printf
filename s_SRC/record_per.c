@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-char	*record_per(st_format *spec, int i)
+char	*record_per(t_format *spec, int i)
 {
 	char	*str;
 

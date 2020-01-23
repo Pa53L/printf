@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   out_str.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/15 20:18:41 by yshawn            #+#    #+#             */
-/*   Updated: 2019/12/11 19:32:33 by yshawn           ###   ########.fr       */
+/*   Created: 2019/12/19 19:31:23 by yshawn            #+#    #+#             */
+/*   Updated: 2020/01/13 23:56:32 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-void	parse_bdollar(int dollar, va_list vl)
+int		p_per(t_format *spec, va_list vl)
 {
-	while (dollar > 1)
+	int		str_len;
+	char	*str;
+
+	if (vl)
+		;
+	str = NULL;
+	str_len = spec->width;
+	if (str_len > 1)
+		str = record_per(spec, str_len);
+	else
 	{
-		va_arg(vl, int);
-		dollar--;
+		write(1, "%", 1);
+		return (1);
 	}
-	return ;
+	write(1, str, str_len);
+	free(str);
+	return (str_len);
 }

@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-char	*record_chr(st_format *spec, char *str, char ch)
+char	*record_chr(t_format *spec, char *str, char ch)
 {
 	int	i;
 

@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-void	ft_cast_size_poxu(st_format *spec, va_list ap, u_int64_t *ival)
+void	ft_cast_size_poxu(t_format *spec, va_list ap, u_int64_t *ival)
 {
 	if (spec->size == 1)
 		*ival = (unsigned short)va_arg(ap, int);

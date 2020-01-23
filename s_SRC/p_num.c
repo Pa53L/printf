@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-int		parse_num(st_format *spec, uint64_t ival, int len)
+int		p_num(t_format *spec, uint64_t ival, int len)
 {
 	int		strlen;
 	char	*str;
@@ -25,9 +25,9 @@ int		parse_num(st_format *spec, uint64_t ival, int len)
 		return (0);
 	str[strlen] = '\0';
 	if (spec->minus == 0)
-		record_num(spec, str, len, ival);
+		record_num(spec, str, ival, len);
 	if (spec->minus == 1)
-		record_minus_num(spec, str, len, ival);
+		record_minus_num(spec, str, ival, len);
 	write(1, str, strlen);
 	free(str);
 	return (strlen);

@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   out_chr.c                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 23:53:58 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/13 23:55:18 by yshawn           ###   ########.fr       */
+/*   Created: 2019/09/15 20:18:41 by yshawn            #+#    #+#             */
+/*   Updated: 2019/12/11 19:32:33 by yshawn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-int		parse_chr(st_format *spec, va_list vl)
+void	p_bdollar(int dollar, va_list vl)
 {
-	char			ch;
-	char			*str;
-
-	str = NULL;
-	ch = (char)va_arg(vl, int);
-	if (spec->width > 1)
+	while (dollar > 1)
 	{
-		str = record_chr(spec, str, ch);
-		if (str)
-		{
-			write(1, str, spec->width);
-			free(str);
-		}
+		va_arg(vl, int);
+		dollar--;
 	}
-	else
-	{
-		write(1, &ch, 1);
-		return (1);
-	}
-	return (spec->width);
+	return ;
 }

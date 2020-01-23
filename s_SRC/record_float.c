@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-void		out_float(st_format *spec, char **str_flag, char **str_number)
+void		out_float(t_format *spec, char **str_flag, char **str_number)
 {
 	int		len_num;
 	int		len_flag;
@@ -34,7 +34,7 @@ void		out_float(st_format *spec, char **str_flag, char **str_number)
 	return ;
 }
 
-void		out_float_minus(st_format *spec, char **str_flag, char **str_number)
+void		out_float_minus(t_format *spec, char **str_flag, char **str_number)
 {
 	int		len_num;
 	int		len_flag;
@@ -52,14 +52,12 @@ void		out_float_minus(st_format *spec, char **str_flag, char **str_number)
 	return ;
 }
 
-void		record_float(st_format *spec, char **str_flag, char **str_number)
+void		record_float(t_format *spec, char **str_flag, char **str_number)
 {
-	if (spec->minus == 0 ) //&& *str_number)
+	if (spec->minus == 0)
 		out_float(spec, str_flag, str_number);
-	else if (spec->minus == 1) //&& *str_flag)
+	else if (spec->minus == 1)
 		out_float_minus(spec, str_flag, str_number);
-	// printf("\n\n\nNUM[%s]\n\n\n", *str_number);
-	// printf("\n\n\nFLAG[%s]\n\n\n", *str_flag);
 	ft_strdel(str_flag);
 	ft_strdel(str_number);
 	return ;

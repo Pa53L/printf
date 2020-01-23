@@ -12,7 +12,7 @@
 
 #include "../h_HEAD/header.h"
 
-char	*is_flag(st_format *spec, char *str)
+char	*is_flag(t_format *spec, char *str)
 {
 	while (*str == '-' || *str == '+' || *str == ' ' || *str == '#' \
 		|| *str == '0')
@@ -32,7 +32,7 @@ char	*is_flag(st_format *spec, char *str)
 	return (str);
 }
 
-char	*is_width(st_format *spec, char *str, va_list vl)
+char	*is_width(t_format *spec, char *str, va_list vl)
 {
 	if (*str == '*')
 	{

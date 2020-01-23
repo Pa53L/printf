@@ -13,38 +13,34 @@
 #ifndef HEADER_H
 # define HEADER_H
 
-#include <unistd.h>
-#include <stdarg.h>
-#include <stdlib.h>
-#include <inttypes.h>
-#include <stdio.h> //DELETE THIS
-#include <limits.h> //DELETE THIS
-#include <float.h> //DELETE THIS
-#include <math.h> //DELETE THIS
-# include <sys/types.h> //DELETE THIS
-# include <sys/stat.h> //DELETE THIS
-# include <fcntl.h> //DELETE THIS
+# include <unistd.h>
+# include <stdarg.h>
+# include <stdlib.h>
+# include <inttypes.h>
 
-#define TYPES_SIZE 12
-#define BLYAT_SIZE 5
-#define TYPES (char[TYPES_SIZE + 1]) {'c', 's', '%', 'b', 'f', 'd', 'i', 'u', 'o', 'p', 'x', 'X', '\0'}
-#define IT (char[17]) {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', '\0'}
-#define ITX (char[17]) {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', '\0'}
-#define NULL_STRING (char[7]) {'(', 'n', 'u', 'l', 'l', ')', '\0'}
-#define COLOR_SIZE 8
-#define COLOR_POINT (int[COLOR_SIZE + 1]) {4, 6, 5, 7, 7, 5, 5, 4}
-#define COLOR (char[COLOR_SIZE + 1][7]) { \
-				"red\0\0\0", \
-				"green\0", \
-				"blue\0\0", \
-				"yellow\0", \
-				"orange\0", \
-				"pink\0\0", \
-				"neon\0\0", \
-				"eoc\0\0\0" \
-							}
-#define OUT_COLOR_POINT (int[COLOR_SIZE + 1]) {11, 10, 10, 11, 11, 11, 11, 4}
-#define OUT_COLOR (char[COLOR_SIZE + 1][11]) { \
+/*
+** удалить все include после этого комментария
+*/
+# include <stdio.h>
+# include <limits.h>
+# include <float.h>
+# include <math.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
+# define TYPES_SIZE 12
+# define TYPES "cs%bfdiuopxX"
+# define IT "0123456789abcdef"
+# define ITX "0123456789ABCDEF"
+# define NULL_STRING "(null)"
+# define COLOR_SIZE 8
+# define COLOR_POINT (const int[8]) {3, 5, 4, 6, 6, 4, 4, 3}
+
+# define COLOR (const char[8][7])\
+{"red\0\0\0\0", "green\0\0", "blue\0\0\0", "yellow\0", "orange\0", "pink\0\0\0", "neon\0\0\0", "eoc\0\0\0\0"}
+# define OUT_COLOR_POINT (const int[8]){11, 10, 10, 11, 11, 11, 11, 4}
+# define OUT_COLOR (const char[8][11]) { \
 				"\e[38;5;196m", \
 				"\e[38;5;48m\0", \
 				"\e[38;5;69m\0", \
@@ -54,7 +50,9 @@
 				"\e[38;5;123m", \
 				"\e[0m\0\0\0\0\0\0\0" \
 							}
-#define DG (char[64][65]) { \
+
+# define DG (const char[64][65])\
+{ \
 	"1000000000000000000000000000000000000000000000000000000000000000", \
 	"0500000000000000000000000000000000000000000000000000000000000000", \
 	"0250000000000000000000000000000000000000000000000000000000000000", \
@@ -120,130 +118,171 @@
 	"0000000000000000000216840434497100886801490560173988342285156250", \
 	"0000000000000000000108420217248550443400745280086994171142578125"  \
 }
-typedef struct struct_specifer
-{
-	int width;
-	int accur;
-	int dollar;
-	char sign;
-	char base;
-	char minus;
-	char plus;
-	char space;
-	char sharp;
-	char zero;
-	char size;
-	char type;
-} st_format;
 
-typedef union {
-	long double ld;
-	struct
+typedef struct			s_format
+{
+	int					width;
+	int					accur;
+	int					dollar;
+	char				sign;
+	char				base;
+	char				minus;
+	char				plus;
+	char				space;
+	char				sharp;
+	char				zero;
+	char				size;
+	char				type;
+}						t_format;
+
+typedef union			u_cast
+{
+	long double			ld;
+	struct				s_parts
 	{
-		unsigned long mantisa : 64;
-		unsigned short exponent : 15;
-		unsigned sign : 1;
-	} parts;
-} ld_cast;
+		unsigned long	mantisa : 64;
+		unsigned short	exponent : 15;
+		unsigned		sign : 1;
+	}					t_parts;
+}						t_cast;
 
-typedef struct mult
+typedef struct			s_mult
 {
-	int len1;
-	int len2;
-	char *str1;
-	char *str2;
-} t_mult;
+	int					len1;
+	int					len2;
+	char				*str1;
+	char				*str2;
+}						t_mult;
 
-typedef int (*FUN)(st_format *, va_list);
-#define BLYAT (FUN[6]) {parse_chr, parse_str, parse_per, parse_bit, parse_float, parse_dipoxu}
+/*
+** ебучая норма, гореть тебе в аду, пиздец
+** array of pointers to functions
+*/
+# define BLYAT_SIZE 5
 
-void ft_bzero(void *, size_t);
-int ft_atoi(const char *);
-size_t ft_strlen(const char *);
-int ft_numlen(uint64_t, int);
-int	ft_str_sym_cmp(char *str_dad, char *str_son, char ch);
-//
-void ft_clean_struct(st_format *);
-void ft_clean_mult(t_mult *);
-//
-void ft_cast_size_di(st_format *, va_list, int64_t *);
-void ft_cast_size_poxu(st_format *, va_list, uint64_t *);
-void ft_cast_size_float(st_format *, va_list, long double *);
-//
-char *is_flag(st_format *, char *);
-char *is_width(st_format *, char *, va_list);
-char *is_accuracy(int *, char *, va_list);
-char *is_size(char *, char *);
-char *is_type(char *, char *);
-//
-int parse_chr(st_format *, va_list);
-int parse_bit(st_format *, va_list);
-int parse_per(st_format *, va_list);
-int parse_str(st_format *, va_list);
-int parse_num(st_format *, uint64_t, int);
-//
-char *record_chr(st_format *, char *, char);
-char *record_str(st_format *, char *, int, int);
-char *record_bit(st_format *, char *, int, uint64_t);
-char *record_per(st_format *, int);
-// char *record_chr(st_format *, char *, char);
-//
-int pcomic_i_num(st_format *, char *, uint64_t, int);
-void record_sharp(st_format *, char *, int *);
-void record_sign(st_format *, char *, int *);
-void record_num(st_format *, char *, int, uint64_t);
-void record_minus_num(st_format *, char *, int, uint64_t);
-//
-void parse_bdollar(int, va_list);
-char *parse_bcolor(char *);
-char *parse_specifiers(st_format *, char *, va_list);
-int parse_output(st_format *, va_list, va_list);
-int parse_dipoxu(st_format *, va_list);
-void parse_dipoxu_cases(st_format *, uint64_t, int *);
-void parse_dipoxu_sharp(st_format *, uint64_t);
-void parse_dipoxu_space(st_format *, int);
-void parse_dipoxu_accur(st_format *, uint64_t, int *);
-void parse_dipoxu_width(st_format *, int);
-void parse_dipoxu_plus(st_format *);
-//
-int parse_float(st_format *, va_list);
-char *parse_float_number(long double ld, int, char);
-void parse_float_nan_inf(st_format *, char);
-char *parse_float_flag(st_format *, int);
-int parse_float_flag_2(st_format *, int);
-void record_float(st_format *, char **, char **);
-void out_float(st_format *, char **, char **);
-void out_float_minus(st_format *, char **, char **);
-//
-int ft_printf(const char *, ...);
-uint64_t printf_body(st_format *, char *, va_list, va_list);
-void printf_printf(char *, uint64_t *);
-//
+typedef int	(*t_fun)(t_format *spec, va_list vl);
 
+# define BLYAT (const t_fun[6]) {p_chr, p_str, p_per, p_bit, p_float, p_dipoxu}
 
-void ft_itoabasex(st_format *, uint64_t, char *, int);
-char *itobs(unsigned long long n, char *ps);
-char    *ft_str_multiply(t_mult *m, char *tmp);
-char *ft_pow(char *res, int pow);
-char *parse_mantis(unsigned long mantisa);
-char *parse_exponent(unsigned short exponent);
-char *ft_strjoin(char const *s1, char const *s2);
-char *ft_strdup(const char *s);
-char *make_mantisa(char *str, unsigned long mantisa);
-char *make_full_mantis(char *str, char *str2[]);
-char *ft_pow5(char *res, int pow);
-char *make_dot(char **str, unsigned short exponent);
-char *make_dot_zero(char **str, unsigned short exponent);
-char *make_rounding(char **str, int pres);
-char *ft_rounding(char *str, int mem);
-char *ft_is_nan(unsigned long mantisa);
-char *ft_make_f_str(char *full, char **right, char **left);
-void    ft_clean_mult(t_mult *m);
-char *ft_zero_str(int pres, char sharp, char *full_str);
-void	fill_rigth_left(t_mult *, char **, char **);
-char *str_no_prec(char);
-char *ft_fill_str(char *str, char *tmp, int pres);
-void	ft_strdel(char **str);
-char	*str_nan_inf(char ch);
+/*
+** standart functions
+*/
+void		ft_bzero(void *str, size_t n);
+int			ft_atoi(const char *str);
+size_t		ft_strlen(const char *str);
+int			ft_numlen(uint64_t num, int base);
+int			ft_str_sym_cmp(char *str_dad, char *str_son, char ch);
+void		ft_strdel(char **str);
+void		ft_itoabasex(t_format *spec, uint64_t unval, char *str, int len);
+char		*itobs(uint64_t num, char *str);
+char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strdup(const char *str);
+/*
+** printf main functions
+*/
+int			ft_printf(const char *format, ...);
+int			printf_body(t_format *spec, char *str, va_list vl, va_list fst_vl);
+void		printf_printf(char *str, int *cnt);
+/*
+** clean structs before using
+*/
+void		ft_clean_struct(t_format *spec);
+void		ft_clean_mult(t_mult *m);
+/*
+** casting right sizes into value
+*/
+void		ft_cast_size_di(t_format *spec, va_list vl, int64_t *ival);
+void		ft_cast_size_poxu(t_format *spec, va_list vl, uint64_t *unval);
+void		ft_cast_size_float(t_format *spec, va_list vl, long double *unval);
+/*
+** parse specifers
+*/
+char		*is_flag(t_format *spec, char *str);
+char		*is_width(t_format *spec, char *str, va_list vl);
+char		*is_accuracy(int *accur, char *str, va_list vl);
+char		*is_size(char *size, char *str);
+char		*is_type(char *type, char *str);
+char		*parse_specifiers(t_format *spec, char *str, va_list vl);
+/*
+** parsers for every types
+*/
+int			p_chr(t_format *spec, va_list vl);
+int			p_bit(t_format *spec, va_list vl);
+int			p_per(t_format *spec, va_list vl);
+int			p_str(t_format *spec, va_list vl);
+int			p_num(t_format *spec, uint64_t unval, int len);
+/*
+** recording values into str, also some logic is here
+** also there is output in record_float
+** other outputs in parsers
+*/
+char		*record_chr(t_format *spec, char *str, char ch);
+char		*record_str(t_format *spec, char *str, int str_len, int tmp_len);
+char		*record_bit(t_format *spec, char *str, int str_len, uint64_t n);
+char		*record_per(t_format *spec, int str_len);
+/*
+** FILE NAME: parse_num_spec,
+** this is for d, i, p, o, x, X, u
+** mini parsers specifers for number strings
+*/
+void		record_sharp(t_format *spec, char *str, int *some_val_i_dont_rmb);
+void		record_sign(t_format *spec, char *str, int *some_val_i_dont_rmb);
+int			pcomic_i_num(t_format *spec, char *str, uint64_t n, int len);
+void		record_num(t_format *spec, char *str, uint64_t n, int len);
+void		record_minus_num(t_format *spec, char *str, uint64_t n, int len);
+/*
+** bonuses
+*/
+void		p_bdollar(int dollar, va_list vl);
+char		*p_bcolor(char *str);
+/*
+** main parser for everything
+** from this function we're going to the parsers
+*/
+int			parse_output(t_format *spec, va_list vl, va_list fst_vl);
+/*
+** parse numbers d, i, p, o, x, X, u
+*/
+int			p_dipoxu(t_format *spec, va_list vl);
+void		parse_dipoxu_sharp(t_format *spec, uint64_t unval);
+void		parse_dipoxu_space(t_format *spec, int num_len);
+void		parse_dipoxu_accur(t_format *spec, uint64_t unval, int *num_len);
+void		parse_dipoxu_width(t_format *spec, int num_len);
+void		parse_dipoxu_plus(t_format *spec);
+void		parse_dipoxu_case(t_format *spec, uint64_t unval, int *num_len);
+/*
+** parse floats
+*/
+int			p_float(t_format *spec, va_list vl);
+char		*parse_float_flag(t_format *spec, int num_len);
+int			parse_float_flag_2(t_format *spec, int num_len);
+void		parse_float_nan_inf(t_format *spec, char str_num);
+void		record_float(t_format *spec, char **str_flag, char **str_num);
+void		out_float(t_format *spec, char **str_flag, char **str_num);
+void		out_float_minus(t_format *spec, char **str_flag, char **str_num);
+/*
+** creating float string
+*/
+char		*parse_float_number(long double num, int accur, char sharp);
+char		*ft_make_full_str(char *full_str, int pres, char sharp);
+char		*parse_mantis(unsigned long mantisa);
+char		*parse_exponent(int pow);
+char		*ft_make_new_str(char *new_str, char *str);
+char		*ft_str_multiply(t_mult *m, char *tmp);
+char		*ft_pow(char *res, int pow);
+char		*make_mantisa(char *str, unsigned long mantisa);
+char		*make_full_mantis(char *str, char *str2[]);
+char		*ft_pow5(char *res, int pow);
+char		*make_dot(char **str, unsigned short exponent);
+char		*make_dot_zero(char **str, unsigned short exponent);
+char		*make_rounding(char **str, int pres);
+char		*ft_rounding(char *str, int mem);
+char		*ft_is_nan(unsigned long mantisa);
+char		*str_nan_inf(char ch);
+char		*ft_make_f_str(char *full, char **right, char **left);
+char		*ft_zero_str(int pres, char sharp, char *full_str);
+void		fill_rigth_left(t_mult *m, char **str_1, char **str_2);
+char		*str_no_prec(char sharp);
+char		*ft_fill_str(char *str, char *tmp, int pres);
 
 #endif

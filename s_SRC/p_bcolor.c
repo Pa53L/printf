@@ -12,17 +12,18 @@
 
 #include "../h_HEAD/header.h"
 
-char	*parse_bcolor(char *str)
+char	*p_bcolor(char *str)
 {
 	int	i;
 
 	i = 0;
 	str++;
+	// printf("\nhere : %s\n", str);
 	while (i < COLOR_SIZE)
 	{
 		if (*str == COLOR[i][0])
 		{
-			if (ft_str_sym_cmp(str, COLOR[i], '}'))
+			if (ft_str_sym_cmp(str, (char *)COLOR[i], '}'))
 			{
 				write(1, OUT_COLOR[i], OUT_COLOR_POINT[i]);
 				i = COLOR_POINT[i];
