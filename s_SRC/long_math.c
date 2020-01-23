@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   long_math.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erodd <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 04:46:08 by erodd             #+#    #+#             */
-/*   Updated: 2020/01/21 04:46:13 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/23 03:34:02 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char	*ft_str_multiply(t_mult *m, char *tmp)
 		}
 		shift++;
 	}
+	tmp[m->len2 + m->len1 - 1] = '\0';
 	return (tmp);
 }
 
@@ -100,20 +101,28 @@ char	*ft_pow(char *res, int pow)
 	res[len] = '\0';
 	res[len - 1] = '2';
 	j = -1;
+	
+	
 	while (j++ < (len - 2))
 		res[j] = '0';
 	while (pow > 1)
 	{
-		len = ft_strlen(res);
-		while (len-- >= 0)
+		if ((len = ft_strlen(res) - 1) < 0)
+			len = 1;
+		while (len >= 0)
 		{
 			dec = res[len] - '0';
+			// if (pow > 1020)
+				// printf("\n\nBEST %c\n\n", res[len]);
 			res[len] = (dec * 2 + ret) % 10 + '0';
 			ret = (dec * 2 + ret) < 10 ? 0 : 1;
+			len--;
 		}
 		res[len] = ret + '0';
+		// printf("\n\nPOW [%d]     [%c]\n\n", pow, res[len]);
 		pow--;
 	}
+	// printf("\n\nPOSLE %s\n\n", res);
 	return (res);
 }
 
@@ -124,24 +133,36 @@ char	*ft_pow5(char *res, int pow)
 	int dec;
 	int j;
 
-	len = pow + 1;
+	// printf("[%s]\n", res);
+	
+	len = pow;
 	ret = 0;
-	res[len] = '\0';
+	// res[len] = '\0';
 	res[len - 1] = '5';
-	j = -1;
-	while (j++ < (len - 2))
-		res[j] = '0';
+	j = 0;
+	
+	//printf("[%d]\n", pow);
+	while (j < (len - 2))
+		res[j++] = '0';
+	
 	while (pow > 1)
 	{
-		len = ft_strlen(res);
-		while (len-- >= 0)
+		len = ft_strlen(res) - 1;
+		//if ((len = ft_strlen(res) - 1) < 0)
+		//	len = 1;
+		
+		while (len > 0)
 		{
+			//printf("[%s]\n", res);
 			dec = res[len] - '0';
 			res[len] = (dec * 5 + ret) % 10 + '0';
 			ret = (dec * 5 + ret) < 10 ? 0 : ((dec * 5 + ret) / 10);
+			len--;
 		}
 		res[len] = ret + '0';
 		pow--;
 	}
+	res[ft_strlen(res)] = '\0';
+	// printf("\n\nPOSLE %s\n\n", res);
 	return (res);
 }

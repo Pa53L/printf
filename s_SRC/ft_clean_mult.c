@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_clean_mult.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erodd <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 05:30:20 by erodd             #+#    #+#             */
-/*   Updated: 2020/01/21 05:30:24 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/22 23:08:06 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	ft_clean_mult(t_mult *m)
 {
 	m->len1 = 0;
 	m->len2 = 0;
-	m->str1 = NULL;
-	m->str2 = NULL;
+	//m->str1 = NULL;
+	//m->str2 = NULL;
+	ft_strdel(&(m->str1));
+	ft_strdel(&(m->str2));
 	return ;
 }

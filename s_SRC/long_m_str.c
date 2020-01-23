@@ -6,20 +6,20 @@
 /*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 04:44:53 by erodd             #+#    #+#             */
-/*   Updated: 2020/01/21 05:11:16 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/23 03:46:55 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../h_HEAD/header.h"
 
-char	*make_rounding(char *str, int pres)
+char	*make_rounding(char **str, int pres)
 {
 	char	*tmp;
-
-	if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(str) + pres + 1))))
+		
+	if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(*str) + pres + 1))))
 		return (NULL);
-	tmp = ft_fill_str(str, tmp, pres);
-	free(str);
+	tmp = ft_fill_str(*(str), tmp, pres);
+	ft_strdel(str);
 	return (tmp);
 }
 
@@ -31,6 +31,7 @@ char	*ft_fill_str(char *str, char *tmp, int pres)
 
 	i = 0;
 	j = 0;
+	
 	while (str[i] != '.')
 		tmp[i++] = str[j++];
 	tmp[i++] = '.';
@@ -48,6 +49,7 @@ char	*ft_fill_str(char *str, char *tmp, int pres)
 		mem = 0;
 	tmp[i] = '\0';
 	tmp = ft_rounding(tmp, mem);
+	
 	return (tmp);
 }
 
@@ -79,12 +81,12 @@ char	*ft_rounding(char *str, int mem)
 	if (i == -1 && mem == 1)
 	{
 		new_str = ft_strjoin("1", str);
-		free(str);
+		ft_strdel(&str);
 	}
 	return (new_str);
 }
 
-char	*make_dot(char *str, unsigned short exponent)
+char	*make_dot(char **str, unsigned short exponent)
 {
 	int		i;
 	int		j;
@@ -92,40 +94,46 @@ char	*make_dot(char *str, unsigned short exponent)
 
 	i = 0;
 	j = 0;
-	if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1))))
+	if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(*str) + 1))))
 		return (NULL);
-	tmp[ft_strlen(str)] = '\0';
-	if (str[i] == '0')
+	//tmp[ft_strlen(*str) + 1] = '\0';
+	if ((*str)[i] == '0')
 		i++;
 	while (i <= ((exponent - 16383) * 0.301 + 1))
-		tmp[j++] = str[i++];
+		tmp[j++] = (*str)[i++];
 	tmp[j] = '.';
 	j++;
-	while (str[i] != '\0')
-		tmp[j++] = str[i++];
-	free(str);
+	while ((*str)[i] != '\0')
+		tmp[j++] = (*str)[i++];
+	tmp[j] = '\0';
+	//write(1, "\n\nBBB\n\n", 7);
+	//write(1, tmp, ft_strlen(tmp));
+	ft_strdel(str);
 	return (tmp);
 }
 
-char	*make_dot_zero(char *str, unsigned short exponent)
+char	*make_dot_zero(char **str, unsigned short exponent)
 {
 	int		i;
 	int		j;
 	char	*tmp;
 
-	i = 2;
+	i = 1;
 	j = 2;
-	if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2))))
+	if (!(tmp = (char *)malloc(sizeof(char) * (ft_strlen(*str) + 3))))
 		return (NULL);
-	tmp[ft_strlen(str)] = '\0';
+	
 	tmp[0] = '0';
 	tmp[1] = '.';
-	while (str[i] != '\0')
+	while ((*str)[i] != '\0')
 	{
-		tmp[j] = str[i];
+		tmp[j] = (*str)[i];
 		i++;
 		j++;
 	}
-	free(str);
+	tmp[ft_strlen(*str) + 2] = '\0';
+	//write(1, "\n\nAAA\n\n", 7);
+	//write(1, tmp, ft_strlen(tmp));
+	ft_strdel(str);
 	return (tmp);
 }

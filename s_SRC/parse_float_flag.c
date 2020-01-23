@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   out_str.c                                          :+:      :+:    :+:   */
+/*   parse_float_flag.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 23:56:42 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/13 23:57:01 by yshawn           ###   ########.fr       */
+/*   Updated: 2020/01/22 21:44:53 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char		*parse_float_flag(st_format *spec, int len_num)
 	i = 0;
 	str_flag = NULL;
 	strlen = parse_float_flag_2(spec, len_num);
+	
 	if (strlen > 0)
 	{
 		if (!(str_flag = (char *)malloc(sizeof(char) * (strlen + 1))))

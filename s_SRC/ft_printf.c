@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:31:27 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/13 04:49:32 by yshawn           ###   ########.fr       */
+/*   Updated: 2020/01/23 02:55:44 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ void		printf_printf(char *str, uint64_t *cnt)
 uint64_t	printf_body(st_format *spec, char *str, va_list vl, va_list fst_vl)
 {
 	uint64_t	cnt;
+	int i;
 
+	i = '1';
 	cnt = 0;
+	//write(1, str, ft_strlen(str));
+	//write(1, "\n\n", 2);
 	while (*str)
 	{
 		if (*str == '{')
@@ -32,15 +36,25 @@ uint64_t	printf_body(st_format *spec, char *str, va_list vl, va_list fst_vl)
 			printf_printf(str, &cnt);
 		else if (*str == '%')
 		{
+			//write(1, &i, 1);
 			str = parse_specifiers(spec, ++str, vl);
+			
 			if (spec->type)
+			{
 				cnt = cnt + parse_output(spec, vl, fst_vl);
+				//write(1, &i, 1);
+			}
 			else if (*str != '%' && *str)
 				printf_printf(str, &cnt);
+			
 		}
 		if (!*str)
 			return (cnt);
 		str++;
+		
+		//write(1, str, 1);
+		//write(1, "\n\n\n", 3);
+		i++;
 	}
 	return (cnt);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   smack_my_bitch_up.c                                :+:      :+:    :+:   */
+/*   ft_smbu.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erodd <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 05:39:01 by erodd             #+#    #+#             */
-/*   Updated: 2020/01/21 05:39:05 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/23 03:18:05 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,14 @@ char	*itobs(unsigned long long n, char *ps)
 	return (ps);
 }
 
-void	fill_rigth_left(t_mult *m, char *a, char *b)
+void	fill_rigth_left(t_mult *m, char **a, char **b)
 {
-	m->str2 = a;
-	m->str1 = b;
-	m->len1 = ft_strlen(a) - 1;
-	m->len2 = ft_strlen(b) - 1;
+	m->str2 = *a;
+	m->str1 = *b;
+	m->len1 = ft_strlen(*a) - 1;
+	m->len2 = ft_strlen(*b) - 1;
+	//printf("AEAE %s\n", *a);
+	//printf("BEBE %s\n", *b);
 }
 
 char	*str_no_prec(char sharp)

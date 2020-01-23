@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   out_str.c                                          :+:      :+:    :+:   */
+/*   parse_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yshawn <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 23:56:42 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/13 23:57:01 by yshawn           ###   ########.fr       */
+/*   Updated: 2020/01/22 18:25:01 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int		parse_str(st_format *spec, va_list vl)
 	tmp_len = spec->width + strlen;
 	strnew = record_str(spec, str, --strlen, tmp_len);
 	write(1, strnew, tmp_len);
-	free(strnew);
+	ft_strdel(&strnew);
 	return (tmp_len);
 }

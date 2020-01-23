@@ -6,7 +6,7 @@
 /*   By: erodd <erodd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:10:31 by yshawn            #+#    #+#             */
-/*   Updated: 2020/01/17 19:25:37 by erodd            ###   ########.fr       */
+/*   Updated: 2020/01/23 03:40:53 by erodd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ typedef struct mult
 typedef int (*FUN)(st_format *, va_list);
 #define BLYAT (FUN[6]) {parse_chr, parse_str, parse_per, parse_bit, parse_float, parse_dipoxu}
 
+void ft_bzero(void *, size_t);
 int ft_atoi(const char *);
 size_t ft_strlen(const char *);
 int ft_numlen(uint64_t, int);
@@ -210,14 +211,16 @@ char *parse_float_number(long double ld, int, char);
 void parse_float_nan_inf(st_format *, char);
 char *parse_float_flag(st_format *, int);
 int parse_float_flag_2(st_format *, int);
-void record_float(st_format *, char *, char *);
-void out_float(st_format *, char *, char *);
-void out_float_minus(st_format *, char *, char *);
+void record_float(st_format *, char **, char **);
+void out_float(st_format *, char **, char **);
+void out_float_minus(st_format *, char **, char **);
 //
 int ft_printf(const char *, ...);
 uint64_t printf_body(st_format *, char *, va_list, va_list);
 void printf_printf(char *, uint64_t *);
 //
+
+
 void ft_itoabasex(st_format *, uint64_t, char *, int);
 char *itobs(unsigned long long n, char *ps);
 char    *ft_str_multiply(t_mult *m, char *tmp);
@@ -229,16 +232,18 @@ char *ft_strdup(const char *s);
 char *make_mantisa(char *str, unsigned long mantisa);
 char *make_full_mantis(char *str, char *str2[]);
 char *ft_pow5(char *res, int pow);
-char *make_dot(char *str, unsigned short exponent);
-char *make_dot_zero(char *str, unsigned short exponent);
-char *make_rounding(char *str, int pres);
+char *make_dot(char **str, unsigned short exponent);
+char *make_dot_zero(char **str, unsigned short exponent);
+char *make_rounding(char **str, int pres);
 char *ft_rounding(char *str, int mem);
 char *ft_is_nan(unsigned long mantisa);
-char *ft_make_f_str(char *full, char *right, char *left);
+char *ft_make_f_str(char *full, char **right, char **left);
 void    ft_clean_mult(t_mult *m);
 char *ft_zero_str(int pres, char sharp, char *full_str);
-void	fill_rigth_left(t_mult *, char *, char *);
+void	fill_rigth_left(t_mult *, char **, char **);
 char *str_no_prec(char);
 char *ft_fill_str(char *str, char *tmp, int pres);
+void	ft_strdel(char **str);
+char	*str_nan_inf(char ch);
 
 #endif
