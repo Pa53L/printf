@@ -17,17 +17,8 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <inttypes.h>
-
-/*
-** удалить все include после этого комментария
-*/
-# include <stdio.h>
 # include <limits.h>
 # include <float.h>
-# include <math.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
 
 # define TYPES_SIZE 13
 # define NAN_INF_SIZE 3

@@ -28,7 +28,7 @@ int		print_b(t_format *spec, char *str, va_list vl, va_list fst_vl)
 	{
 		if (*str == '{')
 			str = parse_bcolor(str);
-		else if (*str != '%')
+		if (*str != '%')
 			printf_printf(str, &cnt);
 		else if (*str == '%')
 		{

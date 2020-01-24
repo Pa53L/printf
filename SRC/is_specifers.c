@@ -47,7 +47,7 @@ char	*is_width(t_format *spec, char *str, va_list vl)
 	}
 	if (*str >= '1' && *str <= '9')
 	{
-		if ((spec->width = atoi(str)) < 0)
+		if ((spec->width = ft_atoi(str)) < 0)
 			spec->width = 0;
 		while (*str >= '0' && *str <= '9')
 			str++;
@@ -76,7 +76,7 @@ char	*is_accuracy(int *accur, char *str, va_list vl)
 	}
 	else
 	{
-		if ((*accur = atoi(str)) < 0)
+		if ((*accur = ft_atoi(str)) < 0)
 			*accur = -1;
 		while (*str >= '0' && *str <= '9')
 			str++;
