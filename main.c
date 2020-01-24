@@ -14,9 +14,7 @@
 
 int main(int ac, char **av)
 {
-   // ft_printf("{blue}%s{green}%s{red}%s{yellow}%s{orange}%s{pink}%s", "hello", "hello", "hello", "hello", "hello", "hello");
-
-
+   // ft_printf("{blue}%5$s{green}%4$s{red}%2$s{yellow}%1$s{orange}%6$s{pink}%3$s\n", "smack", "my", "bitch", "up", "prodigy", "forever");
 
    // PROBLEMS THAT WE HAVE
    // printf("|||MINE: %d\n",     ft_printf("%.350f|", 1.e-57));
@@ -34,7 +32,7 @@ int main(int ac, char **av)
    // printf("|||MINE: %d\n",     ft_printf("%%-%|%%+%|%% %|%%#%"));
    // printf("|||ORIGINAL: %d\n",    printf("%%-%|%%+%|%% %|%%#%"));
    // printf("\n");
-   // conv_cap_f:
+   // что нужно сделать
    // переделать makefile
    // проверить бонусы
    // дописать бонус
