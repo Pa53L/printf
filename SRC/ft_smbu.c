@@ -29,34 +29,6 @@ char	*parse_mantis(unsigned long mantisa)
 	return (str);
 }
 
-char	*make_mantisa(char *str, unsigned long mantisa)
-{
-	char	bin_str[CHAR_BIT * sizeof(unsigned long) + 1];
-	int		i;
-	int		j;
-	int		mem;
-	char	tmp;
-
-	mem = 0;
-	i = 0;
-	while (itobs(mantisa, bin_str)[i] != '\0')
-	{
-		j = 63;
-		if (itobs(mantisa, bin_str)[i] == '1')
-		{
-			while (j >= 0)
-			{
-				tmp = str[j];
-				str[j] = ((str[j] - '0') + (DG[i][j] - '0') + mem) % 10 + '0';
-				mem = ((tmp - '0') + (DG[i][j] - '0') + mem) / 10;
-				j--;
-			}
-		}
-		i++;
-	}
-	return (str);
-}
-
 char	*itobs(uint64_t num, char *str)
 {
 	int			i;

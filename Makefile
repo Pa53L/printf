@@ -13,8 +13,8 @@
 CC = gcc
 NAME = libftprintf.a
 FLAGS = -Wall -Wextra -Werror -O2 -O3 -O1
-DIR_S = ./SRC
-DIR_O = ./OBJ
+DIR_S = SRC
+DIR_O = OBJ
 HEADER = header.h
 SOURCES = ft_strlen.c ft_numlen.c ft_itoabasex.c ft_atoi.c ft_str_sym_cmp.c ft_bzero.c ft_strdup.c ft_strjoin.c ft_strdel.c \
 ft_clean_struct.c ft_clean_mult.c \
@@ -26,27 +26,20 @@ ld_util.c \
 parse_specifiers.c parse_output.c \
 parse_float_number.c parse_float_flag.c \
 record_chr.c record_str.c record_bit.c record_per.c record_float.c \
-ft_smbu.c long_m_str.c long_math.c \
+ft_smbu.c long_m_str.c long_math.c ft_array_mantisa.c \
 is_specifers.c 
-
-# SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
-OBJS = $(patsubst %.c,%.o,$(SRCS))
+SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
+OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 all: $(NAME)
-$(NAME): $(OBJS)
-	@$(CC) $(FLAGS) -I $(HEADER) -c $(SRCS)
+$(DIR_O)/%.o: $(DIR_S)/%.c
+	@mkdir -p $(DIR_O) 
+	@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
+$(NAME): $(SRCS) $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 clean:
 	@rm -f $(OBJS)
+	@rm -rf $(DIR_O)
 fclean: clean
 	@rm -f $(NAME)
 re: fclean all
-
-# ODIR = o_OBJ
-# SDIR = s_SRC
-# OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
-
-# $(ODIR)/%.o: $(SDIR)/%.c
-# 	@$(CC) -c -I $(HEADER) -o $@ $< $(CFLAGS)
-
-# all: $(NAME)
