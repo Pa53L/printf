@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "h_HEAD/header.h"
+#include "header.h"
 
 int main(int ac, char **av)
 {
-   // ft_printf("{blue}%5$s{green}%4$s{red}%2$s{yellow}%1$s{orange}%6$s{pink}%3$s\n", "smack", "my", "bitch", "up", "prodigy", "forever");
+   ft_printf("{blue}%5$s{green}%4$s{red}%2$s{yellow}%1$s{orange}%6$s{pink}%3$s\n", "smack", "my", "bitch", "up", "prodigy", "forever");
 
    // PROBLEMS THAT WE HAVE
    // printf("|||MINE: %d\n",     ft_printf("%.350f|", 1.e-57));
@@ -23,8 +23,8 @@ int main(int ac, char **av)
    // printf("|||MINE: %d\n",     ft_printf("%.f|%.f|%.f|%.f|%.f", 44.5, 44.4, 44.6, 44.50001, 44.5 + 1e-52));
    // printf("|||ORIGINAL: %d\n",    printf("%.f|%.f|%.f|%.f|%.f", 44.5, 44.4, 44.6, 44.50001, 44.5 + 1e-52));
    // printf("\n");
-   // printf("|||MINE: %d\n",     ft_printf("%|%%|%%%|%%%%"));
-   // printf("|||ORIGINAL: %d\n",    printf("%|%%|%%%|%%%%"));
+   printf("|||MINE: %d\n",     ft_printf("%|%%|%%%|%%%%"));
+   printf("|||ORIGINAL: %d\n",    printf("%|%%|%%%|%%%%"));
    // printf("\n");
    // printf("|||MINE: %d\n",     ft_printf("% |% h|% hZ"));
    // printf("|||ORIGINAL: %d\n",    printf("% |% h|% hZ"));

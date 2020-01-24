@@ -10,31 +10,43 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
 CC = gcc
-CFLAGS = -Wall -Wextra -Werrcr
-SRC = ft_strlen.c ft_numlen.c ft_itcabasex.c ft_atci.c ft_str_sym_cmp.c ft_bzerc.c ft_strdup.c ft_strjcin.c ft_strdel.c \
-		ft_clean_struct.c ft_clean_mult.c \
-		ft_cast_size_di.c ft_cast_size_pcxu.c ft_cast_size_flcat.c \
-		ft_printf.c \
-		parse_chr.c parse_str.c parse_per.c parse_bit.c parse_bcclcr.c parse_bdcllar.c parse_flcat.c parse_dipcxu.c \
-		parse_num_spec.c parse_dipcxu_spec_cases.c parse_num.c \
-		ld_util.c \
-		parse_specifiers.c parse_cutput.c \
-		parse_flcat_number.c parse_flcat_flag.c \
-		reccrd_chr.c reccrd_str.c reccrd_bit.c reccrd_per.c reccrd_flcat.c \
-		ft_smbu.c lcng_m_str.c lcng_math.c \
-		is_specifers.c 
-OBJ = $(patsubst %.c,%.o,$(SRC))
-all: 
-	$(CC) $(CFLAGS) -I header.h -c $(SRC)
-	@ar rc $(NAME) $(OBJ)
+NAME = libftprintf.a
+FLAGS = -Wall -Wextra -Werror -O2 -O3 -O1
+DIR_S = ./SRC
+DIR_O = ./OBJ
+HEADER = header.h
+SOURCES = ft_strlen.c ft_numlen.c ft_itoabasex.c ft_atoi.c ft_str_sym_cmp.c ft_bzero.c ft_strdup.c ft_strjoin.c ft_strdel.c \
+ft_clean_struct.c ft_clean_mult.c \
+ft_cast_size_di.c ft_cast_size_poxu.c ft_cast_size_float.c \
+ft_printf.c \
+parse_chr.c parse_str.c parse_per.c parse_bit.c parse_bcolor.c parse_bdollar.c parse_float.c parse_dipoxu.c \
+parse_num_spec.c parse_dipoxu_spec_cases.c parse_num.c \
+ld_util.c \
+parse_specifiers.c parse_output.c \
+parse_float_number.c parse_float_flag.c \
+record_chr.c record_str.c record_bit.c record_per.c record_float.c \
+ft_smbu.c long_m_str.c long_math.c \
+is_specifers.c 
+
+# SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
+OBJS = $(patsubst %.c,%.o,$(SRCS))
+all: $(NAME)
+$(NAME): $(OBJS)
+	@$(CC) $(FLAGS) -I $(HEADER) -c $(SRCS)
+	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	%.o: %.c header.h
-	$(CC) $(CFLAGS) -c $<
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJS)
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 re: fclean all
-.PHONY: all clean fclean re
+
+# ODIR = o_OBJ
+# SDIR = s_SRC
+# OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
+
+# $(ODIR)/%.o: $(SDIR)/%.c
+# 	@$(CC) -c -I $(HEADER) -o $@ $< $(CFLAGS)
+
+# all: $(NAME)

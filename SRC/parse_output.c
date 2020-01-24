@@ -28,10 +28,8 @@
 
 int		parse_output(t_format *spec, va_list vl, va_list fst_vl)
 {
-	int			i;
-	uint64_t	cnt;
+	int			cnt;
 
-	i = 0;
 	cnt = 0;
 	if (spec->dollar > 1)
 		parse_bdollar(spec->dollar, vl);
@@ -47,6 +45,9 @@ int		parse_output(t_format *spec, va_list vl, va_list fst_vl)
 		cnt = parse_float(spec, vl);
 	else
 		cnt = parse_dipoxu(spec, vl);
-	(spec->dollar == 0) ? va_copy(fst_vl, vl) : va_copy(vl, fst_vl);
+	if (spec->dollar == 0)
+		va_copy(fst_vl, vl);
+	else
+		(va_copy(vl, fst_vl));
 	return (cnt);
 }
